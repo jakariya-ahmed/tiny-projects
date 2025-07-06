@@ -14,35 +14,39 @@
         </button> -->
         <!-- input text area  -->
          <div class="mt-8 mb-4">
-             <input type="text" readonly id="input" class="w-full h-20 px-3 focus:outline-none rounded bg-gray-100 text-right text-3xl text-gray-500 transition duration-200">
+             <input type="text" readonly id="display" class="w-full h-20 px-3 focus:outline-none rounded bg-gray-100 text-right text-3xl text-gray-500 transition duration-200">
          </div>
          <!-- button grid layout  -->
          <div class="grid grid-cols-4 gap-4">
             <!-- function button row  -->
              <button class="btn bg-red-500 text-white rounded" data-action="clear">AC</button>
              <button class="btn bg-blue-500 text-white rounded" data-action="back">&larr;</button>
-             <button class="btn bg-green-500 text-white rounded" data-vaue="%">%</button>
-             <button class="btn bg-orange-500 text-white rounded" data-vaue="*">&times;</button>
+             <button class="btn bg-green-500 text-white rounded" data-value="%">%</button>
+             <button class="btn bg-orange-500 text-white rounded" data-value="*">&times;</button>
             
              <button class="btn bg-gray-100 rounded" data-value="7">7</button>
-             <button class="btn bg-gray-100 rounded" data-value="7">8</button>
-             <button class="btn bg-gray-100 rounded" data-value="7">9</button>
-             <button class="btn bg-green-500 text-white rounded" data-vaue="-">&minus;</button>
+             <button class="btn bg-gray-100 rounded" data-value="8">8</button>
+             <button class="btn bg-gray-100 rounded" data-value="9">9</button>
+             <button class="btn bg-green-500 text-white rounded" data-value="-">&minus;</button>
             
-             <button class="btn bg-gray-100 rounded" data-value="7">4</button>
-             <button class="btn bg-gray-100 rounded" data-value="7">5</button>
-             <button class="btn bg-gray-100 rounded" data-value="7">8</button>
-             <button class="btn bg-green-500 text-white rounded" data-vaue="+">&plus;</button>
+             <button class="btn bg-gray-100 rounded" data-value="4">4</button>
+             <button class="btn bg-gray-100 rounded" data-value="5">5</button>
+             <button class="btn bg-gray-100 rounded" data-value="8">8</button>
+             <button class="btn bg-green-500 text-white rounded" data-value="+">&plus;</button>
              
-             <button class="btn bg-gray-100 rounded" data-value="7">1</button>
-             <button class="btn bg-gray-100 rounded" data-value="7">2</button>
-             <button class="btn bg-gray-100 rounded" data-value="7">3</button>
-             <button class="btn bg-orange-500 text-white rounded" data-vaue="/">&divide;</button>
+             <button class="btn bg-gray-100 rounded" data-value="1">1</button>
+             <button class="btn bg-gray-100 rounded" data-value="2">2</button>
+             <button class="btn bg-gray-100 rounded" data-value="3">3</button>
+             <button class="btn bg-orange-500 text-white rounded" data-value="/">&divide;</button>
 
              <button class="btn col-span-2 bg-gray-100" data-value="0"> 0 </button>
             <button class="btn bg-gray-100" data-value=".">.</button>
             <button class="btn bg-blue-500 rounded text-white" data-action="calculate">=</button>
         </div>
-    </div>        
+    </div>  
+
+<!-- Main entry point for JavaScript app -->
+  <script type="module" src="./js/main.js"></script>
+
 </body>
 </html>
