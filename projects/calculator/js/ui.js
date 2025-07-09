@@ -9,7 +9,9 @@ export const UI = {
    * Updates the calculator screen with current value
    * @param {string} value - Value to display
    */
+
   updateDisplay(value) {
     this.displayEl.value = value;
   }
+  
 };

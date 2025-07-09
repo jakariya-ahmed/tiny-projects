@@ -12,6 +12,7 @@ export class Calculator {
    * Appends a number or operator to the expression.
    * Prevents invalid operator chains like ++ or ..
    */
+
   input(value) {
     if (this._isValidInput(value)) {
       this.expression += value;
@@ -21,6 +22,7 @@ export class Calculator {
   /**
    * Checks if input is valid to append to the expression
    */
+
   _isValidInput(value) {
     const lastChar = this.expression.slice(-1);
 
