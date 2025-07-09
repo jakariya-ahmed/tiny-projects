@@ -126,7 +126,55 @@ function fileLog() {
     const status = 'success';
     console.log(status.padEnd(15) + '✔');
 }
-fileLog();
+// fileLog();
+
+
+
+/**
+ * split() function
+ * what is split() function ?
+ * the split() method divides a string into an array of substring,
+ * using a specific separator
+ * string.split(separator, limit);
+ * sperator → The pattern (string or RegEx) that defines where to split
+ * limit → (optional) => Max number of splits(array length)
+*/
+
+// Basic Example
+function spiltBrekDown() {
+    let result = null;
+    const name = "    Jakariya ! ahmed.    aman   ?";
+    // const result = name.split("");  // split every word;
+    // const result = name.split(" ");// default (,) 
+    // const result = name.split(" , "); // remove default (,)
+    
+    // Using Regular Exprestion(RegEx)
+    const punctuationBySplit = name.split(/[.,!?]/) // convert string into array and word
+    const punctuationByReplace = name.replace(/[.,!?]/g, '') // only removed punctuations 
+    const trimed = name.trim(); // only removed left and right white space
+    const joined = name.split(/\s+/).join(' '); // remove extra white space and added white space only for array 
+
+    // Used all in one for clean sentence
+    result = punctuationByReplace.trim().split(/\s+/).join(' ');// remove left & right white spaces
+    // one line combo
+    const removedPunctuation = name.replace(/[^\w\s]/g, '');
+    result = removedPunctuation.trim().split(/\s+/).join(' ');// remove left & right white spaces
+    
+    console.log(punctuationBySplit);
+    console.log(punctuationByReplace);
+    console.log(trimed);
+    console.log(joined);
+    console.log(result);
+    console.log(result);
+}
+spiltBrekDown();
+
+
+
+
+
+
+
 
 
 
