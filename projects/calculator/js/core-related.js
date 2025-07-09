@@ -63,24 +63,70 @@ function extension(file) {
 // console.log(extension('image.jpg'));
 // console.log(extension('00001.video'));
 
+// Display Preview message
+function messagePreview(msg) {
+    const previw = msg.slice(0, 20) + '...';
+    // console.log(previw);
+} 
+
+messagePreview('Hello! Jakariay Ahmed , Your Repor is ready');
+
+// Custom Pagination
+function pagination() {
+    const pages = [1, 2, 3, 4];
+    const page1 = pages.slice(0, 3);
+    const page2 = pages.slice(3, 6);
+}
+
+
 
 /**
  * How work padStart(targetLength, [, padString])
  */
 
+// Padding with zeros to make fixed length number
+function paddedFixNum(num) {
+    const paddedNum = num.padStart(5, '0');
+    // console.log(paddedNum);
+}
+// paddedFixNum('45');
+
+// Padding with spaces 
+function spaces(word) {
+    const paddedWord = word.padStart(6)
+    console.log(`'${paddedWord}'`);    
+}
+
+// spaces('Hi!');
 
 
 
 // Mask a Credit Card Number
+function cardNumber(number) {
+    const masked = number.slice(-4).padStart(number.length, '*');
+    console.log(masked);
+}
+// cardNumber('133373890093887');
 
 
-const cardNumber = '133373890093887';
-const masked = cardNumber.slice(-4) 
+/**
+ * padEnd() function and use case
+ * 
+ */
 
-console.log(masked);
+// Creating Uniform Length Codes / IDs
 
+function uniformCode(id) {
+    const fullId = id.padEnd(6, 'X');
+    console.log(fullId);
+}
+// uniformCode('345');
 
-
+function fileLog() {
+    const status = 'success';
+    console.log(status.padEnd(15) + '✔');
+}
+fileLog();
 
 
 
