@@ -167,9 +167,19 @@ function spiltBrekDown() {
     console.log(result);
     console.log(result);
 }
-spiltBrekDown();
+// spiltBrekDown();
 
+// Check last Number 
+const data = '';
+function getLastNumber(data) {
+    const parts = data.split(/[-+*/%]/);
+    return parts[parts.length - 1]; 
+    // const lastBySlice = parts.slice(-1);
+    // console.log(parts); // return value 20
+    // console.log(last); // return array[20]
+}
 
+getLastNumber('20+2*2-7');
 
 
 

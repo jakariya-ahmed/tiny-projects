@@ -26,6 +26,7 @@ export class Calculator {
   _isValidInput(value) {
     const lastChar = this.expression.slice(-1);
 
+    /\d\.?/
     // Prevent double decimals in a number
     if (value === '.' && /\d*\.?\d*$/.test(this._getLastNumberPart())) {
       if (this._getLastNumberPart().includes('.')) return false;
