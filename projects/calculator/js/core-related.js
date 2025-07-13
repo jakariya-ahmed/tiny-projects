@@ -159,13 +159,15 @@ function spiltBrekDown() {
     // one line combo
     const removedPunctuation = name.replace(/[^\w\s]/g, '');
     result = removedPunctuation.trim().split(/\s+/).join(' ');// remove left & right white spaces
-    
-    console.log(punctuationBySplit);
-    console.log(punctuationByReplace);
-    console.log(trimed);
-    console.log(joined);
-    console.log(result);
-    console.log(result);
+    const number = '+-/';
+    const spiltOperator = number.split(/[-+*/%]/);
+    // console.log(punctuationBySplit);
+    // console.log(punctuationByReplace);
+    // console.log(trimed);
+    // console.log(joined);
+    // console.log(result);
+    // console.log(result);
+    console.log(spiltOperator);
 }
 // spiltBrekDown();
 
@@ -179,7 +181,108 @@ function getLastNumber(data) {
     // console.log(last); // return array[20]
 }
 
-getLastNumber('20+2*2-7');
+// getLastNumber('20+2*2-7');
+
+/**
+ * includes() Method used to check a string contains a substring
+ * or an array contains a substring
+ * string.includes(searchValue, startIndex)
+ * arr.includes(searchElement, fromIndex)
+ * return true/false
+ */
+
+function checkWord(msg) {
+    const resutl = msg.includes('.');
+    if (resutl) {
+        console.log('Yes value is cotain in sentence !');
+    } else {
+        console.log('No! value is not cotain in sentence !');
+    }
+}
+// checkWord('8900.00.');
+
+// let exp = '20+30+45+20';
+// let newInput = '.';
+
+// function inputValidation(exp, newInput) {
+//     // Add the new input to current expression 
+//     const updated = exp + newInput;
+//     // get last part of number 
+//     const parts = updated.split(/[-+*/%]/);
+//     const lastNumber = parts[parts.length -1];
+//     console.log('LastNumber:', lastNumber);
+
+//     //Prevent duplicate decimal /\d*\.?\d*$/
+//     if (newInput === '.' && /\d*\.?\d*$/.test(lastNumber)) {
+//         if (lastNumber.includes('.')) {
+//             console.log('Dot already exists - reject'); 
+//             return false;
+//         }
+//     }
+
+//     console.log('input is fine')
+
+//     return true;
+// }
+
+// inputValidation(exp, newInput);
+
+
+
+
+/**
+ * Get last number 
+ * Prevent duplicate dot(.) 
+ * Cehck dot(.) is exists in new data and expression data
+ * 
+ * 
+ * @param {*} exp 
+ * @param {*} newInput 
+ */
+
+let exp = '20+30-10+20-6.5';
+let newInput = '+5';
+function inputValidation(exp, newInput) {
+    // Get last Charackter 
+    const lastChar = exp.slice(-1);
+    console.log(lastChar);
+    // Add new input to current expression
+    const updated = exp + newInput;
+    // Get last number 
+    const parts = updated.split(/[-+*/%]/); // only gets number with array format like ['20','30','10','3.5']
+    const lastNumber = parts[parts.length - 1]; // length 4 -1 = 3;
+    console.log('lastNumber:', lastNumber);
+
+    // Prevent duplicate decimal(3..5) and accept a decimal format (2.4, 5.3)
+    if (newInput === '.' && /\d*\.?\d*$/.test(lastNumber)) {
+         // If dot(.) is exist return false
+        if (lastNumber.includes('.')) {
+            console.log('Dot already exists 😒');
+            return false;
+        }
+    }
+
+    /**
+     * Prevent duplicate operetors 
+     * ['-','+','*','/','%'].includes(newInput) this conditon check 
+     * any new input is operator. yes 
+     * exp === '' || ['-','+','*','/','%'].includes(lastChar) this condition check
+     * expression is empty or last charackter is operator if yes more
+     * operator is not allow
+     */
+    if (['-','+','*','/','%'].includes(newInput)) {
+        if (exp === '' || ['-','+','*','/','%'].includes(lastChar)){
+            console.log('Invalid operator:', lastChar);
+            return false;
+        }
+    }
+    return true;
+
+}
+
+// inputValidation(exp, newInput);
+
+
 
 
 

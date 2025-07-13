@@ -1,41 +1,49 @@
 // main.js
-// =============================
+//==========================
 // Entry point. Connects UI events with calculator logic using OOP modules.
-
-import { Calculator } from './calculator.js';
+import { Calculator } from "./calculator.js"
 import { UI } from './ui.js';
 
 const calc = new Calculator();
+// console.log(calc.expression);
 
-// Handle all button clicks
-const buttons = document.querySelectorAll('button');
+// Buttton refence for handle events
+let btns = document.querySelectorAll('button')
 
-buttons.forEach(button => {
-  button.addEventListener('click', () => {
-    const value = button.dataset.value;
-    const action = button.dataset.action;
-    // alert(action);
-    if (value) {
-      calc.input(value);
-      UI.updateDisplay(calc.getDisplay());
-    }
-
-    if (action === 'clear') {
-      calc.clear();
-      UI.updateDisplay(calc.getDisplay());
-    }
-
-    if (action === 'back') {
-      calc.backspace();
-      UI.updateDisplay(calc.getDisplay());
-    }
-
-    if (action === 'calculate') {
-      const result = calc.calculate();
-      UI.updateDisplay(result);
-    }
-  });
+btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const value = btn.dataset.value;
+        const action = btn.dataset.action;
+        if (value) {
+            calc.input(value);
+            UI.updateDisplay(calc.getDisplay());
+        }
+        // clear input
+        if (action === 'clear') {
+            calc.clear()
+            UI.updateDisplay(0);
+        } 
+        // clear input
+        if (action === 'back') {
+            calc.backspace()
+            UI.updateDisplay(calc.getDisplay());
+        } 
+        // claculate 
+        if (action === 'calculate') {
+            calc.calculate();
+             UI.updateDisplay(calc.getDisplay());
+        }
+    })
 });
+// console.log(calc._getLastNumberPart());
 
-// Init display
-UI.updateDisplay(calc.getDisplay());
+
+
+
+
+
+
+
+
+
+

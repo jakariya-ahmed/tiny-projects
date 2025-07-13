@@ -114,7 +114,7 @@ function fullNameValidation(input) {
     }
 }
 
-fullNameValidation('Jakariya Ahmed');
+// fullNameValidation('Jakariya Ahmed');
 
 
 /** Name validation with middle name
@@ -134,7 +134,7 @@ function middleNameValidation(input) {
     }
 }
 
-middleNameValidation('jakariya ahmed');
+// middleNameValidation('jakariya ahmed');
 
 
 
