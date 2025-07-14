@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title> Note Mangement </title>
+    <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="bg-gray-200 w-full">
+
+<div class="max-w-md xs:px-2 bg-white rounded-2xl shadow mx-auto p-6 mt-10 space-y-6">
+    <!-- Toggle buttons  -->
+     <div class="flex justify-between">
+        <button id="login-btn" class="flex gap-1 bg-orange-500 py-2 px-4
+         text-white text-medium rounded-full">  
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+            Login
+        </button>
+        <button id="regi-btn" class="flex items-center text-lg text-gray-500 py-2 px-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Create Account
+        </button>
+     </div>
+
+     <!-- login form  -->
+      <div class="">
+        <form id="login-form" class="space-y-4
+        ">
+            <h2 class="flex justify-center items-center mb-6 font-bold text-center text-2xl"> Login 
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+            </h2>
+            <input type="email" placeholder="Email" class="w-full px-3 py-2 border border-gray-300 focus:border-gray-400 focus:ring-1 focus:ring-gray-200 focus:outline-none rounded transition">
+            <input type="password" placeholder="*****" class="w-full px-3 py-2 border border-gray-300 focus:border-gray-400 focus:ring-1 focus:ring-gray-200 focus:outline-none rounded transition">
+            <button class="w-full bg-orange-500 py-2 text-white text-lg hover:bg-orange-400 hover:text-black-500">Login</button>
+            
+        </form>
+
+        <!-- Registration form  -->
+         <form id="register-form" class="space-y-4 hidden">
+            <h2 class="text-2xl font-bold text-center"> Registration Now </h2>
+            <div class="flex gap-2">
+                <input type="text" placeholder="First Name" class="w-1/2 rounded py-2 px-3 border border-gray-300 focus:border-gray-400 focus:ring-1 focus:ring-gray-200 focus:outline-none">
+                <input type="text" placeholder="First Name" class="w-1/2 rounded py-2 px-3 border border-gray-300 focus:border-gray-300 focus:ring-1 focus:ring-gray-200 focus:outline-none">
+            </div>
+            <input type="email" placeholder="Email" class="w-full rounded py-2 px-3 border border-gray-300 focus:border-gray-300 focus:ring-1 focus:ring-gray-200 focus:outline-none">
+            <input type="tel" placeholder="Mobile Number" class="w-full rounded py-2 px-3 border border-gray-300 focus:border-gray-300 focus:ring-1 focus:ring-gray-200 focus:outline-none">
+            <select class="w-full text-gray-600 rounded py-2 px-3 border border-gray-300 focus:border-gray-300 focus:ring-1 focus:ring-gray-200 focus:outline-none">
+                <option value="">Select Gender</option>
+                <option value="female">Female</option>
+                <option value="female">Male</option>
+                <option value="female">Other</option>
+            </select>
+            <input type="password" placeholder="******" class="w-full rounded py-2 px-3 border border-gray-300 focus:border-gray-300 focus:ring-1 focus:ring-gray-200 focus:outline-none">
+            <button class="w-full bg-orange-500 py-2 text-white text-lg hover:bg-orange-400 hover:text-black-500">Registration</button>
+            
+        </form>
+
+      </div>
+
+
+</div>
+
+
+<script src="js/form.js"></script>
+</body>
+</html>
