@@ -8,7 +8,8 @@ import ViewProduct from './pages/dashboard/ViewProductPage';
 import DashboardLayout from './pages/dashboard/DashboardLayout'
 import HomeLayout from './pages/HomeLayout'
 import Dashboard from './pages/dashboard/Dashboard'
-
+import NotFound from './pages/NotFound'
+import SinglePost from './pages/dashboard/post/SinglePost'
 
 
 function App() {
@@ -17,28 +18,28 @@ function App() {
     <div className='min-h-screen bg-slate-700 pt-6'>
             <BrowserRouter>
                 {/* Routes  */}
-                <Routes>
+              <Routes>
 
-                  {/* Home routes  */}
-                  <Route path='/' element={<HomeLayout />}>
-                    <Route index element={<Home />} />
-                    <Route path='/about' element={<About />} />
-                  </Route>
+                {/* Home routes  */}
+                <Route path='/' element={<HomeLayout />}>
+                  <Route index element={<Home />} />
+                  <Route path='/about' element={<About />} />
+                </Route>
 
-                </Routes>
 
 
                 {/* Dashboard routes  */}
-                <Routes>
-                 <Route path='/dashboard' element={<DashboardLayout />}>
+                <Route path='/dashboard' element={<DashboardLayout />}>
                     <Route index element={<Dashboard />} />
                     <Route path='add-product' element={<ProductAdd />} />
                     <Route path='view-product' element={<ViewProduct/>} />
-                  </Route>
-                  
+                    <Route path='post/:id' element={<SinglePost /> } />
+                </Route>
+                
+                <Route path='*' element={<NotFound />}/>
+              
               </Routes>
               {/* End routes  */}
-            
 
             </BrowserRouter>
     </div>
