@@ -2,11 +2,16 @@ import { Link } from 'react-router-dom';
 import Logo from '/icon.png';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import ModalCard from './modals/ModalCardCom';
 export default function Navbar() {
 
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => setIsOpen(prev => !prev);
+
+    //Modal 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
 
     return (
         <header className='max-w-6xl mx-auto bg-gray-600 px-6 py-3'>
@@ -27,7 +32,10 @@ export default function Navbar() {
 
                 <div>
                     {/* call to action section  */}
-                    <button className='bg-blue-900 text-white px-6 py-2 rounded-full'> Let's Start </button>
+                    <button 
+                    className='bg-blue-900 text-white px-6 py-2 rounded-full'
+                    onClick={() => setIsModalOpen(true)}
+                    > Login </button>
                 </div>
 
                 {/* Hamburger Icon  */}
@@ -52,6 +60,13 @@ export default function Navbar() {
             </div>
             }
 
+            <ModalCard
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="Login Modal"
+            >
+
+            </ModalCard>
 
 
         </header>
