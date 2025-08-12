@@ -9,7 +9,8 @@ export default function Navbar() {
 
     const toggleMenu = () => setIsOpen(prev => !prev);
 
-    //Modal 
+    // //Modal 
+    // const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
 
@@ -63,7 +64,7 @@ export default function Navbar() {
             <ModalCard
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                title="Login Modal"
+                title='Login Form'
             >
 
             </ModalCard>
