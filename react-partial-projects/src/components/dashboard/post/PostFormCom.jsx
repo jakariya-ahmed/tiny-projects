@@ -1,10 +1,11 @@
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { usePosts } from "../../../pages/dashboard/context/PostContext";
 
-export default function PostFormModal({isOpen, onClose, title}) {
+export default function PostFormModal({isOpen, onClose, title, initialData}) {
+    const { addPost, updatePost } = usePosts();
 
-    const [posts, setPosts] = useState([]);
     const [form, setForm] = useState({
         title: '',
         cat: '',
@@ -16,27 +17,16 @@ export default function PostFormModal({isOpen, onClose, title}) {
 
     const [editId, setEditId] = useState(null);
 
-    // Load from LocalStorage on mount
     useEffect(() => {
-        const storedPost = JSON.parse(localStorage.getItem('posts')) || [];
-        setPosts(storedPost);
-    }, []);
-
-    // Save to LocalStorage whenever posts change
-    useEffect(() => {
-        localStorage.setItem('posts', JSON.stringify(posts));
-    }, [posts]);
-
-    
-    // Reset form when modal closes
-    useEffect(() => {
-        if (!isOpen) {
-        setForm({ title: "", cat: "", author: "", description: "", date: "" });
-        setEditId(null);
+        if (initialData) {
+            setForm(initialData);
+            setEditId(initialData.id);
+        } else {
+            setForm({ title: "", cat: "", author: "", description: "", date: "" });
+            setEditId(null);
         }
-    }, [isOpen]);
+    }, [initialData]);
 
-    
     // Handle input change 
     const handleChange = (e) => {
         setForm({...form, [e.target.name]: e.target.value});
@@ -48,12 +38,11 @@ export default function PostFormModal({isOpen, onClose, title}) {
         
         if (editId) {
             // Update post 
-            setPosts(posts.map((p) => (p.id === editId ? {...p, ...form} : p)))
-            setEditId(null)
+            updatePost(editId, form);
             toast.success("Post updated successfully.");
         } else {
             // Add new post 
-            setPosts([...posts, {id: Date.now(), ...form }]);
+            addPost({ ...form, id: Date.now() });
             toast.success('Post created successfully.');
         }
 
@@ -65,8 +54,8 @@ export default function PostFormModal({isOpen, onClose, title}) {
             date: '',
             });
 
+            setEditId(null);
             onClose();
-        console.log('Added');
     }
 
 
@@ -142,7 +131,7 @@ export default function PostFormModal({isOpen, onClose, title}) {
                     
                     <button
                     className="bg-blue-400 px-6 py-2 text-gray-200 text-lg mt-2 rounded cursor-pointer"
-                    > {editId ? 'Update Post': 'Add Post'} </button>
+                    > {title} </button>
                 </form>
             </div>
         </>

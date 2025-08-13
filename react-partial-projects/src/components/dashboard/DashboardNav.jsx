@@ -2,6 +2,9 @@ import { Menu, PlusCircle, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PostFormModal from './post/PostFormCom';
+import { PostProvider } from '../../pages/dashboard/context/PostContext';
+import { Toaster } from 'react-hot-toast';
+import Dashboard from '../../pages/dashboard/Dashboard';
 
 export default function DashboardNav() {
 
@@ -53,12 +56,13 @@ export default function DashboardNav() {
             }
 
 
-        <PostFormModal 
-            isOpen ={isModalOpen}
-            onClose ={() => setIsModalOpen(false)}
-            title ='Create New Post'
-        />
-
+        
+        
+            <PostFormModal 
+                isOpen ={isModalOpen}
+                onClose ={() => setIsModalOpen(false)}
+                title ='Create New Post'
+            />
 
         
     

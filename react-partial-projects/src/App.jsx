@@ -1,6 +1,8 @@
 import './App.css'
 import { BrowserRouter} from 'react-router-dom'
 import AppRouter from './router/AppRouter'
+import { PostProvider } from './pages/dashboard/context/PostContext'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
 
@@ -9,8 +11,10 @@ function App() {
         <BrowserRouter>
             {/* Routes  */}
 
+         <PostProvider>
+          <Toaster position='top-right' />
             <AppRouter />
-
+         </PostProvider>
             {/* Routes  */}
         </BrowserRouter>
     </div>
