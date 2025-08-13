@@ -1,12 +1,16 @@
-import { Menu, X } from 'lucide-react';
+import { Menu, PlusCircle, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PostFormModal from './post/PostFormCom';
 
 export default function DashboardNav() {
 
     const[isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => setIsOpen(prev => !prev)
+
+    // Post Modal 
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <header className='max-w-6xl mx-auto shadow-lg px-6 py-3 md:rounded-full'>
@@ -24,7 +28,11 @@ export default function DashboardNav() {
                 </div>
                 <div>
                     {/* call to action section  */}
-                    <button className='bg-blue-900 text-white px-6 py-2 rounded-full'> Let's Start </button>
+                    <button 
+                    onClick={() => setIsModalOpen(true)}
+                    className='flex gap-x-2 bg-blue-900 text-white px-6 py-2 rounded-full'> Add Post 
+                        <PlusCircle size={26} />    
+                    </button>
                 </div>
 
                 {/* Humburger Icon  */}
@@ -43,7 +51,17 @@ export default function DashboardNav() {
                     <Link onClick={toggleMenu} className='block hover:text-white transition' to='/dashboard/view-product'>View Product</Link>
                 </nav>
             }
-                
+
+
+        <PostFormModal 
+            isOpen ={isModalOpen}
+            onClose ={() => setIsModalOpen(false)}
+            title ='Create New Post'
+        />
+
+
+        
+    
 
         </header>
     );
