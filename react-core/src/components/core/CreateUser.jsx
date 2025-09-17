@@ -3,8 +3,11 @@ import { UsersContext } from "../../context/UsersContext";
 
 
 export default function CreateUser() {
-    
-    const {users, setUsers} = useContext(UsersContext);
+    // use context by context api
+    /* const {users, setUsers} = useContext(UsersContext); */
+
+    // use context by reducer
+    const {state, dispatch} = useContext(UsersContext);
 
     const [createUser, setCreateUser] = useState({id: Date.now(), name: '', desi: '', desc: ''});
    
@@ -42,8 +45,13 @@ export default function CreateUser() {
             return;
         }
 
-        // Add user to the list
-        setUsers([...users, createUser]);
+        // Add user to the list by context api
+        /* setUsers([...users, createUser]); */
+
+        // Add user to the list by reducer
+        dispatch({type: 'ADD_USER', payload: createUser})
+
+
 
         // Reset form 
         setCreateUser({id: Date.now(), name: '', desi: '', desc: ''});

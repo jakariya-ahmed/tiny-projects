@@ -4,17 +4,21 @@ import { UsersContext } from "../../context/UsersContext";
 
 export default function Users() {
 
-    const { users, setUsers}  = useContext(UsersContext); /* using custom hook */
+    // const { users, setUsers}  = useContext(UsersContext); /* using custom hook */
+    const { state, dispatch}  = useContext(UsersContext); /* using custom hook */
 
     // Handle delete user
     const handleDel = (id) => {
-        const filteredUsers = users.filter(user => user.id !== id);
-        setUsers(filteredUsers);
+        // Delete by context api
+        /* const filteredUsers = state.users.filter(user => user.id !== id); */
+        
+        // Delete by reducer
+        dispatch({type: 'DELETE_USER', payload: id});
     } 
 
     return (
         <section className="flex max-w-3xl mx-auto gap-x-3 mt-6">
-            {users.map(user => (
+            {state.users.map(user => (
                 <div className="" key={user.id}>
                     <article className="max-d-md shadow-md px-3 py-6 bg-amber-100 rounded-sm">
                         <p>{user.id}</p>
