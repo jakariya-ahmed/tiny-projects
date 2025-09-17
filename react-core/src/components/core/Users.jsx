@@ -5,7 +5,7 @@ import { UsersContext } from "../../context/UsersContext";
 export default function Users() {
 
     // const { users, setUsers}  = useContext(UsersContext); /* using custom hook */
-    const { state, dispatch}  = useContext(UsersContext); /* using custom hook */
+    const {state, dispatch} = useContext(UsersContext);
 
     // Handle delete user
     const handleDel = (id) => {
@@ -13,7 +13,7 @@ export default function Users() {
         /* const filteredUsers = state.users.filter(user => user.id !== id); */
         
         // Delete by reducer
-        dispatch({type: 'DELETE_USER', payload: id});
+        dispatch({type: 'DELETE_USER', payload: id})
     } 
 
     return (

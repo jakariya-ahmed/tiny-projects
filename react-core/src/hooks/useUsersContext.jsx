@@ -11,7 +11,7 @@ import { initialState, reducer } from "../reducer/usersReducer";
 // 3. Provider component
 const UsersProvider = ({ children }) => {
   // Users from reducer
-  const[state, dispatch] = useReducer(reducer, initialState)
+  const[state, dispatch] = useReducer(reducer, initialState);
 
   //Users for context api without reducer
   // const [users, setUsers] = useState([
@@ -21,7 +21,7 @@ const UsersProvider = ({ children }) => {
   //     ]);
 
   return (
-    <UsersContext.Provider value={{ state, dispatch }}>
+    <UsersContext.Provider value={{state, dispatch}}>
       {children}
     </UsersContext.Provider>
   );
