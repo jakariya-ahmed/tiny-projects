@@ -4,10 +4,10 @@ export default function CreatePost() {
             <form className="space-y-3">
                 <input name="name" 
                 
-                type="text" placeholder="User Name" className="border border-gray-400 h-10 w-full p-2"/>
+                type="text" placeholder="Title" className="border border-gray-400 h-10 w-full p-2"/>
                 <input name="desi" 
                 
-                placeholder="Your Designation" className="border border-gray-400 h-10 w-full p-2"/>
+                placeholder="category" className="border border-gray-400 h-10 w-full p-2"/>
                 <textarea name="desc" 
                
                 placeholder="User Description" className="border border-gray-400 w-full p-2">
