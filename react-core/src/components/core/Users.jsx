@@ -17,7 +17,7 @@ export default function Users() {
     } 
 
     return (
-        <section className="flex max-w-3xl mx-auto gap-x-3 mt-6">
+        <section className="grid grid-cols-3 gap-y-2 gap-x-3 mt-6">
             {state.users.map(user => (
                 <div className="" key={user.id}>
                     <article className="max-d-md shadow-md px-3 py-6 bg-amber-100 rounded-sm">
