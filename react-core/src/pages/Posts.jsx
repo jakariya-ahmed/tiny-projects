@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import AllPost from "../components/post/AllPost";
 import CreatePost from "../components/post/CreatePost";
 import { PostContext } from "../context/PostContext";
+import PostProvider from "../hooks/usePostsContext";
 
 export default function Posts() {
-  // Load posts form local storage     
-  const[posts, setPosts] = useState(() => {
-    const saved = localStorage.getItem('posts');
-    return saved ? JSON.parse(saved) : [];  
-  });
-  // 1️⃣ Load once on first render
+  // Load posts form local storage without custom hook     
+  // const[posts, setPosts] = useState(() => {
+  //   const saved = localStorage.getItem('posts');
+  //   return saved ? JSON.parse(saved) : [];  
+  // });
+  // 1️⃣ Load once on first render without custom hook
   // useEffect(() => {
   //   const savedPosts = localStorage.getItem('posts');
   // if(savedPosts) {
@@ -20,9 +21,9 @@ export default function Posts() {
 
 
   // Save on every posts change
-  useEffect(() => {
-    localStorage.setItem('posts', JSON.stringify(posts));
-  });
+  // useEffect(() => {
+  //   localStorage.setItem('posts', JSON.stringify(posts));
+  // });
 
     // Add new post 
     /***  Do not need when used context api ***/
@@ -32,23 +33,28 @@ export default function Posts() {
     /*** Do not need when used context api ***/
 
     return(
-        // ContextApi for posts
-        <PostContext.Provider value={{posts, setPosts}}>
-          <div className="max-w-3xl mx-auto">
-            <h1>Posts Page</h1>
+        /** ContextApi for posts **/
+        // <PostContext.Provider value={{posts, setPosts}}>
+        //   <div className="max-w-3xl mx-auto">
+        //     <h1>Posts Page</h1>
 
-            {/* // Without context api  */}
-            {/* <CreatePost addPost={addPost} posts={posts} />
-            <AllPost posts={posts}/>  */}
-            {/* // Without context api  */}
+        //     {/* // Without context api  */}
+        //     {/* <CreatePost addPost={addPost} posts={posts} />
+        //     <AllPost posts={posts}/>  */}
+        //     {/* // Without context api  */}
 
-            {/* With Context API */}
-              <CreatePost />
-              <AllPost />
-            {/* With Context API */}
-        </div>
-        </PostContext.Provider>
+        //     {/* With Context API */}
+        //       <CreatePost />
+        //       <AllPost />
+        //     {/* With Context API */}
+        // </div>
+        // </PostContext.Provider>
 
+        /** Custom Hook **/
+      <PostProvider>
+        <CreatePost />
+        <AllPost />
+      </PostProvider>
         
     );
 }
