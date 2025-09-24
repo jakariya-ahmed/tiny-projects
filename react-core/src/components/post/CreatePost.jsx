@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { PostContext } from "../../context/PostContext";
 
-export default function CreatePost({addPost, posts}) {
+export default function CreatePost() {
+    // Get posts and setPosts form context 
+    const { posts, setPosts } = useContext(PostContext);
+
     // Set post state
     const[createPost, setCreatePost] = useState({
         id: Date.now(),
@@ -50,7 +54,11 @@ export default function CreatePost({addPost, posts}) {
         }
 
         // Add post to the list
-        addPost(createPost);
+        // Without context api
+        /* addPost(createPost); */
+
+        // With cotnext api
+        setPosts([...posts, createPost]);
 
         // Reset form
         setCreatePost({

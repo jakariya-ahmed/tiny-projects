@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import AllPost from "../components/post/AllPost";
 import CreatePost from "../components/post/CreatePost";
+import { PostContext } from "../context/PostContext";
 
 export default function Posts() {
   // Load posts form local storage     
@@ -24,15 +25,30 @@ export default function Posts() {
   });
 
     // Add new post 
-    const addPost = (newPost) => {
-      setPosts((prev) => [...prev, newPost]);
-    }
+    /***  Do not need when used context api ***/
+    // const addPost = (newPost) => {
+    //   setPosts((prev) => [...prev, newPost]);
+    // } 
+    /*** Do not need when used context api ***/
 
     return(
-        <div className="max-w-3xl mx-auto">
+        // ContextApi for posts
+        <PostContext.Provider value={{posts, setPosts}}>
+          <div className="max-w-3xl mx-auto">
             <h1>Posts Page</h1>
-            <CreatePost addPost={addPost} posts={posts} />
-            <AllPost posts={posts}/>
+
+            {/* // Without context api  */}
+            {/* <CreatePost addPost={addPost} posts={posts} />
+            <AllPost posts={posts}/>  */}
+            {/* // Without context api  */}
+
+            {/* With Context API */}
+              <CreatePost />
+              <AllPost />
+            {/* With Context API */}
         </div>
+        </PostContext.Provider>
+
+        
     );
 }
