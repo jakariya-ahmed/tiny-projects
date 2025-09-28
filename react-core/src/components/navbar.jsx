@@ -21,6 +21,14 @@ export default function Navbar() {
         >
           Posts
         </NavLink>
+        <NavLink
+          to="/products"
+          className={({ isActive }) =>
+            isActive ? "text-blue-600 font-bold" : "text-gray-800"
+          }
+          >
+            Products
+        </NavLink>
       </nav>
     </div>
   );

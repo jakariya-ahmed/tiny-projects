@@ -14,7 +14,7 @@ export default function AllPost() {
 
 
     return(
-        <section className="max-w-7xl mx-auto ">
+        <section className="max-w-7xl mx-auto">
             <div className="flex gap-x-2">
                 <input 
                 className="w-3xl border-2 border-purple-300 p-3 rounded mt-6"
