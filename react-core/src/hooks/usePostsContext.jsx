@@ -1,23 +1,27 @@
-import { useContext, useState, useEffect } from "react"
+import { useReducer } from "react"
 import { PostContext } from "../context/PostContext";
+import { initialState, reducer } from "../reducer/postsReducer";
 
- const PostProvider = ({ children }) => {
-    // Load posts from local storage
-    const [posts, setPosts] = useState(() => {
+
+ const PostsProvider = ({ children }) => {
+    // Load posts from local storage for context api
+   /* const [posts, setPosts] = useState(() => {
         const saved = localStorage.getItem('posts');
         return saved ? JSON.parse(saved) : [];
-    });
+    }); */
 
-    // Save posts to local storage whenever they change
-    useEffect(()=> {
+    const[state, dispatch] = useReducer(reducer, initialState);
+    
+     // Save posts to local storage with context api
+    /*useEffect(()=> {
         localStorage.setItem('posts', JSON.stringify(posts));
-    }, [posts]);
+    }, [posts]); */
 
     return (
-        <PostContext.Provider value={{ posts, setPosts }}>
+        <PostContext.Provider value={{ state, dispatch }}>
             {children}
         </PostContext.Provider>
     );
 };
 
-export default PostProvider;
+export default PostsProvider;

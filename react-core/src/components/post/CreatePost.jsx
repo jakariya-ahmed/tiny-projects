@@ -2,9 +2,9 @@ import { useContext, useState } from "react";
 import { PostContext } from "../../context/PostContext";
 
 export default function CreatePost() {
-    // Get posts and setPosts form context 
-    const { posts, setPosts } = useContext(PostContext);
-
+    // Get posts and setPosts from context 
+    // const { posts, setPosts } = useContext(PostContext);
+    const {state, dispatch} = useContext(PostContext);
     // Set post state
     const[createPost, setCreatePost] = useState({
         id: Date.now(),
@@ -19,7 +19,9 @@ export default function CreatePost() {
     // Handle input change
     const handleChange = (e) => {
         const {name, value} = e.target;
+        // for context api
         setCreatePost({...createPost, [name] : value});
+
 
         // Clear error message
         setErrors({...errors, [name]: ''});
@@ -58,8 +60,11 @@ export default function CreatePost() {
         /* addPost(createPost); */
 
         // With cotnext api
-        setPosts([...posts, createPost]);
+        /*setPosts([...posts, createPost]); */
 
+        // With reducer
+        // dispatch({type: 'ADD_POST', payload: createPost});
+        dispatch({type: 'ADD_POST', payload: createPost})
         // Reset form
         setCreatePost({
             id: Date.now(),

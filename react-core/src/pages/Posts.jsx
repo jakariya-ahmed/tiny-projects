@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AllPost from "../components/post/AllPost";
 import CreatePost from "../components/post/CreatePost";
 import { PostContext } from "../context/PostContext";
-import PostProvider from "../hooks/usePostsContext";
+import PostsProvider from "../hooks/usePostsContext";
 
 export default function Posts() {
   // Load posts form local storage without custom hook     
@@ -51,10 +51,10 @@ export default function Posts() {
         // </PostContext.Provider>
 
         /** Custom Hook **/
-      <PostProvider>
+      <PostsProvider>
         <CreatePost />
         <AllPost />
-      </PostProvider>
+      </PostsProvider>
         
     );
 }
