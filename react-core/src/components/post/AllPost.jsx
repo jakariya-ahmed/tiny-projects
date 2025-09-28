@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { PostContext } from "../../context/PostContext";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function AllPost() {
     // Get posts from context
@@ -50,8 +51,17 @@ export default function AllPost() {
                 )}
             </div>
 
-            <div className="flex">
-                <button></button>
+            <div className="flex gap-2 mb-6">
+                <button className="p-2 rounded bg-purple-200 hover:bg-purple-300">
+                    <ArrowLeft size={32} className="h-6 w-6 text-purple-500"/>
+                </button>
+                <button className="p-2 rounded bg-purple-200 hover:bg-purple-300">1</button>
+                <button className="p-2 rounded bg-purple-200 hover:bg-purple-300">2</button>
+                <button className="p-2 rounded bg-purple-200 hover:bg-purple-300">3</button>
+                <button className="p-2 rounded bg-purple-200 hover:bg-purple-300">
+                    <ArrowRight size={32} className="h-6 w-6 text-purple-500"/>
+                </button>
+
             </div>
             </section>
     );
