@@ -74,48 +74,48 @@ export default function ProductCom() {
             </div>
             
              <div className="flex justify-center mt-6 flex-wrap gap-1">
-        <button
-          onClick={() => goToPage(1)}
-          disabled={currentPage === 1}
-          className="px-2 py-1 border rounded disabled:opacity-50"
-        >
-          First
-        </button>
-        <button
-          onClick={prevPage}
-          disabled={currentPage === 1}
-          className="px-2 py-1 border rounded disabled:opacity-50"
-        >
-          Prev
-        </button>
+                <button
+                  onClick={() => goToPage(1)}
+                  disabled={currentPage === 1}
+                  className="px-2 py-1 border rounded disabled:opacity-50"
+                >
+                  First
+                </button>
+                <button
+                  onClick={prevPage}
+                  disabled={currentPage === 1}
+                  className="px-2 py-1 border rounded disabled:opacity-50"
+                >
+                  Prev
+                </button>
 
-        {pageNumbers.map((num) => (
-          <button
-            key={num}
-            onClick={() => goToPage(num)}
-            className={`px-3 py-1 border rounded ${
-              num === currentPage ? "bg-blue-500 text-white" : "bg-white"
-            }`}
-          >
-            {num}
-          </button>
-        ))}
+                {pageNumbers.map((num) => (
+                  <button
+                    key={num}
+                    onClick={() => goToPage(num)}
+                    className={`px-3 py-1 border rounded ${
+                      num === currentPage ? "bg-blue-500 text-white" : "bg-white"
+                    }`}
+                  >
+                    {num}
+                  </button>
+                ))}
 
-        <button
-          onClick={nextPage}
-          disabled={currentPage === totalPages}
-          className="px-2 py-1 border rounded disabled:opacity-50"
-        >
-          Next
-        </button>
-        <button
-          onClick={() => goToPage(totalPages)}
-          disabled={currentPage === totalPages}
-          className="px-2 py-1 border rounded disabled:opacity-50"
-        >
-          Last
-        </button>
-      </div>
+                <button
+                  onClick={nextPage}
+                  disabled={currentPage === totalPages}
+                  className="px-2 py-1 border rounded disabled:opacity-50"
+                >
+                  Next
+                </button>
+                <button
+                  onClick={() => goToPage(totalPages)}
+                  disabled={currentPage === totalPages}
+                  className="px-2 py-1 border rounded disabled:opacity-50"
+                >
+                  Last
+                </button>
+              </div>
             
         </section>
     );
