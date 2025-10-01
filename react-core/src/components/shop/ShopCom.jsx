@@ -1,56 +1,56 @@
 import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
+import usePagination from "../../hooks/usePagination";
+import useDummyData from "../../hooks/useDummyData";
+
 export default function ShopCom(){
     // Dummy API URL
     const API_URL = `https://dummyjson.com/products?limit=120&skip=12`;
+    const items = 12;
 
-    // State for products, loading, and error
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null); 
+    // Get from custom hook useDummyData.js
+    const { products, loading, error } = useDummyData(API_URL);
 
-    // Fetch porducts using Fetch Api from dummyjson.com
-    useEffect(() => {
-        fetch(API_URL)
-        .then((res) => {
-            if(!res.ok) throw new Error("Network response was not fine");
-            return res.json();
-        })
-        .then((data) => {
-            setProducts(data.products);
-            setLoading(false);
-        })
-        .catch((err) => {
-            setError(err.message);
-            setLoading(false);
-        });
-    });
-    
-    // Normal pagination
-    // CURRENTPAGE,PERPAGEITEM,LASTINDEX,FIRSTINDEX,TOTALPAGE
+    // Search products
+    const [searchKey, setSearchKey] = useState("");
+   
+     // Filter products by search key
+     const filteredProducts = searchKey ? 
+     products.filter((p) => 
+        p.title.toLowerCase().includes(searchKey.toLowerCase())
+    ) : products;
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 12;
+    // pass data to pagination hook
+    const {
+        currentPage,
+        setCurrentPage,
+        totalPages,
+        currentProducts,
+    } = usePagination(filteredProducts, items);
 
-    // Index of last item on the current page
-    const lastIndex = currentPage * itemsPerPage;
-
-    // Index of first item on the current page
-    const firstIndex = lastIndex - itemsPerPage;
-    // Get total pages
-    const totalPage = Math.ceil(products.length / itemsPerPage);
-    // Get current page products 
-    const currentProducts = products.slice(firstIndex, lastIndex);
 
     // Handle pagination change
     const handlePagination = (page) => {
         setCurrentPage(page);
     }
-    // console.log(totalPage);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
 
     return (
-        <div className="mt-6">
-            <div className="grid sm:grid-cols-2 md:mx-4 md:grid-cols-3 lg:grid-cols-4 gap-3">
+    <div className="mt-6">
+        {/*  search input  */}
+        <div className="mb-4">
+            <input  value={searchKey} placeholder="Search products..."
+            onChange={(e) => {
+                setSearchKey(e.target.value);
+                setCurrentPage(1);
+            }}
+             className="w-full p-2 border rounded mb-4"
+            type="text" />
+        </div>
+        <div className="grid sm:grid-cols-2 md:mx-4 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {currentProducts.map((product) => {
             // Calculate averate rating 
             // const avgRating = product.reviews?.length ?
@@ -91,7 +91,7 @@ export default function ShopCom(){
             </div>
         
             <div className="flex justify-center gap-2 my-6">
-                {Array.from({ length: totalPage }, (_, i) => i+1).map((page) => (
+                {Array.from({ length: totalPages }, (_, i) => i+1).map((page) => (
                 <button 
                 key={page}
                 onClick={() => handlePagination(page)}
