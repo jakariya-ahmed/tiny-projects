@@ -20,7 +20,7 @@ export default function ShopCom(){
         p.title.toLowerCase().includes(searchKey.toLowerCase())
     ) : products;
 
-    // pass data to pagination hook
+    // Get and Pass data to custom usePagination.jsx
     const {
         currentPage,
         setCurrentPage,
@@ -41,14 +41,19 @@ export default function ShopCom(){
     return (
     <div className="mt-6">
         {/*  search input  */}
-        <div className="mb-4">
+        <div className="mb-4 flex gap-3">
             <input  value={searchKey} placeholder="Search products..."
             onChange={(e) => {
                 setSearchKey(e.target.value);
                 setCurrentPage(1);
             }}
-             className="w-full p-2 border rounded mb-4"
+             className="w-100 p-2 border rounded mb-4"
             type="text" />
+            <select name="" id="" className="p-2 border rounded mb-4">
+                <option value="">Default</option>
+                <option value="">Lowest Price</option>
+                <option value="">Highest Price</option>
+            </select>
         </div>
         <div className="grid sm:grid-cols-2 md:mx-4 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {currentProducts.map((product) => {
