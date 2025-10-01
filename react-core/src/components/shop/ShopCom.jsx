@@ -1,8 +1,8 @@
 import { Star } from "lucide-react";
-import { useEffect, useInsertionEffect, useState } from "react";
+import { useEffect, useState } from "react";
 export default function ShopCom(){
     // Dummy API URL
-    const API_URL = `https://dummyjson.com/products?limit=20&skip=10`;
+    const API_URL = `https://dummyjson.com/products?limit=120&skip=12`;
 
     // State for products, loading, and error
     const [products, setProducts] = useState([]);
@@ -25,9 +25,33 @@ export default function ShopCom(){
             setLoading(false);
         });
     });
+    
+    // Normal pagination
+    // CURRENTPAGE,PERPAGEITEM,LASTINDEX,FIRSTINDEX,TOTALPAGE
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 12;
+
+    // Index of last item on the current page
+    const lastIndex = currentPage * itemsPerPage;
+
+    // Index of first item on the current page
+    const firstIndex = lastIndex - itemsPerPage;
+    // Get total pages
+    const totalPage = Math.ceil(products.length / itemsPerPage);
+    // Get current page products 
+    const currentProducts = products.slice(firstIndex, lastIndex);
+
+    // Handle pagination change
+    const handlePagination = (page) => {
+        setCurrentPage(page);
+    }
+    // console.log(totalPage);
+
     return (
-        <div className="mt-6 grid sm:grid-cols-2 md:mx-4 md:grid-cols-3 lg:grid-cols-4 gap-3">
-        {products.map((product) => {
+        <div className="mt-6">
+            <div className="grid sm:grid-cols-2 md:mx-4 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            {currentProducts.map((product) => {
             // Calculate averate rating 
             // const avgRating = product.reviews?.length ?
             // product.reviews.reduce((sum, r) => sum + r.rating, 0)
@@ -39,7 +63,7 @@ export default function ShopCom(){
             // console.log(avgRating);
             
             return(
-                <div className="rounded-md shadow-md bg-amber-500">
+                <div key={product.id} className="rounded-md shadow-md bg-amber-500">
                     <img src={product.thumbnail} alt="t-shirt" />
                     <div className="px-3 py-4">
                         <h2>{product.title} </h2>
@@ -63,6 +87,19 @@ export default function ShopCom(){
                 </div>
                 );
             })}
+
+            </div>
+        
+            <div className="flex justify-center gap-2 my-6">
+                {Array.from({ length: totalPage }, (_, i) => i+1).map((page) => (
+                <button 
+                key={page}
+                onClick={() => handlePagination(page)}
+                className="bg-amber-500 text-white px-4 py-1 rounded-md hover:bg-amber-400 cursor-pointer">
+                    {page}
+                </button>
+                ))}
+            </div>
         </div>
     );
 }
