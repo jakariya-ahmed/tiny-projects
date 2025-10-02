@@ -37,19 +37,19 @@ export default function ProductCom() {
   const currentProducts = products.slice(indexOfFirst, indexOfLast);
 
   // Smart window of page numbers
-  const maxPageButtons = 10; // show at most 10 numbered buttons
-  const half = Math.floor(maxPageButtons / 2);
+  const maxPageBtns = 10;
+  const half = Math.floor(maxPageBtns / 2);
 
   let startPage = Math.max(1, currentPage - half);
-  let endPage = startPage + maxPageButtons - 1;
+  let endPage = startPage + maxPageBtns - 1;
   if (endPage > totalPages) {
     endPage = totalPages;
-    startPage = Math.max(1, endPage - maxPageButtons + 1);
+    startPage = Math.max(1, endPage - maxPageBtns + 1) 
   }
 
   const pageNumbers = [];
-  for (let i = startPage; i <= endPage; i++) pageNumbers.push(i);
-
+    for(let i = startPage; i <= endPage; i++) pageNumbers.push(i);
+  
   // --- Handlers ---
   const goToPage = (p) => setCurrentPage(p);
   const nextPage = () => setCurrentPage((p) => Math.min(p + 1, totalPages));
