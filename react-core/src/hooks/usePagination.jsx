@@ -17,11 +17,30 @@ export default function usePagination(data=[], itemsPerPage=items) {
 
     }, [data, currentPage, itemsPerPage]);
 
+    // Page numbers (only show 10 buttons at a time)
+    const maxButtons = 10;
+    let startPage = Math.max(currentPage - Math.floor(maxButtons / 2), 1)
+    let endPage = startPage + maxButtons - 1;
+    if (endPage > totalPages) {
+        endPage = totalPages;
+        startPage = Math.max(endPage - maxButtons + 1, 1);
+    }
+
+    const pageNumbers = Array.from(
+        { length: endPage - startPage + 1},
+        (_, i) => startPage + i
+    );
+
+    // const pageNumbers = [];
+    // for (let i = startPage; i <= endPage; i++) pageNumbers.push(i);
+
+
     return {
         currentPage,
         setCurrentPage,
         totalPages,
         currentProducts,
+        pageNumbers,
     };
 
 }

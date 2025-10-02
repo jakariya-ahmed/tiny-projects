@@ -1,11 +1,11 @@
-import { Star } from "lucide-react";
+import { ArrowBigLeft, ArrowBigRight, ArrowLeftIcon, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import usePagination from "../../hooks/usePagination";
 import useDummyData from "../../hooks/useDummyData";
 
 export default function ShopCom(){
     // Dummy API URL
-    const API_URL = `https://dummyjson.com/products?limit=120&skip=12`;
+    const API_URL = `https://dummyjson.com/products?limit=1200&skip=12`;
     const items = 12;
 
     // Get from custom hook useDummyData.js
@@ -26,13 +26,19 @@ export default function ShopCom(){
         setCurrentPage,
         totalPages,
         currentProducts,
+        pageNumbers,
     } = usePagination(filteredProducts, items);
+
+      // --- Handlers ---
+  const goToPage = (p) => setCurrentPage(p);
+  const nextPage = () => setCurrentPage((p) => Math.min(p + 1, totalPages));
+  const prevPage = () => setCurrentPage((p) => Math.max(p - 1, 1));
 
 
     // Handle pagination change
-    const handlePagination = (page) => {
-        setCurrentPage(page);
-    }
+    // const handlePagination = (page) => {
+    //     setCurrentPage(page);
+    // }
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -96,15 +102,49 @@ export default function ShopCom(){
             </div>
         
             <div className="flex justify-center gap-2 my-6">
-                {Array.from({ length: totalPages }, (_, i) => i+1).map((page) => (
-                <button 
-                key={page}
-                onClick={() => handlePagination(page)}
-                className="bg-amber-500 text-white px-4 py-1 rounded-md hover:bg-amber-400 cursor-pointer">
-                    {page}
+                <button
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(1)}
+                    className="bg-amber-400 px-3 py-1 rounded-md disabled:opacity-50"
+                    >
+                        First
                 </button>
+                <button
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                    className="bg-amber-400 px-3 py-1 rounded-md disabled:opcacity-50"
+                    >
+                        <ArrowBigLeft size={16} />
+                </button>
+
+                {pageNumbers.map((page) => (
+                    <button
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={`px-3 py-1 rounded ${currentPage === page ? "bg-blue-500 text-white" : ""}`}
+                    >
+                        {page}
+                    </button>
                 ))}
+                
+                <button
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                    className="bg-amber-400 px-3 py-1 rounded-md disabled:opcacity-50"
+                >
+                    <ArrowBigRight size={16} />
+                </button>
+                <button
+                    disabled={currentPage === totalPages}
+                    onClick={() => goToPage(totalPages)}
+                    className="bg-amber-400 px-3 py-1 rounded-md disabled:opacity-50"
+                >
+                    Last
+                </button>
+
+
             </div>
+            
         </div>
     );
 }
