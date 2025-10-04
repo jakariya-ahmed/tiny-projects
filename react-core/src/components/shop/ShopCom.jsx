@@ -5,11 +5,13 @@ import useDummyData from "../../hooks/useDummyData";
 
 
 import { motion } from "framer-motion";
+import CategoriesCom from "./CategoriesCom";
+import BrandCom from "./BrandCom";
 
 export default function ShopCom(){
     // Dummy API URL
-    const API_URL = `https://dummyjson.com/products?limit=1200&skip=12`;
-    const items = 12;
+    const API_URL = `https://dummyjson.com/products?limit=1200&skip=24`;
+    const items = 24;
 
     // Get from custom hook useDummyData.js
     const { products, loading, error } = useDummyData(API_URL);
@@ -199,26 +201,11 @@ const [price, setPrice] = useState(50);
                 </div>
 
                 {/* Category */}
-                <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-2">Category</h3>
-                <ul className="space-y-2 text-gray-700">
-                    <li><input type="checkbox" /> Electronics</li>
-                    <li><input type="checkbox" /> Fashion</li>
-                    <li><input type="checkbox" /> Home</li>
-                    <li><input type="checkbox" /> Sports</li>
-                </ul>
-                </div>
+                <CategoriesCom />
 
                 {/* Brand */}
-                <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-2">Brand</h3>
-                <ul className="space-y-2 text-gray-700">
-                    <li><input type="checkbox" /> Apple</li>
-                    <li><input type="checkbox" /> Samsung</li>
-                    <li><input type="checkbox" /> Nike</li>
-                    <li><input type="checkbox" /> Adidas</li>
-                </ul>
-                </div>
+                
+                <BrandCom />
 
                 {/* Color */}
                 <div className="mb-6">
