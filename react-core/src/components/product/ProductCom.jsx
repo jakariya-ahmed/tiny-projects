@@ -2,64 +2,69 @@ import { useEffect, useState } from "react";
 
 export default function ProductCom() {
     const API_URL = `https://dummyjson.com/products?limit=200&skip=10`;
-    // State fro products, loading, and error
+  // State for products, loading, and errors
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
 
-    // Fetch products using Fetch Api form dummyjson.com
+    // Get data form dummujson.com using Fetch Api
     useEffect(() => {
-        fetch(API_URL)
-        .then((res) => {
-            if(!res.ok) throw new Error("Network response was not fine");
-            return res.json();
-        })
-        .then((data) => {
-            setProducts(data.products);
-            setLoading(false);
-        })
-        .catch((error) => {
-            setError(error.message);
-            setLoading(false);
-        });
+      fetch(API_URL)
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not fine");
+        return res.json();
+      })
+      .then((data) => {
+        setProducts(data.products);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      })
     }, []);
 
-    // Page items for pagination
+
+    // Pagination show 10 products on per page
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    const productsPerPage = 12;
 
-  // --- Pagination Calculations ---
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+    const indexOfLast = currentPage * productsPerPage;
+    const indexOfFirst = indexOfLast - productsPerPage;
 
-  // Only products for the current page
-  const indexOfLast = currentPage * itemsPerPage;
-  const indexOfFirst = indexOfLast - itemsPerPage;
-  const currentProducts = products.slice(indexOfFirst, indexOfLast);
+    const totalPages = Math.ceil(products.length / productsPerPage);
+    
+    const currentProducts = products.slice(indexOfFirst, indexOfLast);
 
-  // Smart window of page numbers
-  const maxPageBtns = 10;
-  const half = Math.floor(maxPageBtns / 2);
+    // Dynamic pagination buttons show
+    const maxPageBtns = 10;
+    const half = Math.floor(maxPageBtns / 2);
 
-  let startPage = Math.max(1, currentPage - half);
-  let endPage = startPage + maxPageBtns - 1;
-  if (endPage > totalPages) {
-    endPage = totalPages;
-    startPage = Math.max(1, endPage - maxPageBtns + 1) 
-  }
+    let startPage = Math.max(1, currentPage - half);
+    let endPage = startPage + maxPageBtns - 1;
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(1, endPage - maxPageBtns + 1);
+    } 
 
-  const pageNumbers = [];
-    for(let i = startPage; i <= endPage; i++) pageNumbers.push(i);
-  
+    const pageNumbers = [];
+
+    for (let i=startPage; i <= endPage; i++) pageNumbers.push(i);
+
+
   // --- Handlers ---
   const goToPage = (p) => setCurrentPage(p);
   const nextPage = () => setCurrentPage((p) => Math.min(p + 1, totalPages));
   const prevPage = () => setCurrentPage((p) => Math.max(p - 1, 1));
 
-
     if (loading) return <p> Products are loading...</p>
     if (error) return <p> Error: {error}</p>
     return(
         <section className="my-6">
+          <aside>
+            
+          </aside>
+          {/* Product card  */}
             <div className="grid sm:grid-cols-2 md:px-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 { currentProducts.map((p) => (
                 <div key={p.id} className="shadow-md rounded-md">
@@ -72,7 +77,7 @@ export default function ProductCom() {
                 </div>
                 ))}
             </div>
-            
+            {/* Pagination buttons  */}
              <div className="flex justify-center mt-6 flex-wrap gap-1">
                 <button
                   onClick={() => goToPage(1)}
@@ -120,3 +125,10 @@ export default function ProductCom() {
         </section>
     );
 }
+
+
+
+
+
+
+

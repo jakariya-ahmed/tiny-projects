@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import usePagination from "../../hooks/usePagination";
 import useDummyData from "../../hooks/useDummyData";
 
+
+import { motion } from "framer-motion";
+
 export default function ShopCom(){
     // Dummy API URL
     const API_URL = `https://dummyjson.com/products?limit=1200&skip=12`;
@@ -40,6 +43,19 @@ export default function ShopCom(){
     //     setCurrentPage(page);
     // }
 
+// Dummy Products
+const products2 = Array.from({ length: 12 }, (_, i) => ({
+  id: i + 1,
+  name: `Product ${i + 1}`,
+  price: (10 + i * 5).toFixed(2),
+  image: `https://via.placeholder.com/300x300?text=Product+${i + 1}`,
+}));
+
+const [search, setSearch] = useState("");
+const [price, setPrice] = useState(50);
+
+
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
@@ -47,13 +63,13 @@ export default function ShopCom(){
     return (
     <div className="mt-6">
         {/*  search input  */}
-        <div className="mb-4 flex gap-3">
+        <div className="mb-4 flex gap-3 top-filter">
             <input  value={searchKey} placeholder="Search products..."
             onChange={(e) => {
                 setSearchKey(e.target.value);
                 setCurrentPage(1);
             }}
-             className="w-100 p-2 border rounded mb-4"
+            className="w-100 p-2 border rounded mb-4"
             type="text" />
             <select name="" id="" className="p-2 border rounded mb-4">
                 <option value="">Default</option>
@@ -61,47 +77,50 @@ export default function ShopCom(){
                 <option value="">Highest Price</option>
             </select>
         </div>
-        <div className="grid sm:grid-cols-2 md:mx-4 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {currentProducts.map((product) => {
-            // Calculate averate rating 
-            // const avgRating = product.reviews?.length ?
-            // product.reviews.reduce((sum, r) => sum + r.rating, 0)
-            // / product.reviews.length : 0;
-            const avgRating = product.reviews?.length?
-            product.reviews.reduce((sum, r) => sum + r.rating, 0) 
-            / product.reviews.length : 0;
-            
-            // console.log(avgRating);
-            
-            return(
-                <div key={product.id} className="rounded-md shadow-md bg-amber-500">
-                    <img src={product.thumbnail} alt="t-shirt" />
-                    <div className="px-3 py-4">
-                        <h2>{product.title} </h2>
-                        <p><strong className="line-through text-red-500">3450 tk </strong> 
-                        <strong>{product.price} tk</strong> </p>
-                        <div className="flex items-center gap-2">
-                            <div className="flex">
-                                {Array.from({ length: 5}).map((_, i) => (
-                                    <Star key={i} size={16} 
-                                    className={i < Math.round(avgRating) ? 
-                                        "text-black-500 fill-white" : "text-black-500"}/>
+        <div className="flex ">
+                
+            <div className="products">
+                <div className="grid sm:grid-cols-2 md:mx-4 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {currentProducts.map((product) => {
+                    // Calculate averate rating 
+                    // const avgRating = product.reviews?.length ?
+                    // product.reviews.reduce((sum, r) => sum + r.rating, 0)
+                    // / product.reviews.length : 0;
+                    const avgRating = product.reviews?.length?
+                    product.reviews.reduce((sum, r) => sum + r.rating, 0) 
+                    / product.reviews.length : 0;
+                    
+                    // console.log(avgRating);
+                    // Product card 
+                    return(
+                        <div key={product.id} className="rounded-md shadow-md bg-amber-500">
+                            <img src={product.thumbnail} alt="t-shirt" />
+                            <div className="px-3 py-4">
+                                <h2>{product.title} </h2>
+                                <p><strong className="line-through text-red-500">3450 tk </strong> 
+                                <strong>{product.price} tk</strong> </p>
+                                <div className="flex items-center gap-2">
+                                    <div className="flex">
+                                        {Array.from({ length: 5}).map((_, i) => (
+                                            <Star key={i} size={16} 
+                                            className={i < Math.round(avgRating) ? 
+                                                "text-black-500 fill-white" : "text-black-500"}/>
+                                            
+                                            
+                                        ))}
+                                    </div>
+
                                     
-                                    
-                                ))}
+                                    <button className="bg-white text-gray-700 px-4 py-1 rounded-md mt-2 hover:bg-amber-400 hover:text-white cursor-pointer">Add to cart</button >
+                                </div>
                             </div>
-
-                            
-                            <button className="bg-white text-gray-700 px-4 py-1 rounded-md mt-2 hover:bg-amber-400 hover:text-white cursor-pointer">Add to cart</button >
                         </div>
-                    </div>
-                </div>
-                );
-            })}
+                        );
+                    })}
 
-            </div>
-        
-            <div className="flex justify-center gap-2 my-6">
+                </div>
+                {/* Pagination buttons  */}
+                <div className="flex justify-center gap-2 my-6">
                 <button
                     disabled={currentPage === 1}
                     onClick={() => setCurrentPage(1)}
@@ -143,8 +162,106 @@ export default function ShopCom(){
                 </button>
 
 
+                </div>
             </div>
-            
+                
+
+            <motion.aside
+                initial={{ x: -50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white shadow-lg rounded-2xl p-4 h-fit sticky top-4"
+            >
+                {/* Search */}
+                <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2">Search</h3>
+                <input
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search products..."
+                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400"
+                />
+                </div>
+
+                {/* Price Filter */}
+                <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2">Price Range</h3>
+                <input
+                    type="range"
+                    min="0"
+                    max="5000"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    className="w-full"
+                />
+                <p className="text-sm mt-2">Up to ${price}</p>
+                </div>
+
+                {/* Category */}
+                <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2">Category</h3>
+                <ul className="space-y-2 text-gray-700">
+                    <li><input type="checkbox" /> Electronics</li>
+                    <li><input type="checkbox" /> Fashion</li>
+                    <li><input type="checkbox" /> Home</li>
+                    <li><input type="checkbox" /> Sports</li>
+                </ul>
+                </div>
+
+                {/* Brand */}
+                <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2">Brand</h3>
+                <ul className="space-y-2 text-gray-700">
+                    <li><input type="checkbox" /> Apple</li>
+                    <li><input type="checkbox" /> Samsung</li>
+                    <li><input type="checkbox" /> Nike</li>
+                    <li><input type="checkbox" /> Adidas</li>
+                </ul>
+                </div>
+
+                {/* Color */}
+                <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2">Color</h3>
+                <div className="flex gap-2">
+                    <span className="w-6 h-6 rounded-full bg-red-500 border cursor-pointer"></span>
+                    <span className="w-6 h-6 rounded-full bg-blue-500 border cursor-pointer"></span>
+                    <span className="w-6 h-6 rounded-full bg-green-500 border cursor-pointer"></span>
+                    <span className="w-6 h-6 rounded-full bg-black border cursor-pointer"></span>
+                </div>
+                </div>
+
+                {/* Size */}
+                <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2">Size</h3>
+                <div className="flex gap-2 flex-wrap">
+                    {["S", "M", "L", "XL"].map((s) => (
+                    <button
+                        key={s}
+                        className="px-3 py-1 border rounded-lg hover:bg-violet-100"
+                    >
+                        {s}
+                    </button>
+                    ))}
+                </div>
+                </div>
+
+                {/* Reviews */}
+                <div>
+                <h3 className="text-lg font-semibold mb-2">Reviews</h3>
+                <ul className="space-y-2 text-gray-700">
+                    <li>⭐⭐⭐⭐⭐ & Up</li>
+                    <li>⭐⭐⭐⭐ & Up</li>
+                    <li>⭐⭐⭐ & Up</li>
+                </ul>
+                </div>
+            </motion.aside>
+
+
         </div>
+
+
+
+    </div>
     );
 }
