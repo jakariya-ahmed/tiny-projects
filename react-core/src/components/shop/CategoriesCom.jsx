@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function CategoriesCom() {
+export default function CategoriesCom({ handleCategoryChange, selectedCategories }) {
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
@@ -36,8 +36,9 @@ export default function CategoriesCom() {
             <ul className="space-y-2 text-gray-700">
                 {categories.map((cat) => (
                 <li key={cat.slug}>
-                    <input type="checkbox" value={cat}
-                        onCanPlay={(e) => onCatgoryChange(e.target.value, e.target.checked)}
+                    <input type="checkbox" value={cat.slug}
+                    checked={selectedCategories.includes(cat.slug)}
+                        onChange={(e) => handleCategoryChange(e.target.value, e.target.checked)}
                     /> <span className="pl-2">{cat.name}</span>
                  </li>
                 ))}

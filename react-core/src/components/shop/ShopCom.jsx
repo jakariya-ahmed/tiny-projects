@@ -1,8 +1,7 @@
-import { ArrowBigLeft, ArrowBigRight, ArrowLeftIcon, Star } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowBigLeft, ArrowBigRight, CheckIcon, Star } from "lucide-react";
+import { useState } from "react";
 import usePagination from "../../hooks/usePagination";
 import useDummyData from "../../hooks/useDummyData";
-
 
 import { motion } from "framer-motion";
 import CategoriesCom from "./CategoriesCom";
@@ -16,14 +15,35 @@ export default function ShopCom(){
     // Get from custom hook useDummyData.js
     const { products, loading, error } = useDummyData(API_URL);
 
-    // Search products
+    // Filter state 
     const [searchKey, setSearchKey] = useState("");
-   
+    const [selectedCategories, setSelectedCategories] = useState([]);
+
      // Filter products by search key
-     const filteredProducts = searchKey ? 
-     products.filter((p) => 
-        p.title.toLowerCase().includes(searchKey.toLowerCase())
-    ) : products;
+    //  const filteredProducts = searchKey ? 
+    //  products.filter((p) => 
+    //     p.title.toLowerCase().includes(searchKey.toLowerCase())
+    // ) : products;
+
+    
+// Handle category change
+  const handleCategoryChange = (category, checked) => {
+    if (checked) {
+      setSelectedCategories((prev) => [...prev, category]);
+    } else {
+      setSelectedCategories((prev) =>
+        prev.filter((c) => c !== category)
+      );
+    }
+  };
+
+    const filteredProducts = products.filter((p) => {
+        const matchSearch = !searchKey || p.title.toLowerCase().includes(searchKey.toLowerCase());
+        // Category filter
+        const matchCategory = selectedCategories.length === 0 || selectedCategories.includes(p.category.toLowerCase());
+        return matchSearch, matchCategory;
+    });
+
 
     // Get and Pass data to custom usePagination.jsx
     const {
@@ -33,6 +53,8 @@ export default function ShopCom(){
         currentProducts,
         pageNumbers,
     } = usePagination(filteredProducts, items);
+
+
 
       // --- Handlers ---
   const goToPage = (p) => setCurrentPage(p);
@@ -45,17 +67,8 @@ export default function ShopCom(){
     //     setCurrentPage(page);
     // }
 
-// Dummy Products
-const products2 = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
-  name: `Product ${i + 1}`,
-  price: (10 + i * 5).toFixed(2),
-  image: `https://via.placeholder.com/300x300?text=Product+${i + 1}`,
-}));
-
-const [search, setSearch] = useState("");
-const [price, setPrice] = useState(50);
-
+    // Filter state 
+    const [price, setPrice] = useState(50);
 
 
     if (loading) return <p>Loading...</p>;
@@ -65,24 +78,27 @@ const [price, setPrice] = useState(50);
     return (
     <div className="mt-6">
         {/*  search input  */}
-        <div className="mb-4 flex gap-3 top-filter">
-            <input  value={searchKey} placeholder="Search products..."
-            onChange={(e) => {
-                setSearchKey(e.target.value);
-                setCurrentPage(1);
-            }}
-            className="w-100 p-2 border rounded mb-4"
-            type="text" />
-            <select name="" id="" className="p-2 border rounded mb-4">
-                <option value="">Default</option>
-                <option value="">Lowest Price</option>
-                <option value="">Highest Price</option>
+        <motion.div 
+        initial={{ x: 50, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="mb-4 flex gap-3 top-filter">
+            <select name="" id="" className="p-2 border border-gray-200 bg-amber-500 text-white rounded-md mb-4">
+                <option value="">Sort Default </option>
+                <option value="">Sort by price: Lowest to High</option>
+                <option value="">Sort by price: Highest to Lowest</option>
+                <option value="">Sort by Latest </option>
+                <option value="">Sort by Popularity </option>
             </select>
-        </div>
-        <div className="flex ">
+        </motion.div>
+        <div className="lg:flex">
                 
             <div className="products">
-                <div className="grid sm:grid-cols-2 md:mx-4 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <motion.div 
+                initial={{x: -50, opacity: 0}}
+                animate={{ x: 0, opacity: 1}}
+                transition={{ duration: 0.5 }}
+                className="grid sm:grid-cols-2 md:mx-4 md:grid-cols-3 lg:grid-cols-4 gap-3">
                     {currentProducts.map((product) => {
                     // Calculate averate rating 
                     // const avgRating = product.reviews?.length ?
@@ -120,7 +136,7 @@ const [price, setPrice] = useState(50);
                         );
                     })}
 
-                </div>
+                </motion.div>
                 {/* Pagination buttons  */}
                 <div className="flex justify-center gap-2 my-6">
                 <button
@@ -169,7 +185,7 @@ const [price, setPrice] = useState(50);
                 
 
             <motion.aside
-                initial={{ x: -50, opacity: 0 }}
+                initial={{ x: 50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
                 className="bg-white shadow-lg rounded-2xl p-4 h-fit sticky top-4"
@@ -179,8 +195,11 @@ const [price, setPrice] = useState(50);
                 <h3 className="text-lg font-semibold mb-2">Search</h3>
                 <input
                     type="text"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
+                    value={searchKey}
+                    onChange={(e) => {
+                        setSearchKey(e.target.value);
+                        setCurrentPage(1);
+                    }}
                     placeholder="Search products..."
                     className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400"
                 />
@@ -201,7 +220,9 @@ const [price, setPrice] = useState(50);
                 </div>
 
                 {/* Category */}
-                <CategoriesCom />
+                <CategoriesCom 
+                selectedCategories={selectedCategories}
+                handleCategoryChange={handleCategoryChange}/>
 
                 {/* Brand */}
                 
