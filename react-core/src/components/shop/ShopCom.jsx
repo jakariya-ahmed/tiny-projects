@@ -1,11 +1,15 @@
 import { ArrowBigLeft, ArrowBigRight, CheckIcon, Star } from "lucide-react";
-import { useState } from "react";
+import {useEffect, useState } from "react";
 import usePagination from "../../hooks/usePagination";
 import useDummyData from "../../hooks/useDummyData";
 
 import { motion } from "framer-motion";
 import CategoriesCom from "./CategoriesCom";
 import BrandCom from "./BrandCom";
+import ColorCom from "./ColorCom";
+import SizeCom from "./SizeCom";
+import PriceCom from "./PriceCom";
+import SortComp from "./SortCom";
 
 export default function ShopCom(){
     // Dummy API URL
@@ -13,13 +17,17 @@ export default function ShopCom(){
     const items = 24;
 
     // Get from custom hook useDummyData.js
-    const { products, loading, error } = useDummyData(API_URL);
+    const { products, loading, error, maxPrice } = useDummyData(API_URL);
 
     // Filter state 
     const [searchKey, setSearchKey] = useState("");
     const [selectedCategories, setSelectedCategories] = useState([]);
-
-     // Filter products by search key
+    const [selectedBrands, setSelectedBrands] = useState([]);
+    const [selectedColors, setSelectedColor] = useState([]);
+    const [selectedSizes, setSelectedSizes] = useState([]);
+    const [priceRange, setPriceRange] = useState([0, maxPrice])
+    const [sortOption, setSortOption] = useState("default");
+    // Filter products by search key
     //  const filteredProducts = searchKey ? 
     //  products.filter((p) => 
     //     p.title.toLowerCase().includes(searchKey.toLowerCase())
@@ -37,12 +45,80 @@ export default function ShopCom(){
     }
   };
 
+ // ✅ Brand change handler
+  const handleBrandChange = (brand, isChecked) => {
+    setSelectedBrands((prev) =>
+      isChecked ? [...prev, brand] : prev.filter((b) => b !== brand)
+    );
+  };
+
+  // Color change handler
+  const handleColorChange = (color) => {
+    setSelectedColor((prev) =>
+    prev.includes(color)
+      ? prev.filter((c) => c !== color) // remove if already selected
+      : [...prev, color] // add if not selected
+  ); // toggle
+  }
+
+  // Multi size change handle 
+const handleSizeChange = (size) => {
+  setSelectedSizes((prev) =>
+    prev.includes(size)
+      ? prev.filter((s) => s !== size) // remove if already selected
+      : [...prev, size] // add if not selected
+  );
+};
+
+// Handle price filter
+useEffect(() => {
+  if (maxPrice > 0) {
+    setPriceRange([0, maxPrice]);
+  }
+}, [maxPrice]);
+
+const handlePriceChange = (e) => {
+  const { name, value } = e.target;
+  setPriceRange((prev) =>
+    name === "min"
+      ? [Number(value), prev[1]]
+      : [prev[0], Number(value)]
+  );
+};
+
     const filteredProducts = products.filter((p) => {
+        // Search Key by Filter
         const matchSearch = !searchKey || p.title.toLowerCase().includes(searchKey.toLowerCase());
         // Category filter
         const matchCategory = selectedCategories.length === 0 || selectedCategories.includes(p.category.toLowerCase());
-        return matchSearch, matchCategory;
+        // Brand by filter
+        const matchBrand =
+        selectedBrands.length === 0 ||
+        selectedBrands.includes(p.brand?.toLowerCase());
+        // Color by filter
+        const matchColor =
+        selectedColors.length === 0 ||
+        p.colors?.some((c) => selectedColors.includes(c.toLowerCase()));
+        // Size by filter
+        const matchSize =
+            selectedSizes.length === 0 ||
+            p.sizes?.some((s) => selectedSizes.includes(s.toLowerCase()));
+        // ✅ Price filter
+        const matchPrice = p.price >= priceRange[0] 
+        && p.price <= priceRange[1];
+        
+        return matchSearch && matchCategory && matchBrand && matchColor && matchSize && matchPrice;
+
     });
+
+    // ✅ Sorting
+    if (sortOption === "priceHighLow") {
+    filteredProducts.sort((a, b) => b.price - a.price);
+    } else if (sortOption === "priceLowHigh") {
+    filteredProducts.sort((a, b) => a.price - b.price);
+    } else if (sortOption === "popular") {
+    filteredProducts.sort((a, b) => b.rating - a.rating); // using rating as popularity
+    }
 
 
     // Get and Pass data to custom usePagination.jsx
@@ -55,20 +131,11 @@ export default function ShopCom(){
     } = usePagination(filteredProducts, items);
 
 
-
-      // --- Handlers ---
+    // --- Handlers ---
   const goToPage = (p) => setCurrentPage(p);
   const nextPage = () => setCurrentPage((p) => Math.min(p + 1, totalPages));
   const prevPage = () => setCurrentPage((p) => Math.max(p - 1, 1));
 
-
-    // Handle pagination change
-    // const handlePagination = (page) => {
-    //     setCurrentPage(page);
-    // }
-
-    // Filter state 
-    const [price, setPrice] = useState(50);
 
 
     if (loading) return <p>Loading...</p>;
@@ -83,13 +150,10 @@ export default function ShopCom(){
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="mb-4 flex gap-3 top-filter">
-            <select name="" id="" className="p-2 border border-gray-200 bg-amber-500 text-white rounded-md mb-4">
-                <option value="">Sort Default </option>
-                <option value="">Sort by price: Lowest to High</option>
-                <option value="">Sort by price: Highest to Lowest</option>
-                <option value="">Sort by Latest </option>
-                <option value="">Sort by Popularity </option>
-            </select>
+            <SortComp 
+            sortOption={sortOption}
+            setSortOption={setSortOption}
+            />
         </motion.div>
         <div className="lg:flex">
                 
@@ -206,18 +270,11 @@ export default function ShopCom(){
                 </div>
 
                 {/* Price Filter */}
-                <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-2">Price Range</h3>
-                <input
-                    type="range"
-                    min="0"
-                    max="5000"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    className="w-full"
+                <PriceCom 
+                handlePriceChange={handlePriceChange}
+                priceRange={priceRange}
+
                 />
-                <p className="text-sm mt-2">Up to ${price}</p>
-                </div>
 
                 {/* Category */}
                 <CategoriesCom 
@@ -226,43 +283,54 @@ export default function ShopCom(){
 
                 {/* Brand */}
                 
-                <BrandCom />
+                <BrandCom 
+                handleBrandChange={handleBrandChange}
+                selectedBrands={selectedBrands}/>
 
                 {/* Color */}
-                <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-2">Color</h3>
-                <div className="flex gap-2">
-                    <span className="w-6 h-6 rounded-full bg-red-500 border cursor-pointer"></span>
-                    <span className="w-6 h-6 rounded-full bg-blue-500 border cursor-pointer"></span>
-                    <span className="w-6 h-6 rounded-full bg-green-500 border cursor-pointer"></span>
-                    <span className="w-6 h-6 rounded-full bg-black border cursor-pointer"></span>
-                </div>
-                </div>
-
+                <ColorCom 
+                handleColorChange={handleColorChange}
+                selectedColors={selectedColors}/>
                 {/* Size */}
-                <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-2">Size</h3>
-                <div className="flex gap-2 flex-wrap">
-                    {["S", "M", "L", "XL"].map((s) => (
-                    <button
-                        key={s}
-                        className="px-3 py-1 border rounded-lg hover:bg-violet-100"
-                    >
-                        {s}
-                    </button>
-                    ))}
-                </div>
-                </div>
+                <SizeCom 
+                selectedSizes={selectedSizes}
+                handleSizeChange={handleSizeChange}
+                />
 
                 {/* Reviews */}
-                <div>
-                <h3 className="text-lg font-semibold mb-2">Reviews</h3>
-                <ul className="space-y-2 text-gray-700">
-                    <li>⭐⭐⭐⭐⭐ & Up</li>
-                    <li>⭐⭐⭐⭐ & Up</li>
-                    <li>⭐⭐⭐ & Up</li>
-                </ul>
-                </div>
+                <div className="mb-6">
+  <h3 className="text-lg font-semibold mb-2">Rating</h3>
+  <ul className="space-y-2">
+    {[5, 4, 3, 2, 1].map((r) => (
+      <li key={r}>
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="radio"
+            name="rating"
+            value={r}
+            checked={selectedRating === r}
+            onChange={() => handleRatingChange(r)}
+          />
+          <span className="text-yellow-500">
+            {"★".repeat(r)} <span className="text-gray-500">& Up</span>
+          </span>
+        </label>
+      </li>
+    ))}
+    <li>
+      <label className="flex items-center gap-2 cursor-pointer">
+        <input
+          type="radio"
+          name="rating"
+          value={0}
+          checked={selectedRating === 0}
+          onChange={() => handleRatingChange(0)}
+        />
+        <span className="text-gray-600">All Ratings</span>
+      </label>
+    </li>
+  </ul>
+</div>
             </motion.aside>
 
 

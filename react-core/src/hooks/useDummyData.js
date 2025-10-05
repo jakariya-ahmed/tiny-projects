@@ -4,6 +4,7 @@ export default function useDummyData(API_URL) {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [maxPrice, setMaxPrice] = useState(0);
 
     useEffect(() => {
         setLoading(true);
@@ -13,7 +14,22 @@ export default function useDummyData(API_URL) {
                 return res.json();
             })
             .then((data) => {
-                setProducts(data.products);
+                // Fake color & size attributes
+                const productsWithAttributes = data.products.map((p) => (
+                    {
+                    ...p,
+                    colors: ["red","blue","green","yellow","black","pink"]
+                    .sort(() => 0.5 - Math.random()).slice(0, 2), //pick 2 random colors
+                    sizes: ['S','M','L','XL']
+                    .sort(() => 0.5 - Math.random()).slice(0,2)// Pick 2 random sizes
+                }))
+
+                setProducts(productsWithAttributes);
+                
+                // Find max Price 
+                const maxP = Math.ceil(Math.max(...productsWithAttributes.map((p) => p.price)));
+                setMaxPrice(maxP);
+                
                 setLoading(false);
             })
             .catch((err) => {
@@ -22,5 +38,5 @@ export default function useDummyData(API_URL) {
             });
     }, [API_URL]);
 
-    return { products, loading, error };
+    return { products, loading, error, maxPrice };
 }
