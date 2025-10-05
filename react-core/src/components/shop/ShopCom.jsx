@@ -10,14 +10,13 @@ import ColorCom from "./ColorCom";
 import SizeCom from "./SizeCom";
 import PriceCom from "./PriceCom";
 import SortComp from "./SortCom";
+import RatingCom from "./RatingCom";
 
 export default function ShopCom(){
-    // Dummy API URL
-    const API_URL = `https://dummyjson.com/products?limit=1200&skip=24`;
     const items = 24;
 
     // Get from custom hook useDummyData.js
-    const { products, loading, error, maxPrice } = useDummyData(API_URL);
+    const { products, loading, error, maxPrice } = useDummyData();
 
     // Filter state 
     const [searchKey, setSearchKey] = useState("");
@@ -27,11 +26,9 @@ export default function ShopCom(){
     const [selectedSizes, setSelectedSizes] = useState([]);
     const [priceRange, setPriceRange] = useState([0, maxPrice])
     const [sortOption, setSortOption] = useState("default");
-    // Filter products by search key
-    //  const filteredProducts = searchKey ? 
-    //  products.filter((p) => 
-    //     p.title.toLowerCase().includes(searchKey.toLowerCase())
-    // ) : products;
+    const [selectedRating, setSelectedRating] = useState(0);
+    
+
 
     
 // Handle category change
@@ -86,6 +83,13 @@ const handlePriceChange = (e) => {
   );
 };
 
+// Handle change rating
+const handleRatingChange  = (rating) => {
+    setSelectedRating(rating);
+    setCurrentPage(1);
+}
+
+
     const filteredProducts = products.filter((p) => {
         // Search Key by Filter
         const matchSearch = !searchKey || p.title.toLowerCase().includes(searchKey.toLowerCase());
@@ -106,8 +110,19 @@ const handlePriceChange = (e) => {
         // ✅ Price filter
         const matchPrice = p.price >= priceRange[0] 
         && p.price <= priceRange[1];
-        
-        return matchSearch && matchCategory && matchBrand && matchColor && matchSize && matchPrice;
+        // Filter by Rating
+        const matchRating = selectedRating === 0 
+        || Math.floor(p.rating) >= selectedRating;
+
+        return (
+            matchSearch &&
+            matchCategory &&
+            matchBrand && 
+            matchColor && 
+            matchSize && 
+            matchPrice && 
+            matchRating
+        );
 
     });
 
@@ -298,39 +313,10 @@ const handlePriceChange = (e) => {
                 />
 
                 {/* Reviews */}
-                <div className="mb-6">
-  <h3 className="text-lg font-semibold mb-2">Rating</h3>
-  <ul className="space-y-2">
-    {[5, 4, 3, 2, 1].map((r) => (
-      <li key={r}>
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input
-            type="radio"
-            name="rating"
-            value={r}
-            checked={selectedRating === r}
-            onChange={() => handleRatingChange(r)}
-          />
-          <span className="text-yellow-500">
-            {"★".repeat(r)} <span className="text-gray-500">& Up</span>
-          </span>
-        </label>
-      </li>
-    ))}
-    <li>
-      <label className="flex items-center gap-2 cursor-pointer">
-        <input
-          type="radio"
-          name="rating"
-          value={0}
-          checked={selectedRating === 0}
-          onChange={() => handleRatingChange(0)}
-        />
-        <span className="text-gray-600">All Ratings</span>
-      </label>
-    </li>
-  </ul>
-</div>
+                <RatingCom 
+                selectedRating={selectedRating}
+                handleRatingChange={handleRatingChange}
+                />
             </motion.aside>
 
 

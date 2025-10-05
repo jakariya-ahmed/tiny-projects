@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
-export default function useDummyData(API_URL) {
+export default function useDummyData() {
+    // Dummy API URL
+    const API_URL = `https://dummyjson.com/products?limit=1200&skip=24`;
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
