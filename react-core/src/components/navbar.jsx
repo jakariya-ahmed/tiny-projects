@@ -1,7 +1,8 @@
-import { UserIcon } from "lucide-react";
+import { ShoppingBagIcon, UserIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import HeaderSearchCom from "./header/HeaderSearchCom";
 import useDummyData from "../hooks/useDummyData";
+import UserHeaderCom from "./header/UserHeaderCom";
 
 
 export default function Navbar() {
@@ -53,11 +54,10 @@ const { products, loading, error, maxPrice } = useDummyData();
       
         </nav>
       </div>
-      <div>
-        <NavLink>
-          <span><UserIcon size={26} /></span>
-        </NavLink>
-      </div>
+      {/* user section  */}
+      <UserHeaderCom />
+
+      
     </header>
   );
 }

@@ -11,13 +11,15 @@ import SizeCom from "./SizeCom";
 import PriceCom from "./PriceCom";
 import SortComp from "./SortCom";
 import RatingCom from "./RatingCom";
+import { useCart } from "../../context/CartContext";
 
 export default function ShopCom(){
     const items = 24;
 
     // Get from custom hook useDummyData.js
     const { products, loading, error, maxPrice } = useDummyData();
-
+    // use cart context from CartContext
+    const { addToCart } = useCart();
     // Filter state 
     const [searchKey, setSearchKey] = useState("");
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -208,7 +210,11 @@ const handleRatingChange  = (rating) => {
                                     </div>
 
                                     
-                                    <button className="bg-white text-gray-700 px-4 py-1 rounded-md mt-2 hover:bg-amber-400 hover:text-white cursor-pointer">Add to cart</button >
+                                    <button 
+                                    onClick={() => addToCart(product)}
+                                    className="bg-white text-gray-700 px-4 py-1 rounded-md mt-2 hover:bg-amber-400 hover:text-white cursor-pointer">
+                                        Add to cart
+                                    </button >
                                 </div>
                             </div>
                         </div>
