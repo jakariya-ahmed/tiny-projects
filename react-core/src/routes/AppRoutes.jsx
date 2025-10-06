@@ -5,6 +5,7 @@ import Products from "../pages/Products";
 import Shop from "../pages/Shop";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
+import Success from "../pages/Success";
 
 export default function AppRoutes() {
     return(
@@ -18,6 +19,7 @@ export default function AppRoutes() {
             {/* Cart  */}
             <Route path="cart" element={<Cart />} />
             <Route path="checkout" element={<Checkout />} />
+            <Route path="order-success" element={<Success />} />
         </Routes>
     );
 }
