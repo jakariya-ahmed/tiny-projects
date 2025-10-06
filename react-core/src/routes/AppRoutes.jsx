@@ -3,6 +3,8 @@ import Home from "../pages/Home";
 import Posts from "../pages/Posts";
 import Products from "../pages/Products";
 import Shop from "../pages/Shop";
+import Cart from "../pages/Cart";
+import Checkout from "../pages/Checkout";
 
 export default function AppRoutes() {
     return(
@@ -13,6 +15,9 @@ export default function AppRoutes() {
 
             {/* shop  */}
             <Route path="shop" element={<Shop />} /> 
+            {/* Cart  */}
+            <Route path="cart" element={<Cart />} />
+            <Route path="checkout" element={<Checkout />} />
         </Routes>
     );
 }
