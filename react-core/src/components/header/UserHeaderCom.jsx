@@ -1,4 +1,4 @@
-import { UserIcon, ShoppingBagIcon } from "lucide-react";
+import { UserIcon, ShoppingBagIcon, HeartIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 export default function UserHeaderCom() {
@@ -11,18 +11,23 @@ export default function UserHeaderCom() {
 
     return (
         <>
-        <div className="flex gap-x-2 relative group">
-            <NavLink>
-            <span><UserIcon size={26} /></span>
-            </NavLink>
+        <div className="flex gap-x-4 relative group">
+            
             <div className="relative">
                 <span><NavLink to="/cart"><ShoppingBagIcon size={26} /> </NavLink></span>
                 <div className="flex">
-                    <NavLink ><span className="absolute top-[-15px] left-[-10px] bg-amber-500 text-center rounded-xl px-[8px] ">{ totalItems}</span> </NavLink>
+                    <NavLink ><span className="absolute text-[12px] top-[-10px] left-[-10px] bg-amber-500 text-center rounded-xl px-[5px] ">{ totalItems}</span> </NavLink>
                 </div>
             </div>
-            
-            
+            <div className="relative">
+                <span><NavLink to="/cart"><HeartIcon size={26} /> </NavLink></span>
+                <div className="flex">
+                    <NavLink ><span className="absolute text-[12px] top-[-10px] left-[-10px] bg-amber-500 text-center rounded-xl px-[5px] ">{ totalItems}</span> </NavLink>
+                </div>
+            </div>
+            <div>
+                <span><NavLink><UserIcon size={26} /></NavLink></span>
+            </div>
 
             {/* Dropdown */}
             <div className="absolute right-0 top-[20px] mt-2 w-72 bg-white shadow-lg rounded-lg hidden group-hover:block z-50 py-6 px-4  max-h-100 overflow-y-auto">

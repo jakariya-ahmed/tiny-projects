@@ -6,6 +6,7 @@ import Shop from "../pages/Shop";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Success from "../pages/Success";
+import Core from "../pages/Core";
 
 export default function AppRoutes() {
     return(
@@ -13,7 +14,7 @@ export default function AppRoutes() {
             <Route path="/" element={<Home /> } /> 
             <Route path="posts" element={<Posts /> }/>
             <Route path="products" element={<Products /> }/>
-
+            <Route path="core" element={<Core/> }/>
             {/* shop  */}
             <Route path="shop" element={<Shop />} /> 
             {/* Cart  */}

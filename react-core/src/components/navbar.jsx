@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import HeaderSearchCom from "./header/HeaderSearchCom";
 import useDummyData from "../hooks/useDummyData";
 import UserHeaderCom from "./header/UserHeaderCom";
+import HeaderTop from "./header/HeaderTop";
+import { div } from "framer-motion/client";
 
 
 export default function Navbar() {
@@ -10,54 +12,60 @@ export default function Navbar() {
 const { products, loading, error, maxPrice } = useDummyData();
 
   return (
-    <header className="flex justify-between max-w-[80%] mx-auto bg-gray-100 py-4 px-5 mt-6 rounded-xl">
-      <div >
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "text-blue-600 font-bold" : "text-gray-800"
-          }
-        >
-          <img src="/public/images/logo.png" className="w-10 h-10" alt="shpping" />
-        </NavLink>
-      </div>
-      {/* Header search  */}
-      <HeaderSearchCom 
-      products={products}
-      />
+    <div>
+      <HeaderTop />
+      <header className="flex justify-between max-w-[70%] mx-auto py-4 px-5 mt-6 rounded-xl">
 
-      <div>
-        <nav className="space-x-4">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "text-blue-600 font-bold" : "text-gray-800"
-          }
-        >
-          Home
-        </NavLink>
+        <div >
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "text-blue-600 font-bold" : "text-gray-800"
+            }
+          >
+            <img src="/public/images/logo.svg" className="" alt="shpping" />
+          </NavLink>
+        </div>
+        {/* Header search  */}
+        <HeaderSearchCom 
+        products={products}
+        />
 
-        <NavLink
-          to="/posts"
-          className={({ isActive }) =>
-            isActive ? "text-blue-600 font-bold" : "text-gray-800"
-          }
-        >
-          Posts
-        </NavLink>
+        {/* <div>
+          <nav className="space-x-4">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "text-blue-600 font-bold" : "text-gray-800"
+            }
+          >
+            Home
+          </NavLink>
 
-        <NavLink to="/products" className={({ isActive }) =>isActive ? 
-        "text-blue-600 font-bold" : "text-gray-800"}>Products</NavLink>
+          <NavLink
+            to="/posts"
+            className={({ isActive }) =>
+              isActive ? "text-blue-600 font-bold" : "text-gray-800"
+            }
+          >
+            Posts
+          </NavLink>
 
-        <NavLink to="/shop" className={({isActive}) => isActive ? 
-        "text-blue-600 font-bold" : "text-gray-800"  }>Shop</NavLink>
-      
-        </nav>
-      </div>
-      {/* user section  */}
-      <UserHeaderCom />
+          <NavLink to="/products" className={({ isActive }) =>isActive ? 
+          "text-blue-600 font-bold" : "text-gray-800"}>Products</NavLink>
 
-      
-    </header>
+          <NavLink to="/shop" className={({isActive}) => isActive ? 
+          "text-blue-600 font-bold" : "text-gray-800"  }>Shop</NavLink>
+        
+          </nav>
+        </div> */}
+
+        {/* user section  */}
+        <UserHeaderCom />
+
+        
+      </header>
+    </div>
+
   );
 }
