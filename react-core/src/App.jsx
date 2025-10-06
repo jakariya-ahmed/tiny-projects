@@ -3,7 +3,7 @@ import './App.css'
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
 import UsersProvider from './hooks/useUsersContext';
-import Navbar from './components/navbar';
+import Header from './components/Header';
 import { CartProvider } from './context/CartContext';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
     <UsersProvider>
       <CartProvider>
         <BrowserRouter>
-          <Navbar />
+          <Header />
           <AppRoutes />
 
         </BrowserRouter>

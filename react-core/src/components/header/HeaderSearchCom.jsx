@@ -25,9 +25,9 @@ export default function HeaderSearchCom({products}){
                     value={headerSearch}
                     onChange={(e) => setHeaderSearch(e.target.value)}
                     placeholder="Search products..."
-                    className="w-full text-amber-800 border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-amber-200"
+                    className="w-full text-amber-800 border border-gray-300 px-3 py-2 h-12 focus:outline-none focus:ring-0 focus:ring-amber-200"
                 />
-                <button className="bg-amber-500 px-3 py-2 text-white cursor-pointer">
+                <button className="bg-amber-500 px-6 py-2 h-12 text-white cursor-pointer">
                     <SearchIcon size={26}/>
                 </button>
 
