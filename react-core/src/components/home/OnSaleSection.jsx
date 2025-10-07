@@ -43,7 +43,7 @@ export default function OnSaleSection() {
               "url('public/images/banner/cover-countdown.jpg')",
           }}
       >
-        <h2 className="text-3xl font-bold text-gray-800">On Sale Now!</h2>
+        <h2 className="text-4xl font-bold text-gray-800">On Sale Now!</h2>
         <p className="text-gray-600">Limited time flash sale. Grab your favorite products!</p>
 
         {/* Countdown */}

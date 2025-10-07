@@ -70,7 +70,7 @@ export default function HeroSection() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.3 }}
-                        className="text-5xl sm:text-5xl font-semibold text-amber-500"
+                        className="text-6xl sm:text-6xl font-bold text-amber-500"
                       >
                         {s.subtitle}
                       </motion.h3>

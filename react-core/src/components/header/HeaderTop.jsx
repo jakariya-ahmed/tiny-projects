@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function HeaderTop() {
     return(
         <div className=" border-b-2 border-gray-100">
-            <div className="max-w-7xl mx-auto justify-between flex py-2">
+            <div className="flex sm:max-w-[90%] md:max-w-[90%] xl:max-w-[70%] mx-auto justify-between py-2">
                 <div className="">
                     <ul className="flex gap-3">
                         <li className="text-[15px] font-semi-bold hover:text-amber-500 transition"><NavLink>Account </NavLink></li>
@@ -14,7 +14,7 @@ export default function HeaderTop() {
                 <div>
                     <ul className="flex gap-3">
                         <li className="text-[15px] font-semi-bold hover:text-amber-500 transition">Bangla</li>
-                        <li className="text-[15px] font-semi-bold hover:text-amber-500 transition">DB</li>
+                        <li className="text-[15px] font-semi-bold hover:text-amber-500 transition">BD</li>
                     </ul>
                 </div>
             </div>

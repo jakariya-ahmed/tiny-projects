@@ -5,13 +5,16 @@ import HeroSlider from '../components/home/SliderCom';
 import ServiceHighlightsCom from '../components/home/ServiceHighlightsCom';
 import NewCollectionCom from '../components/home/NewCollectionCom';
 import OnSaleSection from '../components/home/OnSaleSection';
-
+import TopSellingCom from '../components/home/TopSellingCom';
+import PopularCom from '../components/home/PopularCom';
+import BannerCom from '../components/home/BannerCom';
+import TrandingCom from '../components/home/TrandingCom';
 
 export default function Home() {
 
     return(
         
-        <div className='max-w-[70%] mx-auto'>
+        <div className='sm:max-w-[90%] md:max-w-[90%] xl:max-w-[70%] mx-auto'>
             {/* Slider & banner section  */}
             <HeroSlider />
 
@@ -24,6 +27,18 @@ export default function Home() {
             {/* OnSale section  */}
             <OnSaleSection />
             
+            {/* Top Selling products  */}
+            <TopSellingCom />
+
+            {/* Popular products  */}
+            <PopularCom />
+
+            {/* Banner  */}
+            <BannerCom />
+
+            {/* Tranding  */}
+            <TrandingCom />
+
         </div>
     );
 }

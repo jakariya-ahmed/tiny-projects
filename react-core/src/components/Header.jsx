@@ -15,8 +15,8 @@ const { products, loading, error, maxPrice } = useDummyData();
     <header className="">
 
       <HeaderTop />
-      <div className="max-w-[70%] mx-auto">
-          <div className="flex justify-between items-center py-6 px-5 ">
+      <div className="sm:max-w-[90%] md:max-w-[90%] xl:max-w-[70%] mx-auto">
+          <div className="flex justify-between items-center py-6">
 
             <div >
               <NavLink

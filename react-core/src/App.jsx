@@ -5,26 +5,20 @@ import AppRoutes from './routes/AppRoutes';
 import UsersProvider from './hooks/useUsersContext';
 import Header from './components/Header';
 import { CartProvider } from './context/CartContext';
+import Footer from './components/Footer';
 
 function App() {
-
-  
-
-
-  return (
-<CartProvider>
-    <UsersProvider>
-      
+return (
+  <CartProvider>
+      <UsersProvider>
         <BrowserRouter>
           <Header />
           <AppRoutes />
-
+          <Footer />
         </BrowserRouter>
-    </UsersProvider>
+      </UsersProvider>
   </CartProvider>
       
-
-
   )
 }
 
