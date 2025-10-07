@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function OnSaleSection() {
@@ -34,9 +35,14 @@ export default function OnSaleSection() {
   }, []);
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-gray-100 rounded-xl">
+    <section className="py-12 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
       {/* Left side */}
-      <div className="flex flex-col justify-center gap-4">
+      <div className="flex flex-col justify-center pl-10 gap-4 bg-amber-100 h-[320px] sm:h-[200px] lg:h-[320px] bg-cover bg-center overflow-hidden"
+      style={{
+            backgroundImage:
+              "url('public/images/banner/cover-countdown.jpg')",
+          }}
+      >
         <h2 className="text-3xl font-bold text-gray-800">On Sale Now!</h2>
         <p className="text-gray-600">Limited time flash sale. Grab your favorite products!</p>
 
@@ -60,9 +66,19 @@ export default function OnSaleSection() {
           </div>
         </div>
 
-        <button className="mt-6 w-40 bg-violet-600 text-white py-2 rounded-lg hover:bg-violet-700 transition">
-          Shop Now
-        </button>
+      <button className="group relative mt-6 w-30 cursor-pointer text-amber-500 font-medium">
+      <span className="flex items-center justify-center gap-1">
+        Shop Now
+        <ArrowRight
+          size={16}
+          className="transition-transform duration-300 group-hover:translate-x-1"
+        />
+      </span>
+
+      {/* Underline animation */}
+      <span className="absolute left-0 bottom-[-10px] w-full h-[2px] bg-amber-500 scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+    </button>
+
       </div>
 
       {/* Right side */}
@@ -70,7 +86,7 @@ export default function OnSaleSection() {
         <img
           src="public/images/slider/ads.png"
           alt="Flash Sale Banner"
-          className="w-full h-80 object-cover rounded-xl shadow-lg"
+          className="w-full h-80 object-cover"
         />
         {/* <div className="absolute bottom-4 left-4 bg-violet-600 text-white px-4 py-2 rounded-lg font-bold">
           Flash Sale!
