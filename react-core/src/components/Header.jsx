@@ -43,7 +43,7 @@ const { products, loading, error, maxPrice } = useDummyData();
       </div>
 
       <div className="bg-amber-100">
-        <div className="max-w-[70%] mx-auto px-5">
+        <div className="max-w-[70%] mx-auto">
           <Navbar />
         </div>  
       </div>
