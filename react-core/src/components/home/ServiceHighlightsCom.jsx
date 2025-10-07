@@ -4,25 +4,25 @@ export default function ServiceHighlightsCom() {
   const services = [
     {
       id: 1,
-      icon: <Truck className="w-8 h-8 text-violet-600" />,
+      icon: <Truck className="w-8 h-8 text-amber-600" />,
       title: "Free Shipping",
       desc: "When ordering over $100",
     },
     {
       id: 2,
-      icon: <RefreshCcw className="w-8 h-8 text-violet-600" />,
+      icon: <RefreshCcw className="w-8 h-8 text-amber-600" />,
       title: "Free Return",
       desc: "Get return within 30 days",
     },
     {
       id: 3,
-      icon: <ShieldCheck className="w-8 h-8 text-violet-600" />,
+      icon: <ShieldCheck className="w-8 h-8 text-amber-600" />,
       title: "Secure Payment",
       desc: "100% secure online payment",
     },
     {
       id: 4,
-      icon: <Award className="w-8 h-8 text-violet-600" />,
+      icon: <Award className="w-8 h-8 text-amber-600" />,
       title: "Best Quality",
       desc: "Original product guaranteed",
     },

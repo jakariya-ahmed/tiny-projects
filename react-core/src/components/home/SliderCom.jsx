@@ -106,7 +106,7 @@ export default function HeroSection() {
       <div className="lg:col-span-4 flex flex-col gap-4">
         {/* Top Banner */}
         <div
-          className="relative h-[180px] sm:h-[200px] lg:h-[240px] bg-cover bg-center shadow-sm overflow-hidden"
+          className="relative h-[180px] sm:h-[200px] lg:h-[240px] bg-cover bg-center shadow-sm overflow-hidden p-4"
           style={{
             backgroundImage:
               "url('public/images/slider/banner-2.png')",

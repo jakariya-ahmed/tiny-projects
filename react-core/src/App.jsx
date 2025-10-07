@@ -12,16 +12,16 @@ function App() {
 
 
   return (
-
+<CartProvider>
     <UsersProvider>
-      <CartProvider>
+      
         <BrowserRouter>
           <Header />
           <AppRoutes />
 
         </BrowserRouter>
-      </CartProvider>
     </UsersProvider>
+  </CartProvider>
       
 
 
