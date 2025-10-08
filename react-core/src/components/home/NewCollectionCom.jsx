@@ -72,7 +72,7 @@ function ProductCard({ product }) {
       {/* Add to Cart Button */}
       <button
         onClick={() => addToCart(product)}
-        className={`absolute bottom-[-50px] cursor-pointer left-1/2 -translate-x-1/2 w-full bg-amber-600 text-white py-2 flex items-center justify-center gap-2 transition-all duration-300
+        className={`absolute bottom-[-50px] cursor-pointer left-1/2 -translate-x-1/2 w-full bg-amber-500 text-white py-2 flex items-center justify-center gap-2 transition-all duration-300
           ${hovered ? "bottom-[0px]" : ""}
         `}
       >

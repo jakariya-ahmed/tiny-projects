@@ -32,9 +32,11 @@ export const CartProvider = ({ children }) => {
 
     // Remove item
     const removeFromCart = (id) => {
-        setCart((prev) => prev.filter((item) => item.id !== id));
-        // Toast would be triger
-        showRemoveToast("Item");
+        // Find the item 1st
+        const removedItem = cart.find(((item) => item.id === id))
+        setCart((prev) => prev.filter((item) => item.id !== id))
+         // Show toast AFTER updating state
+        if (removedItem) showRemoveToast(removedItem.title);
     }
 
     // Update quantity
@@ -42,8 +44,7 @@ export const CartProvider = ({ children }) => {
         setCart((prev) => prev.map((item) =>
             item.id === id ? {...item, quantity:Math.max(1, qty)} : item
         ));
-        // Toast would be triger
-        showCartToast(product.name);
+
     }
 
     // Clear cart

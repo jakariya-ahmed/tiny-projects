@@ -93,7 +93,7 @@ function ProductCard({ product }) {
         </button>
         <button 
         onClick={() => addToCart(product)}
-        className="bg-white shadow-md p-2 rounded-full hover:bg-amber-600 hover:text-white transition-colors">
+        className="bg-white shadow-md p-2 rounded-full hover:bg-amber-500 hover:text-white transition-colors">
           <ShoppingCart size={16} />
         </button>
       </div>
