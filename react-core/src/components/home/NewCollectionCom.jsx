@@ -31,7 +31,7 @@ export default function NewCollectionCom() {
 }
 
 function ProductCard({ product }) {
-  const [hovered, setHovered] = useState(false);
+    const [hovered, setHovered] = useState(false);
     const { addToCart } = useCart();
 
   const avgRating = product.reviews?.length

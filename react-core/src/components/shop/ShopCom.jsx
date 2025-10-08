@@ -1,4 +1,4 @@
-import { ArrowBigLeft, ArrowBigRight, CheckIcon, Star } from "lucide-react";
+import { ArrowBigLeft, ArrowBigRight, ShoppingBag, Heart, Eye, ShoppingCart, ArrowRight } from "lucide-react";
 import {useEffect, useState } from "react";
 import usePagination from "../../hooks/usePagination";
 import useDummyData from "../../hooks/useDummyData";
@@ -29,8 +29,6 @@ export default function ShopCom(){
     const [priceRange, setPriceRange] = useState([0, maxPrice])
     const [sortOption, setSortOption] = useState("default");
     const [selectedRating, setSelectedRating] = useState(0);
-    
-
 
     
 // Handle category change
@@ -160,68 +158,29 @@ const handleRatingChange  = (rating) => {
 
 
     return (
-    <div className="mt-6">
+    <div className="my-6">
         {/*  search input  */}
         <motion.div 
         initial={{ x: 50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="mb-4 flex gap-3 top-filter">
+        className="mb-4 flex gap-x-3 top-filter">
             <SortComp 
             sortOption={sortOption}
             setSortOption={setSortOption}
             />
         </motion.div>
-        <div className="lg:flex">
-                
+        <div className="lg:flex gap-x-4">
             <div className="products">
-                <motion.div 
-                initial={{x: -50, opacity: 0}}
-                animate={{ x: 0, opacity: 1}}
-                transition={{ duration: 0.5 }}
-                className="grid sm:grid-cols-2 md:mx-4 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                    {currentProducts.map((product) => {
-                    // Calculate averate rating 
-                    // const avgRating = product.reviews?.length ?
-                    // product.reviews.reduce((sum, r) => sum + r.rating, 0)
-                    // / product.reviews.length : 0;
-                    const avgRating = product.reviews?.length?
-                    product.reviews.reduce((sum, r) => sum + r.rating, 0) 
-                    / product.reviews.length : 0;
+                {/* Products Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                    {currentProducts.map((product) => (
                     
-                    // console.log(avgRating);
-                    // Product card 
-                    return(
-                        <div key={product.id} className="rounded-md shadow-md bg-amber-500">
-                            <img src={product.thumbnail} alt="t-shirt" />
-                            <div className="px-3 py-4">
-                                <h2>{product.title} </h2>
-                                <p><strong className="line-through text-red-500">3450 tk </strong> 
-                                <strong>{product.price} tk</strong> </p>
-                                <div className="flex items-center gap-2">
-                                    <div className="flex">
-                                        {Array.from({ length: 5}).map((_, i) => (
-                                            <Star key={i} size={16} 
-                                            className={i < Math.round(avgRating) ? 
-                                                "text-black-500 fill-white" : "text-black-500"}/>
-                                            
-                                            
-                                        ))}
-                                    </div>
+                    <ProductCard key={product.id} product={product} />
+                    ))}
+                </div>
 
-                                    
-                                    <button 
-                                    onClick={() => addToCart(product)}
-                                    className="bg-white text-gray-700 px-4 py-1 rounded-md mt-2 hover:bg-amber-400 hover:text-white cursor-pointer">
-                                        Add to cart
-                                    </button >
-                                </div>
-                            </div>
-                        </div>
-                        );
-                    })}
 
-                </motion.div>
                 {/* Pagination buttons  */}
                 <div className="flex justify-center gap-2 my-6">
                 <button
@@ -266,14 +225,16 @@ const handleRatingChange  = (rating) => {
 
 
                 </div>
-            </div>
-                
 
+            </div>
+
+
+            {/* filter sidebar  */}
             <motion.aside
                 initial={{ x: 50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white shadow-lg rounded-2xl p-4 h-fit sticky top-4"
+                className="w-[25%] bg-white p-4 h-fit sticky top-4"
             >
                 {/* Search */}
                 <div className="mb-6">
@@ -332,4 +293,79 @@ const handleRatingChange  = (rating) => {
 
     </div>
     );
+}
+
+
+
+
+// product card 
+function ProductCard({ product }) {
+    const [hovered, setHovered] = useState(false);
+    const { addToCart } = useCart();
+
+  const avgRating = product.reviews?.length
+    ? product.reviews.reduce((sum, r) => sum + r.rating, 0) / product.reviews.length
+    : 0;
+
+  return (
+    <div
+      className="relative bg-white overflow-hidden group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Product Image */}
+      <img
+        src={product.thumbnail}
+        alt={product.title}
+        className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+
+      {/* Product Info */}
+      <div className="px-4 py-3">
+        <h3 className="text-lg font-semibold text-gray-800">{product.title}</h3>
+        <div className="flex items-center gap-2 mt-1">
+          <span className="line-through text-red-500 font-medium">{product.price + 500} tk</span>
+          <span className="text-gray-900 font-bold">{product.price} tk</span>
+        </div>
+
+        {/* Rating */}
+        <div className="flex items-center gap-1 mt-1">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <span key={i} className={`text-yellow-400 ${i < Math.round(avgRating) ? "opacity-100" : "opacity-30"}`}>
+              ★
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Add to Cart Button */}
+      <button
+        onClick={() => addToCart(product)}
+        className={`absolute bottom-[-50px] cursor-pointer left-1/2 -translate-x-1/2 w-full bg-amber-500 text-white py-2 flex items-center justify-center gap-2 transition-all duration-300
+          ${hovered ? "bottom-[0px]" : ""}
+        `}
+      >
+        <ShoppingBag size={20} /> Add to Cart
+      </button>
+
+      {/* Side Quick Actions */}
+      <div
+        className={`absolute top-1/3 -right-12 flex flex-col gap-2 transition-all duration-300
+          ${hovered ? "right-2" : ""}
+        `}
+      >
+        <button className="bg-white shadow-md p-2 rounded-full hover:bg-amber-600 hover:text-white transition-colors">
+          <Heart size={16} />
+        </button>
+        <button className="bg-white shadow-md p-2 rounded-full hover:bg-amber-600 hover:text-white transition-colors">
+          <Eye size={16} />
+        </button>
+        <button 
+        onClick={() => addToCart(product)}
+        className="bg-white shadow-md p-2 rounded-full hover:bg-amber-600 hover:text-white transition-colors">
+          <ShoppingCart size={16} />
+        </button>
+      </div>
+    </div>
+  );
 }

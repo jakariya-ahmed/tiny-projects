@@ -71,7 +71,7 @@ function ProductCard({ product }) {
       {/* Add to Cart Button */}
       <button
         onClick={() => addToCart(product)}
-        className="cursor-pointer bg-amber-600 text-white py-2 px-3 text-sm flex items-center justify-center gap-2 mt-6"
+        className="cursor-pointer bg-amber-500 text-white py-2 px-3 text-sm flex items-center justify-center gap-2 mt-6"
       >
         <ShoppingBag size={20} /> Add to Cart
       </button>
