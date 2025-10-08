@@ -1,5 +1,6 @@
 import { pre } from "framer-motion/client";
 import { Children, createContext, useContext, useState } from "react";
+import { showCartToast, showRemoveToast } from "../utils/toastMessage";
 
 // Create context
 const CartContext = createContext();
@@ -21,12 +22,19 @@ export const CartProvider = ({ children }) => {
                 );
             }
             return [...prev, {...product, quantity: 1}];
+            
         });
+
+        // Toast should be triggered OUTSIDE setCart
+        showCartToast(product.title);
+
     };
 
     // Remove item
     const removeFromCart = (id) => {
         setCart((prev) => prev.filter((item) => item.id !== id));
+        // Toast would be triger
+        showRemoveToast("Item");
     }
 
     // Update quantity
@@ -34,6 +42,8 @@ export const CartProvider = ({ children }) => {
         setCart((prev) => prev.map((item) =>
             item.id === id ? {...item, quantity:Math.max(1, qty)} : item
         ));
+        // Toast would be triger
+        showCartToast(product.name);
     }
 
     // Clear cart
