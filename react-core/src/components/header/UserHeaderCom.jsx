@@ -20,9 +20,9 @@ export default function UserHeaderCom() {
                 </div>
             </div>
             <div className="relative">
-                <span><NavLink to="/cart"><HeartIcon size={26} /> </NavLink></span>
+                <span><NavLink to="/"><HeartIcon size={26} /> </NavLink></span>
                 <div className="flex">
-                    <NavLink ><span className="absolute text-[12px] top-[-10px] left-[-10px] bg-amber-500 text-center rounded-xl px-[5px] ">{ totalItems}</span> </NavLink>
+                    <NavLink ><span className="absolute text-[12px] top-[-10px] left-[-10px] bg-amber-500 text-center rounded-xl px-[5px] ">0</span> </NavLink>
                 </div>
             </div>
             <div>

@@ -102,20 +102,25 @@ export default function Navbar() {
                     Home
                 </NavLink>
 
+                <NavLink to="/shop" className={({isActive}) => isActive ? 
+                "text-blue-600 font-bold" : "text-gray-800 font-bold"  }>Shop</NavLink>
                 <NavLink
                     to="/posts"
                     className={({ isActive }) =>
                     isActive ? "text-blue-600 font-bold" : "text-gray-800 font-bold"
                     }
                 >
-                    Posts
+                    About
                 </NavLink>
 
-                <NavLink to="/products" className={({ isActive }) =>isActive ? 
-                "text-blue-600 font-bold" : "text-gray-800 font-bold"}>Products</NavLink>
-
-                <NavLink to="/shop" className={({isActive}) => isActive ? 
-                "text-blue-600 font-bold" : "text-gray-800 font-bold"  }>Shop</NavLink>
+                <NavLink
+                    to="/contact"
+                    className={({ isActive }) =>
+                    isActive ? "text-blue-600 font-bold" : "text-gray-800 font-bold"
+                    }
+                >
+                    Contact
+                </NavLink>
                 
                 </nav>
             </div>

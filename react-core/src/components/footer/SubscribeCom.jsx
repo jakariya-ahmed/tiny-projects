@@ -55,7 +55,7 @@ export default function SubscribeCom() {
           {/* Subscribe Button */}
           <button
             type="submit"
-            className="bg-amber-500 text-white px-6 py-3 font-medium hover:bg-amber-600 transition-colors duration-300"
+            className="bg-amber-500 text-white px-6 py-3 font-medium hover:bg-amber-600 transition-colors outline-none duration-300"
           >
             Subscribe Now
           </button>

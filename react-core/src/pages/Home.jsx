@@ -14,7 +14,7 @@ export default function Home() {
 
     return(
         
-        <div className='sm:max-w-[90%] md:max-w-[90%] xl:max-w-[70%] mx-auto'>
+        <div className='sm:max-w-[90%] md:max-w-[90%] xl:max-w-[70%] mx-auto px-4 sm:px-0'>
             {/* Slider & banner section  */}
             <HeroSlider />
 

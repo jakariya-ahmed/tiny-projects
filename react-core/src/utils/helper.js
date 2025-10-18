@@ -4,3 +4,5 @@ export const getAverageRating = (reviews = []) => {
   const total = reviews.reduce((sum, { rating }) => sum + rating, 0);
   return +(total / reviews.length).toFixed(1); // round to 1 decimal
 };
+
+

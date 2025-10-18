@@ -8,6 +8,7 @@ import Checkout from "../pages/Checkout";
 import Success from "../pages/Success";
 import Core from "../pages/Core";
 import SingleProduct from "../pages/SingleProduct";
+import Contact from "../pages/Contact";
 
 export default function AppRoutes() {
     return(
@@ -24,6 +25,7 @@ export default function AppRoutes() {
             <Route path="order-success" element={<Success />} />
             {/* Single Product  */}
             <Route path="/product/:id" element={<SingleProduct />} />
+            <Route path="/contact" element={<Contact />} />
         </Routes>
     );
 }

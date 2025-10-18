@@ -1,42 +1,10 @@
-import { ShoppingBag, Heart, Eye, ShoppingCart, ArrowRight } from "lucide-react";
 import { useState } from "react";
-import useHomeProducts from "../../hooks/useHomeProducts";
+import { ShoppingBag, Heart, Eye, ShoppingCart } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 
-export default function TopSellingCom() {
-
-    const {getTopSelling} = useHomeProducts();
-
-    const products = getTopSelling();
-
-  return (
-    <section className=" mx-auto py-10">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Top Selling</h2>
-        <button className="flex items-center gap-1 text-amber-600 font-medium hover:underline">
-          View More <ArrowRight size={16} />
-        </button>
-      </div>
-
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-2 gap-6">
-             
-          {products.map((product) => (
-           <Link key={product.id} to={`/product/${product.id}`} > 
-            <ProductCard key={product.id} product={product} />
-            </Link>
-          ))}
-        
-        
-      </div>
-    </section>
-  );
-}
-
-function ProductCard({ product }) {
-  const [hovered, setHovered] = useState(false);
+export default function ProductCard({ product }) {
+    const [hovered, setHovered] = useState(false);
     const { addToCart } = useCart();
 
   const avgRating = product.reviews?.length
@@ -45,16 +13,17 @@ function ProductCard({ product }) {
 
   return (
     <div
-      className="relative bg-white overflow-hidden group flex items-center py-6"
+      className="relative bg-white overflow-hidden group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      
-        {/* Product Image */}
+     
+
+         {/* Product Image */}
         <img
           src={product.thumbnail}
           alt={product.title}
-          className="w-80 h-55 transition-transform duration-300 group-hover:scale-105"
+          className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
         />
 
         {/* Product Info */}
@@ -73,17 +42,17 @@ function ProductCard({ product }) {
               </span>
             ))}
           </div>
-          
+        </div>
+
         {/* Add to Cart Button */}
         <button
           onClick={() => addToCart(product)}
-          className="cursor-pointer bg-amber-500 text-white py-2 px-3 text-sm flex items-center justify-center gap-2 mt-6"
+          className={`absolute bottom-[-50px] cursor-pointer left-1/2 -translate-x-1/2 w-full bg-amber-500 text-white py-2 flex items-center justify-center gap-2 transition-all duration-300
+            ${hovered ? "bottom-[0px]" : ""}
+          `}
         >
           <ShoppingBag size={20} /> Add to Cart
         </button>
-
-        </div>
-
 
         {/* Side Quick Actions */}
         <div
@@ -99,10 +68,12 @@ function ProductCard({ product }) {
           </button>
           <button 
           onClick={() => addToCart(product)}
-          className="bg-white shadow-md p-2 rounded-full hover:bg-amber-500 hover:text-white transition-colors">
+          className="bg-white shadow-md p-2 rounded-full hover:bg-amber-600 hover:text-white transition-colors">
             <ShoppingCart size={16} />
           </button>
         </div>
+        
+
 
     </div>
   );
