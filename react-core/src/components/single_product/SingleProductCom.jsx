@@ -124,26 +124,26 @@ export default function SingleProductCom() {
 
         {/* Buttons */}
         <div className="flex items-center gap-4 mt-6">
-      {/* Quantity Controller */}
-      <div className="flex items-center border rounded-md">
-        <button
-          onClick={() => {
-            if (cartItem) updateQty(product.id, qty - 1);
-          }}
-          className="px-3 py-2 text-lg font-semibold border-r hover:bg-gray-100 transition"
-        >
-          −
-        </button>
-        <span className="px-4 select-none">{qty}</span>
-        <button
-          onClick={() => {
-            if (cartItem) updateQty(product.id, qty + 1);
-          }}
-          className="px-3 py-2 text-lg font-semibold border-l hover:bg-gray-100 transition"
-        >
-          +
-        </button>
-      </div>
+        {/* Quantity Controller */}
+        <div className="flex items-center border rounded-md">
+          <button
+            onClick={() => {
+              if (cartItem) updateQty(product.id, qty - 1);
+            }}
+            className="px-3 py-2 text-lg font-semibold border-r hover:bg-gray-100 transition"
+          >
+            −
+          </button>
+          <span className="px-4 select-none">{qty}</span>
+          <button
+            onClick={() => {
+              if (cartItem) updateQty(product.id, qty + 1);
+            }}
+            className="px-3 py-2 text-lg font-semibold border-l hover:bg-gray-100 transition"
+          >
+            +
+          </button>
+        </div>
 
       {/* Add to Cart */}
       <button

@@ -30,7 +30,7 @@ export default function UserHeaderCom() {
             </div>
 
             {/* Dropdown */}
-            <div className="absolute right-0 top-[20px] mt-2 w-72 bg-white shadow-lg rounded-lg hidden group-hover:block z-50 py-6 px-4  max-h-100 overflow-y-auto">
+            <div className="absolute right-0 top-[18px] mt-2 w-72 bg-white shadow-lg rounded-lg hidden group-hover:block z-50 py-6 px-4  max-h-100 overflow-y-auto">
                 <h4 className="font-semibold border-b pb-2">Cart</h4>
                 {cart.length === 0 ? (
                     <p className="text-gray-500 py-2">Cart is empty</p>
