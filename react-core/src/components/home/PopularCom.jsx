@@ -21,48 +21,40 @@ const products = getPopularProducts();
         </button>
       </div>
 
-      {/* Products Grid */}
-      <div className="flex gap-x-6">
-        <div className="w-[30%]">
-            <div
-                className="relative bg-white overflow-hidden group"
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-                >
-                {/* Product Image */}
-                <img
-                    src="public/images/banner/ads-2.jpg"
-                    alt=""
-                    className="w-full transition-transform duration-300 group-hover:scale-105 cursor-pointer"
-                />
+{/* Products Grid Section */}
+<div className="flex flex-col md:flex-row gap-6">
+  
+  {/* Banner Section */}
+  <div className="w-full md:w-[30%] flex flex-col gap-6">
+    
+    <div className="relative bg-white overflow-hidden group">
+      <img
+        src="public/images/banner/ads-2.jpg"
+        alt="Ad Banner 1"
+        className="w-full transition-transform duration-300 group-hover:scale-105 cursor-pointer rounded-xl"
+      />
+    </div>
 
-            </div>
+    <div className="relative bg-white overflow-hidden group">
+      <img
+        src="public/images/banner/ads-3.webp"
+        alt="Ad Banner 2"
+        className="w-full transition-transform duration-300 group-hover:scale-105 cursor-pointer rounded-xl"
+      />
+    </div>
+  </div>
 
-            <div
-                className="relative bg-white overflow-hidden group"
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-                >
-                {/* Product Image */}
-                <img
-                    src="public/images/banner/ads-3.webp"
-                    alt=""
-                    className="w-full transition-transform duration-300 group-hover:scale-105 cursor-pointer"
-                />
+  {/* Product Cards Section */}
+  <div className="w-full md:w-[70%] grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+    {products.map((product) => (
+      <Link key={product.id} to={`/product/${product.id}`}>
+        <ProductCard product={product} />
+      </Link>
+    ))}
+  </div>
 
-            </div>
+</div>
 
-        </div>
-
-        <div className="w-[70%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {products.map((product) => (
-            <Link key={product.id} to={`/product/${product.id}`} >
-              <ProductCard product={product} />
-            </Link>
-            ))}
-        </div>
-        
-      </div>
     </section>
   );
 }

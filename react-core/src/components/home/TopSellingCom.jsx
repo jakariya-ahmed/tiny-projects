@@ -21,7 +21,7 @@ export default function TopSellingCom() {
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-6">
              
           {products.map((product) => (
            <Link key={product.id} to={`/product/${product.id}`} > 

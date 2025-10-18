@@ -173,7 +173,7 @@ const handleRatingChange  = (rating) => {
         <div className="lg:flex gap-x-4">
             <div className="products">
                 {/* Products Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     {currentProducts.map((product) => (
                     
                     <ProductCard key={product.id} product={product} />
@@ -234,7 +234,7 @@ const handleRatingChange  = (rating) => {
                 initial={{ x: 50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="w-[25%] bg-white p-4 h-fit sticky top-4"
+                className="w-full sm:w-[25%] bg-white p-4 h-fit sticky top-4"
             >
                 {/* Search */}
                 <div className="mb-6">
