@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import LanguageCurrencyDropdown from "./LanguageCurrencyDropdown";
 
 export default function HeaderTop() {
     return(
@@ -12,10 +13,7 @@ export default function HeaderTop() {
                     </ul>
                 </div>
                 <div>
-                    <ul className="flex gap-3">
-                        <li className="text-[15px] font-semi-bold hover:text-amber-500 transition">Bangla</li>
-                        <li className="text-[15px] font-semi-bold hover:text-amber-500 transition">BD</li>
-                    </ul>
+                    <LanguageCurrencyDropdown />
                 </div>
             </div>
         </div>
