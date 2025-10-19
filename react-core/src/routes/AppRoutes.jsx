@@ -11,6 +11,7 @@ import SingleProduct from "../pages/SingleProduct";
 import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import About from "../pages/About";
 
 export default function AppRoutes() {
     return(
@@ -28,6 +29,7 @@ export default function AppRoutes() {
             {/* Single Product  */}
             <Route path="/product/:id" element={<SingleProduct />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/about-us" element={<About /> } />
             <Route path="/login" element={<Login /> }/>
             <Route path="/register" element={<Register/> } />
         </Routes>

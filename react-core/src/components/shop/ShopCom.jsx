@@ -172,7 +172,7 @@ const handleRatingChange  = (rating) => {
             setSortOption={setSortOption}
             />
         </motion.div>
-        <div className="lg:flex-row gap-x-4">
+        <div className="lg:flex gap-x-4">
             <div className="products">
                 {/* Products Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">

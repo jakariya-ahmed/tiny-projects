@@ -4,7 +4,7 @@ import { ChevronDown, MenuIcon } from "lucide-react";
 import {
   Smartphone,Laptop,FlaskConical,Heart,ShoppingBag,Home,Sofa,Shirt,Handbag,Watch,Dumbbell,Gamepad,Headphones,Car,ChevronRight,
 } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 export default function Navbar() {
@@ -97,18 +97,18 @@ export default function Navbar() {
                 <NavLink
                     to="/"
                     className={({ isActive }) =>
-                    isActive ? "text-blue-600 font-bold" : "text-gray-800 font-bold"
+                    isActive ? "text-amber-600 font-bold" : "text-gray-800 font-bold"
                     }
                 >
                     Home
                 </NavLink>
 
                 <NavLink to="/shop" className={({isActive}) => isActive ? 
-                "text-blue-600 font-bold" : "text-gray-800 font-bold"  }>Shop</NavLink>
+                "text-amber-600 font-bold" : "text-gray-800 font-bold"  }>Shop</NavLink>
                 <NavLink
-                    to="/posts"
+                    to="/about-us"
                     className={({ isActive }) =>
-                    isActive ? "text-blue-600 font-bold" : "text-gray-800 font-bold"
+                    isActive ? "text-amber-600 font-bold" : "text-gray-800 font-bold"
                     }
                 >
                     About
@@ -117,7 +117,7 @@ export default function Navbar() {
                 <NavLink
                     to="/contact"
                     className={({ isActive }) =>
-                    isActive ? "text-blue-600 font-bold" : "text-gray-800 font-bold"
+                    isActive ? "text-amber-600 font-bold" : "text-gray-800 font-bold"
                     }
                 >
                     Contact
@@ -129,9 +129,11 @@ export default function Navbar() {
 
         {/* become seller button  */}
         <div className=" py-2 text-right">
-                <button className="flex items-center text-lg bg-amber-500 py-2 px-4 rounded-sm text-black font-semi-bold cursor-pointer">
+                <Link to="/register">
+                    <button className="flex items-center text-lg bg-amber-500 py-2 px-4 rounded-sm text-black font-semi-bold cursor-pointer">
                     Become a seller <span><ChevronRight size={16} /></span>
                 </button>
+                </Link>
         </div>
 
 
