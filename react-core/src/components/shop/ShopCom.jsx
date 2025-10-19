@@ -177,9 +177,9 @@ const handleRatingChange  = (rating) => {
                 {/* Products Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     {currentProducts.map((product) => (
-                    <Link to={`/product/${product.id}`}>
+                    <Link key={product.id} to={`/product/${product.id}`}>
                     
-                      <ProductCard key={product.id} product={product} />
+                      <ProductCard product={product} />
                     </Link>
 
                     ))}

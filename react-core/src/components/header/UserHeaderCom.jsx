@@ -1,4 +1,4 @@
-import { UserIcon, ShoppingBagIcon, HeartIcon } from "lucide-react";
+import { UserIcon, HeartIcon, ShoppingBasketIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 export default function UserHeaderCom() {
@@ -14,7 +14,7 @@ export default function UserHeaderCom() {
         <div className="flex gap-x-4 relative group">
             
             <div className="relative">
-                <span><NavLink to="/cart"><ShoppingBagIcon size={26} /> </NavLink></span>
+                <span><NavLink to="/cart"><ShoppingBasketIcon size={26} /> </NavLink></span>
                 <div className="flex">
                     <NavLink ><span className="absolute text-[12px] top-[-10px] left-[-10px] bg-amber-500 text-center rounded-xl px-[5px] ">{ totalItems}</span> </NavLink>
                 </div>

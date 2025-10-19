@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import useDummyData from "../../hooks/useDummyData"; // your hook for products
 import ProductCard from "../product/ProductCard";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 
 export default function RelatedProducts({ currentProduct }) {
@@ -55,7 +56,10 @@ export default function RelatedProducts({ currentProduct }) {
         >
           {related.map((product) => (
             <SwiperSlide key={product.id}>
+              <Link to={`/product/${product.id}`} >
+              
               <ProductCard product={product} />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

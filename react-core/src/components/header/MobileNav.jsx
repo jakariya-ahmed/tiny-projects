@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, ShoppingBag, User, Grid, ShoppingBagIcon } from "lucide-react";
+import { Home, ShoppingBag, User, Grid, ShoppingBasketIcon } from "lucide-react";
 import { NavLink, Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 
@@ -69,8 +69,11 @@ export default function MobileNav() {
         </button>
 
         <div className="relative">
-            <NavLink to="/cart" className="flex flex-col items-center text-gray-700">
-              <ShoppingBagIcon size={22} />
+            <NavLink to="/cart" onClick={() => setActiveTab("cart")}
+            className={`flex flex-col items-center text-sm ${
+                activeTab === "cart" ? "text-blue-600" : "text-gray-500"
+            }`}>
+              <ShoppingBasketIcon size={22} />
               <span className="text-xs">Cart</span>
             </NavLink>
             {totalItems > 0 && (
@@ -99,7 +102,7 @@ export default function MobileNav() {
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ duration: 0.3 }}
-            className="absolute bottom-12 left-0 right-0 bg-white border-t border-gray-300 rounded-t-2xl shadow-xl max-h-[60vh] overflow-y-auto"
+            className="absolute bottom-12 left-0 right-0 bg-white border-t border-gray-300 max-h-[60vh] overflow-y-auto"
           >
             <div className="p-4">
               <h2 className="text-lg font-semibold mb-3 text-gray-800">

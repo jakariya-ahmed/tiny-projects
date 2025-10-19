@@ -17,7 +17,7 @@ export default function Checkout() {
     const navigate = useNavigate();
     // Subtotal
     const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    console.log(subtotal);
+    // console.log(subtotal);
     // ✅ Redirect only if not on order-success page
     useEffect(() => {
         if (cart.length === 0 && location.pathname !== "/order-success") {
@@ -126,7 +126,7 @@ return (
 
           <button
             type="submit"
-            className="w-full bg-green-600 text-white py-2 rounded-lg font-medium"
+            className="w-full bg-amber-500 text-white py-2 rounded-lg font-medium"
           >
             Place Order
           </button>
