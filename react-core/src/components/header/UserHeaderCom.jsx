@@ -26,7 +26,7 @@ export default function UserHeaderCom() {
                 </div>
             </div>
             <div>
-                <span><NavLink><UserIcon size={26} /></NavLink></span>
+                <span><NavLink to="/login"><UserIcon size={26} /></NavLink></span>
             </div>
 
             {/* Dropdown */}

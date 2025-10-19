@@ -83,15 +83,17 @@ export default function MobileNav() {
             )}
           </div>
 
-        <button
-          onClick={() => setActiveTab("user")}
-          className={`flex flex-col items-center text-sm ${
-            activeTab === "user" ? "text-amber-600" : "text-gray-500"
-          }`}
-        >
-          <User className="w-6 h-6" />
-          <span>Account</span>
-        </button>
+        <Link to="/login">
+            <button
+            onClick={() => setActiveTab("user")}
+            className={`flex flex-col items-center text-sm ${
+              activeTab === "user" ? "text-amber-600" : "text-gray-500"
+            }`}
+          >
+            <User className="w-6 h-6" />
+            <span>Account</span>
+          </button>
+        </Link>
       </div>
 
       {/* Category Drawer */}
