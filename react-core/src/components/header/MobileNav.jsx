@@ -38,7 +38,7 @@ export default function MobileNav() {
             <button
             onClick={() => setActiveTab("home")}
             className={`flex flex-col items-center text-sm ${
-                activeTab === "home" ? "text-blue-600" : "text-gray-500"
+                activeTab === "home" ? "text-amber-600" : "text-gray-500"
             }`}
             >
             <Home className="w-6 h-6" />
@@ -50,7 +50,7 @@ export default function MobileNav() {
             <button
             onClick={() => setActiveTab("shop")}
             className={`flex flex-col items-center text-sm ${
-                activeTab === "shop" ? "text-blue-600" : "text-gray-500"
+                activeTab === "shop" ? "text-amber-600" : "text-gray-500"
             }`}
             >
             <ShoppingBag className="w-6 h-6" />
@@ -61,7 +61,7 @@ export default function MobileNav() {
         <button
           onClick={() => setShowCategories(!showCategories)}
           className={`flex flex-col items-center text-sm ${
-            showCategories ? "text-blue-600" : "text-gray-500"
+            showCategories ? "text-amber-600" : "text-gray-500"
           }`}
         >
           <Grid className="w-6 h-6" />
@@ -71,7 +71,7 @@ export default function MobileNav() {
         <div className="relative">
             <NavLink to="/cart" onClick={() => setActiveTab("cart")}
             className={`flex flex-col items-center text-sm ${
-                activeTab === "cart" ? "text-blue-600" : "text-gray-500"
+                activeTab === "cart" ? "text-amber-600" : "text-gray-500"
             }`}>
               <ShoppingBasketIcon size={22} />
               <span className="text-xs">Cart</span>
@@ -86,7 +86,7 @@ export default function MobileNav() {
         <button
           onClick={() => setActiveTab("user")}
           className={`flex flex-col items-center text-sm ${
-            activeTab === "user" ? "text-blue-600" : "text-gray-500"
+            activeTab === "user" ? "text-amber-600" : "text-gray-500"
           }`}
         >
           <User className="w-6 h-6" />
