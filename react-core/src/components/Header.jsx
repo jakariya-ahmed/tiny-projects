@@ -27,7 +27,7 @@ const { products, loading, error, maxPrice } = useDummyData();
                     isActive ? "text-blue-600 font-bold" : "text-gray-800"
                   }
                 >
-                  <img src="/public/images/logo.svg" className="" alt="shpping" />
+                  <img src="/public/images/logo.png" className="" alt="shpping" />
                 </NavLink>
               </div>
               {/* Header search  */}
