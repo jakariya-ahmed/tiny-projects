@@ -109,7 +109,7 @@ export default function HeroSection() {
           className="relative h-[180px] sm:h-[200px] lg:h-[240px] bg-cover bg-center shadow-sm overflow-hidden p-4"
           style={{
             backgroundImage:
-              "url('public/images/slider/banner-2.png')",
+              "url('/images/slider/banner-2.png')",
           }}
         >
           {/* <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-white text-center p-4">
@@ -127,7 +127,7 @@ export default function HeroSection() {
           className="relative h-[180px] sm:h-[200px] lg:h-[240px] bg-cover bg-center shadow-sm overflow-hidden"
           style={{
             backgroundImage:
-              "url('public/images/slider/banner-1.png')",
+              "url('/images/slider/banner-1.png')",
           }}
         >
           {/* <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-white text-center p-4">

@@ -29,7 +29,7 @@ const products = getPopularProducts();
     
     <div className="relative bg-white overflow-hidden group">
       <img
-        src="public/images/banner/ads-2.jpg"
+        src="/images/banner/ads-2.jpg"
         alt="Ad Banner 1"
         className="w-full transition-transform duration-300 group-hover:scale-105 cursor-pointer rounded-xl"
       />
@@ -37,7 +37,7 @@ const products = getPopularProducts();
 
     <div className="relative bg-white overflow-hidden group">
       <img
-        src="public/images/banner/ads-3.webp"
+        src="/images/banner/ads-3.webp"
         alt="Ad Banner 2"
         className="w-full transition-transform duration-300 group-hover:scale-105 cursor-pointer rounded-xl"
       />

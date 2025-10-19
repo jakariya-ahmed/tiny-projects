@@ -84,7 +84,7 @@ export default function OnSaleSection() {
       {/* Right side */}
       <div className="relative">
         <img
-          src="public/images/slider/ads.png"
+          src="images/slider/ads.png"
           alt="Flash Sale Banner"
           className="w-full h-80 object-cover"
         />
