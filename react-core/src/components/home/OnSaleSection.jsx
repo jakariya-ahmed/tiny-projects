@@ -37,7 +37,7 @@ export default function OnSaleSection() {
   return (
     <section className="py-12 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
       {/* Left side */}
-      <div className="flex flex-col justify-center pl-10 gap-4 bg-amber-100 h-[320px] sm:h-[200px] lg:h-[320px] bg-cover bg-center overflow-hidden"
+      <div className="flex flex-col justify-center pl-10 gap-4 bg-amber-100 h-[320px] lg:h-[320px] bg-cover bg-center overflow-hidden"
       style={{
             backgroundImage:
               "url('public/images/banner/cover-countdown.jpg')",
@@ -86,7 +86,7 @@ export default function OnSaleSection() {
         <img
           src="/images/slider/ads.png"
           alt="Flash Sale Banner"
-          className="w-full h-80 object-cover"
+          className="w-full sm:h-80 "
         />
         {/* <div className="absolute bottom-4 left-4 bg-violet-600 text-white px-4 py-2 rounded-lg font-bold">
           Flash Sale!

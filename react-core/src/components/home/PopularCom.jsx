@@ -12,7 +12,7 @@ const {getPopularProducts} = useHomeProducts();
 const products = getPopularProducts();
 
   return (
-    <section className=" mx-auto py-10">
+    <section className=" mx-auto py-10 px-2 sm:px-0 md:px-4">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Popular Products </h2>
@@ -45,7 +45,7 @@ const products = getPopularProducts();
   </div>
 
   {/* Product Cards Section */}
-  <div className="w-full md:w-[70%] grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+  <div className="w-full md:w-[70%] grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2 md:gap-5">
     {products.map((product) => (
       <Link key={product.id} to={`/product/${product.id}`}>
         <ProductCard product={product} />

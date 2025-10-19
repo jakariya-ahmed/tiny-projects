@@ -12,7 +12,7 @@ export default function NewCollectionCom() {
     const products = getNewCollection();
 
   return (
-    <section className="mx-auto py-10 px-4 sm:px-0">
+    <section className="mx-auto py-10 px-2 sm:px-0 md:px-4">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">New Collection</h2>

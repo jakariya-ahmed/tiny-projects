@@ -11,7 +11,7 @@ export default function TopSellingCom() {
     const products = getTopSelling();
 
   return (
-    <section className=" mx-auto py-10">
+    <section className=" mx-auto py-10 px-2 sm:px-0 md:px-4">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Top Selling</h2>
@@ -21,7 +21,7 @@ export default function TopSellingCom() {
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-2 md:gap-5">
              
           {products.map((product) => (
            <Link key={product.id} to={`/product/${product.id}`} > 
@@ -54,7 +54,7 @@ function ProductCard({ product }) {
         <img
           src={product.thumbnail}
           alt={product.title}
-          className="w-80 h-55 transition-transform duration-300 group-hover:scale-105"
+          className="w-45 sm:w-60 md:w-40 md:h-55 transition-transform duration-300 group-hover:scale-105"
         />
 
         {/* Product Info */}

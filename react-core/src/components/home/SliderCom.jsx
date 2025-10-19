@@ -36,7 +36,7 @@ export default function HeroSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-12 py-8 gap-x-4">
+    <section className="grid grid-cols-1 lg:grid-cols-12 sm:py-8 gap-x-4">
       {/* Slider Section */}
       <div className="lg:col-span-8 relative">
         <Swiper
@@ -70,7 +70,7 @@ export default function HeroSection() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.3 }}
-                        className="text-6xl sm:text-6xl font-bold text-amber-500"
+                        className="text-4xl sm:text-6xl font-bold text-amber-500"
                       >
                         {s.subtitle}
                       </motion.h3>
@@ -103,10 +103,10 @@ export default function HeroSection() {
       </div>
 
       {/* Banner Section */}
-      <div className="lg:col-span-4 flex flex-col gap-4">
+      <div className="flex-col flex lg:col-span-4 gap-4 mt-4 lg:mt-0 px-2 sm:px-0 md:px-4">
         {/* Top Banner */}
         <div
-          className="relative h-[180px] sm:h-[200px] lg:h-[240px] bg-cover bg-center shadow-sm overflow-hidden p-4"
+          className="relative w-full h-50 sm:h-50 lg:h-[240px] bg-cover bg-center shadow-sm overflow-hidden p-5"
           style={{
             backgroundImage:
               "url('/images/slider/banner-2.png')",
