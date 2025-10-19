@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, ShoppingBag, User, Grid, LucideShoppingBasket, LineChart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Home, ShoppingBag, User, Grid, ShoppingBagIcon } from "lucide-react";
+import { NavLink, Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
 const categoriesData = {
   Electronics: ["Phones", "Laptops", "Headphones"],
@@ -10,6 +11,13 @@ const categoriesData = {
 };
 
 export default function MobileNav() {
+
+  const { cart, removeFromCart } = useCart();
+   const totalItems = cart.reduce((sum, item) => 
+        sum + item.quantity, 0
+    ); 
+
+
   const [activeTab, setActiveTab] = useState("home");
   const [showCategories, setShowCategories] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -60,17 +68,17 @@ export default function MobileNav() {
           <span>Category</span>
         </button>
 
-        <Link to="/cart">
-          <button
-            onClick={() => setActiveTab("cart")}
-            className={`flex flex-col items-center text-sm ${
-                activeTab === "cart" ? "text-blue-600" : "text-gray-500"
-            }`}
-            >
-            <LucideShoppingBasket className="w-6 h-6" />
-            <span>Cart</span>
-            </button>
-        </Link>
+        <div className="relative">
+            <NavLink to="/cart" className="flex flex-col items-center text-gray-700">
+              <ShoppingBagIcon size={22} />
+              <span className="text-xs">Cart</span>
+            </NavLink>
+            {totalItems > 0 && (
+              <span className="absolute text-[10px] top-[-2px] right-[-5px] bg-amber-500 text-white rounded-full px-[5px]">
+                {totalItems}
+              </span>
+            )}
+          </div>
 
         <button
           onClick={() => setActiveTab("user")}

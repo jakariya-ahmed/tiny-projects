@@ -1,7 +1,8 @@
-import { ArrowBigLeft, ArrowBigRight, ShoppingBag, Heart, Eye, ShoppingCart, ArrowRight } from "lucide-react";
+import { ArrowBigLeft, ArrowBigRight} from "lucide-react";
 import {useEffect, useState } from "react";
 import usePagination from "../../hooks/usePagination";
 import useDummyData from "../../hooks/useDummyData";
+import { Link } from "react-router-dom";
 
 import { motion } from "framer-motion";
 import CategoriesCom from "./CategoriesCom";
@@ -12,6 +13,7 @@ import PriceCom from "./PriceCom";
 import SortComp from "./SortCom";
 import RatingCom from "./RatingCom";
 import { useCart } from "../../context/CartContext";
+import ProductCard from "../product/ProductCard";
 
 export default function ShopCom(){
     const items = 24;
@@ -170,19 +172,22 @@ const handleRatingChange  = (rating) => {
             setSortOption={setSortOption}
             />
         </motion.div>
-        <div className="lg:flex gap-x-4">
+        <div className="lg:flex-row gap-x-4">
             <div className="products">
                 {/* Products Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     {currentProducts.map((product) => (
+                    <Link to={`/product/${product.id}`}>
                     
-                    <ProductCard key={product.id} product={product} />
+                      <ProductCard key={product.id} product={product} />
+                    </Link>
+
                     ))}
                 </div>
 
 
                 {/* Pagination buttons  */}
-                <div className="flex justify-center gap-2 my-6">
+                <div className="flex justify-center sm:gap-2 my-6 overflow-x-auto">
                 <button
                     disabled={currentPage === 1}
                     onClick={() => setCurrentPage(1)}
@@ -234,7 +239,7 @@ const handleRatingChange  = (rating) => {
                 initial={{ x: 50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="w-full sm:w-[25%] bg-white p-4 h-fit sticky top-4"
+                className="w-full lg:w-[25%] bg-white p-4 h-fit sticky top-4"
             >
                 {/* Search */}
                 <div className="mb-6">
@@ -296,76 +301,3 @@ const handleRatingChange  = (rating) => {
 }
 
 
-
-
-// product card 
-function ProductCard({ product }) {
-    const [hovered, setHovered] = useState(false);
-    const { addToCart } = useCart();
-
-  const avgRating = product.reviews?.length
-    ? product.reviews.reduce((sum, r) => sum + r.rating, 0) / product.reviews.length
-    : 0;
-
-  return (
-    <div
-      className="relative bg-white overflow-hidden group"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Product Image */}
-      <img
-        src={product.thumbnail}
-        alt={product.title}
-        className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-      />
-
-      {/* Product Info */}
-      <div className="px-4 py-3">
-        <h3 className="text-lg font-semibold text-gray-800">{product.title}</h3>
-        <div className="flex items-center gap-2 mt-1">
-          <span className="line-through text-red-500 font-medium">{product.price + 500} tk</span>
-          <span className="text-gray-900 font-bold">{product.price} tk</span>
-        </div>
-
-        {/* Rating */}
-        <div className="flex items-center gap-1 mt-1">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <span key={i} className={`text-yellow-400 ${i < Math.round(avgRating) ? "opacity-100" : "opacity-30"}`}>
-              ★
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Add to Cart Button */}
-      <button
-        onClick={() => addToCart(product)}
-        className={`absolute bottom-[-50px] cursor-pointer left-1/2 -translate-x-1/2 w-full bg-amber-500 text-white py-2 flex items-center justify-center gap-2 transition-all duration-300
-          ${hovered ? "bottom-[0px]" : ""}
-        `}
-      >
-        <ShoppingBag size={20} /> Add to Cart
-      </button>
-
-      {/* Side Quick Actions */}
-      <div
-        className={`absolute top-1/3 -right-12 flex flex-col gap-2 transition-all duration-300
-          ${hovered ? "right-2" : ""}
-        `}
-      >
-        <button className="bg-white shadow-md p-2 rounded-full hover:bg-amber-600 hover:text-white transition-colors">
-          <Heart size={16} />
-        </button>
-        <button className="bg-white shadow-md p-2 rounded-full hover:bg-amber-600 hover:text-white transition-colors">
-          <Eye size={16} />
-        </button>
-        <button 
-        onClick={() => addToCart(product)}
-        className="bg-white shadow-md p-2 rounded-full hover:bg-amber-600 hover:text-white transition-colors">
-          <ShoppingCart size={16} />
-        </button>
-      </div>
-    </div>
-  );
-}

@@ -11,7 +11,7 @@ export default function CartCom() {
   const total = subtotal - discount;
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto p-6 overflow-x-auto">
       <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
 
       {cart.length === 0 ? (
