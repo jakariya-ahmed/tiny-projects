@@ -11,7 +11,7 @@ const slides = [
     title: "Summer Collection 2025",
     subtitle: "Up to 50% Off",
     desc: "Discover the latest trends with our vibrant summer outfits. Discover the latest trends with our vibrant summer outfits.",
-    img: "public/images/slider/slider-1.jpg",
+    img: "/images/slider/slider-1.jpg",
     button: "Shop Now",
   },
   {
@@ -19,7 +19,7 @@ const slides = [
     title: "New Arrivals",
     subtitle: "Stylish & Modern",
     desc: "Explore the freshest looks curated just for you. Discover the latest trends with our vibrant summer outfits.",
-    img: "public/images/slider/slider-2.jpg",
+    img: "/images/slider/slider-2.jpg",
     button: "Explore",
   },
   {
@@ -27,7 +27,7 @@ const slides = [
     title: "Exclusive Deals",
     subtitle: "Limited Time Offer",
     desc: "Get your favorite items at unbeatable prices! Discover the latest trends with our vibrant summer outfits.",
-    img: "public/images/slider/slider-1.jpg",
+    img: "/images/slider/slider-1.jpg",
     button: "Grab Now",
   },
 ];
