@@ -4,7 +4,7 @@ export default function BannerCom() {
     return (
         <div className="my-8">
                 <img
-                    src="public/images/banner/banner.png"
+                    src="/images/banner/banner.png"
                     alt=""
                     className="w-full cursor-pointer"
                 />
