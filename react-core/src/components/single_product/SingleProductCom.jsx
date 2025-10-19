@@ -61,7 +61,7 @@ export default function SingleProductCom() {
         className="flex flex-col gap-4"
       >
         {/* Breadcrumb */}
-        <div className="text-sm text-gray-500 mb-2">
+        <div className="text-sm text-gray-500 mb-2 mt-4 md:mt-0">
           <Link to="/" className="hover:text-amber-500">Home</Link> /{" "}
           <span className="text-gray-800">{product.category}</span>
         </div>
@@ -123,40 +123,42 @@ export default function SingleProductCom() {
         </div>
 
         {/* Buttons */}
-        <div className="flex items-center gap-4 mt-6">
-        {/* Quantity Controller */}
-        <div className="flex items-center border rounded-md">
+        <div className="flex flex-col sm:flex-row gap-4 mt-6">
+          {/* Quantity Controller */}
+          <div className="flex items-center border rounded-md">
+            <button
+              onClick={() => {
+                if (cartItem) updateQty(product.id, qty - 1);
+              }}
+              className="px-3 py-2 text-lg font-semibold border-r hover:bg-gray-100 transition"
+            >
+              −
+            </button>
+            <span className="px-4 select-none">{qty}</span>
+            <button
+              onClick={() => {
+                if (cartItem) updateQty(product.id, qty + 1);
+              }}
+              className="px-3 py-2 text-lg font-semibold border-l hover:bg-gray-100 transition"
+            >
+              +
+            </button>
+          </div>
+
+        {/* Add to Cart */}
+        <div className="flex gap-4">
           <button
-            onClick={() => {
-              if (cartItem) updateQty(product.id, qty - 1);
-            }}
-            className="px-3 py-2 text-lg font-semibold border-r hover:bg-gray-100 transition"
+            onClick={() => addToCart(product)}
+            className="flex items-center gap-2 bg-amber-500 text-white px-6 py-2 rounded-md hover:bg-amber-600 transition"
           >
-            −
+            <ShoppingCart size={18} /> Add to Cart
           </button>
-          <span className="px-4 select-none">{qty}</span>
-          <button
-            onClick={() => {
-              if (cartItem) updateQty(product.id, qty + 1);
-            }}
-            className="px-3 py-2 text-lg font-semibold border-l hover:bg-gray-100 transition"
-          >
-            +
+
+          {/* Order Now */}
+          <button className="border border-amber-500 text-amber-500 px-6 py-2 rounded-md hover:bg-amber-500 hover:text-white transition">
+            Order Now
           </button>
         </div>
-
-      {/* Add to Cart */}
-      <button
-        onClick={() => addToCart(product)}
-        className="flex items-center gap-2 bg-amber-500 text-white px-6 py-2 rounded-md hover:bg-amber-600 transition"
-      >
-        <ShoppingCart size={18} /> Add to Cart
-      </button>
-
-      {/* Order Now */}
-      <button className="border border-amber-500 text-amber-500 px-6 py-2 rounded-md hover:bg-amber-500 hover:text-white transition">
-        Order Now
-      </button>
     </div>
 
         {/* Share */}

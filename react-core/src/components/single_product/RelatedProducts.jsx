@@ -21,7 +21,7 @@ export default function RelatedProducts({ currentProduct }) {
   if (!related.length) return null;
 
   return (
-    <section className="relative mt-12 max-w-7xl mx-auto">
+    <section className="relative w-full overflow-hidden mt-12 max-w-7xl mx-auto">
       <h2 className="text-2xl font-bold mb-6">Related Products</h2>
 
        {/* Custom navigation buttons */}
@@ -36,30 +36,29 @@ export default function RelatedProducts({ currentProduct }) {
         </button>
       </div>
 
-    <Swiper
-        modules={[Navigation, Autoplay]}
-        navigation={{
-          nextEl: ".button-next",
-          prevEl: ".button-prev",
-        }}
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 3000 }}
-        loop={true}
-        slidesPerView={5}
-        spaceBetween={20}
-        breakpoints={{
-          320: { slidesPerView: 2, spaceBetween: 10 },
-          640: { slidesPerView: 3, spaceBetween: 15 },
-          768: { slidesPerView: 4, spaceBetween: 20 },
-          1024: { slidesPerView: 5, spaceBetween: 20 },
-        }}
-      >
-        {related.map((product) => (
-          <SwiperSlide key={product.id}>
-            <ProductCard product={product} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          navigation={{
+            nextEl: ".button-next",
+            prevEl: ".button-prev",
+          }}
+          autoplay={{ delay: 3000 }}
+          loop={true}
+          spaceBetween={20}
+          slidesPerView={1} // default for very small screens
+          breakpoints={{
+            380: { slidesPerView: 2, spaceBetween: 15 },  // mobile
+            768: { slidesPerView: 3, spaceBetween: 20 },  // tablet
+            1024: { slidesPerView: 4, spaceBetween: 20 }, // small laptop
+            1280: { slidesPerView: 5, spaceBetween: 25 }, // large desktop
+          }}
+        >
+          {related.map((product) => (
+            <SwiperSlide key={product.id}>
+              <ProductCard product={product} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
       
     </section>
