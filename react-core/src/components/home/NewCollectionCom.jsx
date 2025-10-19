@@ -12,7 +12,7 @@ export default function NewCollectionCom() {
     const products = getNewCollection();
 
   return (
-    <section className="mx-auto py-10">
+    <section className="mx-auto py-10 px-4 sm:px-0">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">New Collection</h2>
@@ -22,7 +22,7 @@ export default function NewCollectionCom() {
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-5">
         {products.map((product) => (
           <Link key={product.id} to={`/product/${product.id}`} >
             <ProductCard product={product} />

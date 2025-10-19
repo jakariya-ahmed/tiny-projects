@@ -1,5 +1,6 @@
 import { SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 export default function HeaderSearchCom({products}){
     
     const [headerSearch, setHeaderSearch] = useState("");
@@ -35,18 +36,21 @@ export default function HeaderSearchCom({products}){
             {searchSuggestions.length > 0 && (
             <ul className="absolute left-0 right-0 bg-white border border-amber-200 rounded-lg mt-1 shadow-lg z-50 max-h-100 overflow-y-auto">
                 {searchSuggestions.map((item) => (
-                    <li
-                    key={item.id}
-                    className="px-3 py-2 hover:bg-amber-100 cursor-pointer flex items-center gap-2"
-                    >
-                        <img
-                            src={item.thumbnail}
-                            alt={item.title}
-                            className="w-10 h-10 object-cover rounded"
-                        />
-                    <span>{item.title}</span>
-                    <span>tk{item.price}  </span>
-                    </li>
+                    <Link to={`/product/${item.id}`}>
+                        <li
+                        key={item.id}
+                        className="px-3 py-2 hover:bg-amber-100 cursor-pointer flex items-center gap-2"
+                        >
+                            <img
+                                src={item.thumbnail}
+                                alt={item.title}
+                                className="w-10 h-10 object-cover rounded"
+                            />
+                        <span>{item.title}</span>
+                        <span>tk{item.price}  </span>
+                        </li>
+                    </Link>
+                    
                 ))}
             </ul>
         )}
