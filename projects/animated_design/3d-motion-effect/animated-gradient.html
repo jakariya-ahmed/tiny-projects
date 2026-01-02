@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="different-card.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="services-pro">
+  <div class="service-card" style="--img:url('https://images.unsplash.com/photo-1522199755839-a2bacb67c546')">
+    <div class="icon">🚀</div>
+    <h3>Web Development</h3>
+    <p>High performance, scalable web apps.</p>
+  </div>
+
+  <div class="service-card" style="--img:url('https://images.unsplash.com/photo-1527689368864-3a821dbccc34')">
+    <div class="icon">🎨</div>
+    <h3>UI/UX Design</h3>
+    <p>Premium modern UI experience.</p>
+  </div>
+
+  <div class="service-card" style="--img:url('https://images.unsplash.com/photo-1506765515384-028b60a970df')">
+    <div class="icon">⚡</div>
+    <h3>Marketing Strategy</h3>
+    <p>Grow your brand with confidence.</p>
+  </div>
+</div>
+
+<!-- flip service card:hover  -->
+<div class="services-pro">
+  
+  <!-- Card 1 -->
+  <div class="flip-card">
+    <div class="inner">
+
+      <!-- FRONT SIDE -->
+      <div class="front">
+        <div class="icon">🚀</div>
+        <h3>Web Development</h3>
+        <p>Modern responsive applications.</p>
+      </div>
+
+      <!-- BACK SIDE -->
+      <div class="back" style="--img:url('https://picsum.photos/400/300?random=1')"></div>
+
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="flip-card">
+    <div class="inner">
+      <div class="front">
+        <div class="icon">🎨</div>
+        <h3>UI/UX Design</h3>
+        <p>Creative premium design.</p>
+      </div>
+      <div class="back" style="--img:url('https://picsum.photos/400/300?random=2')"></div>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="flip-card">
+    <div class="inner">
+      <div class="front">
+        <div class="icon">⚡</div>
+        <h3>Brand Strategy</h3>
+        <p>Grow your identity.</p>
+      </div>
+      <div class="back" style="--img:url('https://picsum.photos/400/300?random=3')"></div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="services-wrapper">
+
+  <!-- SECTION 1 — SLIDE UP REVEAL -->
+  <h2 class="section-title">Slide-Up Reveal</h2>
+  <div class="services section1">
+
+    <div class="card" style="--img:url('https://picsum.photos/id/1015/500/350')">
+      <div class="content">
+        <div class="icon">🚀</div>
+        <h3>Web Development</h3>
+        <p>Modern scalable performance apps.</p>
+      </div>
+    </div>
+
+    <div class="card" style="--img:url('https://picsum.photos/id/1025/500/350')">
+      <div class="content">
+        <div class="icon">🎨</div>
+        <h3>UI/UX Design</h3>
+        <p>Premium design experience.</p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- SECTION 2 — BLUR TRANSITION -->
+  <h2 class="section-title">Blur Transition</h2>
+  <div class="services section2">
+
+    <div class="card" style="--img:url('https://picsum.photos/id/1035/500/350')">
+      <div class="content">
+        <div class="icon">⚙️</div>
+        <h3>App Development</h3>
+        <p>Fast & reliable mobile apps.</p>
+      </div>
+    </div>
+
+    <div class="card" style="--img:url('https://picsum.photos/id/1041/500/350')">
+      <div class="content">
+        <div class="icon">🔥</div>
+        <h3>Brand Identity</h3>
+        <p>Create powerful brand image.</p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- SECTION 3 — FADE + ZOOM REVEAL -->
+  <h2 class="section-title">Fade + Zoom Reveal</h2>
+  <div class="services section3">
+
+    <div class="card" style="--img:url('https://picsum.photos/id/1062/500/350')">
+      <div class="content">
+        <div class="icon">💡</div>
+        <h3>Strategy Planning</h3>
+        <p>Smart long-term business plans.</p>
+      </div>
+    </div>
+
+    <div class="card" style="--img:url('https://picsum.photos/id/1074/500/350')">
+      <div class="content">
+        <div class="icon">⚡</div>
+        <h3>Marketing Boost</h3>
+        <p>Grow your online visibility.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- different animation card End here  -->
+
+<div class="wrap">
+
+  <div>
+    <h1>3D Tilt — Interactive Pro Card</h1>
+    <p class="lead">Move your cursor over the card to feel depth. Touch-friendly tilt included.</p>
+    <div class="row tilt" aria-label="3D tilt service row">
+      <article class="svc" tabindex="0" data-role="tilt" aria-labelledby="t1-title">
+        <div class="surface" aria-hidden="true"></div>
+        <div class="shine" aria-hidden="true"></div>
+        <div class="inner">
+          <div class="icon" aria-hidden="true">🚀</div>
+          <div id="t1-title" class="title">Web Development</div>
+          <div class="desc">Blazing-fast, SEO-friendly, resilient web apps crafted for scale.</div>
+          <div class="meta"><button class="cta">Explore</button></div>
+        </div>
+      </article>
+
+      <article class="svc" tabindex="0" data-role="tilt" aria-labelledby="t2-title">
+        <div class="surface" aria-hidden="true"></div>
+        <div class="shine" aria-hidden="true"></div>
+        <div class="inner">
+          <div class="icon" aria-hidden="true">🎨</div>
+          <div id="t2-title" class="title">UI / UX Design</div>
+          <div class="desc">Pixel-perfect interfaces that delight users and convert visitors.</div>
+          <div class="meta"><button class="cta">View</button></div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div>
+    <h1>Glassmorphism + Reveal</h1>
+    <p class="lead">Hover to reveal a full-bleed image on the card backside — front content blurs and gives way to the artwork.</p>
+    <div class="row glass" aria-label="glass reveal row">
+      <article class="svc" tabindex="0" aria-labelledby="g1-title" style="--img: url('https://picsum.photos/id/1018/800/600')">
+        <div class="back-image" style="background-image:var(--img)"></div>
+        <div class="front">
+          <div class="icon" aria-hidden="true">⚙️</div>
+          <div id="g1-title" class="title">App Engineering</div>
+          <div class="desc">Native & cross-platform solutions with battle-tested architecture.</div>
+          <div class="meta"><button class="cta">Project</button></div>
+        </div>
+      </article>
+
+      <article class="svc" tabindex="0" aria-labelledby="g2-title" style="--img: url('https://picsum.photos/id/1020/800/600')">
+        <div class="back-image" style="background-image:var(--img)"></div>
+        <div class="front">
+          <div class="icon" aria-hidden="true">📈</div>
+          <div id="g2-title" class="title">Growth Strategy</div>
+          <div class="desc">Data-driven marketing & growth that scales revenue predictably.</div>
+          <div class="meta"><button class="cta">Start</button></div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div>
+    <h1>Neon Glow Borders</h1>
+    <p class="lead">Subtle inner surface with an animated neon gradient border — eye-catching & modern.</p>
+    <div class="row neon" aria-label="neon border row">
+      <article class="svc" tabindex="0" aria-labelledby="n1-title">
+        <div class="glowPulse" style="background:linear-gradient(180deg, rgba(255,107,214,0.18), rgba(77,240,255,0.05));"></div>
+        <div class="inner">
+          <div class="icon" aria-hidden="true">💡</div>
+          <div id="n1-title" class="title">Brand Identity</div>
+          <div class="desc">Unique brand systems with style guides and motion language.</div>
+          <div class="meta"><button class="cta">Discover</button></div>
+        </div>
+      </article>
+
+      <article class="svc" tabindex="0" aria-labelledby="n2-title">
+        <div class="glowPulse" style="background:linear-gradient(180deg, rgba(106,123,255,0.12), rgba(0,233,255,0.06));"></div>
+        <div class="inner">
+          <div class="icon" aria-hidden="true">⚡</div>
+          <div id="n2-title" class="title">Performance Ops</div>
+          <div class="desc">Optimize delivery, caching, and runtime performance for real users.</div>
+          <div class="meta"><button class="cta">Optimize</button></div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+</div>
+
+<!-- 3D titl and hover moving effect  -->
+<div class="grid">
+  <!-- CARD 1 -->
+  <div class="card tilt">
+    <div class="icon">⚡</div>
+    <h2 style="margin:0 0 10px;">AI Automation</h2>
+    <p style="opacity:.85;font-size:14px;">
+      Intelligent tools for workflow automation.
+    </p>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="card tilt">
+    <div class="icon">🎨</div>
+    <h2 style="margin:0 0 10px;">UI/UX Design</h2>
+    <p style="opacity:.85;font-size:14px;">
+      Modern pixel-perfect interfaces built for conversion.
+    </p>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="card tilt">
+    <div class="icon">🛠️</div>
+    <h2 style="margin:0 0 10px;">Web Development</h2>
+    <p style="opacity:.85;font-size:14px;">
+      High-performance, fast, and scalable websites.
+    </p>
+  </div>
+
+  <!-- CARD 4 -->
+  <div class="card tilt">
+    <div class="icon">🚀</div>
+    <h2 style="margin:0 0 10px;">Brand Strategy</h2>
+    <p style="opacity:.85;font-size:14px;">
+      Build your brand identity with premium visuals.
+    </p>
+  </div>
+</div>
+
+<!-- premium, expert-level Magnetic Hover Card -->
+<div class="services-container">
+  <div class="service-card" tabindex="0">
+    <div class="icon">⚡</div>
+    <h3>AI Automation</h3>
+    <p>Intelligent tools that automate workflows efficiently.</p>
+  </div>
+
+  <div class="service-card" tabindex="0">
+    <div class="icon">🛠️</div>
+    <h3>Web Development</h3>
+    <p>Robust, scalable websites tailored for your business.</p>
+  </div>
+
+  <div class="service-card" tabindex="0">
+    <div class="icon">🎨</div>
+    <h3>UI/UX Design</h3>
+    <p>Pixel-perfect, user-friendly interfaces with impact.</p>
+  </div>
+
+  <div class="service-card" tabindex="0">
+    <div class="icon">🚀</div>
+    <h3>Brand Strategy</h3>
+    <p>Craft compelling brand narratives that resonate.</p>
+  </div>
+</div>
+
+
+<script src="different-card.js"></script>
+
+
+</body>
+</html>

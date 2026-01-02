@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Gradient</title>
+<style>
+.services {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  padding: 50px;
+}
+
+.service-card {
+  width: 260px;
+  height: 320px;
+  background: linear-gradient(135deg, #ffcf67, #d3321d);
+  background-size: 200% 200%;
+  border-radius: 20px;
+  padding: 25px;
+  color: white;
+  transform-style: preserve-3d;
+  transform: perspective(900px);
+  transition: transform 0.15s ease-out, background-position 0.3s ease;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+}
+
+/* TEXT FLOATING IN 3D */
+.service-card h3,
+.service-card p {
+  position: relative;
+  transform: translateZ(40px);
+}
+
+
+ 
+</style>
+</head>
+<body>
+    
+<div class="services">
+  <div class="service-card">
+    <h3>Web Development</h3>
+    <p>Building modern & scalable apps.</p>
+  </div>
+
+  <div class="service-card">
+    <h3>UI/UX Design</h3>
+    <p>Smooth, modern & user-focused designs.</p>
+  </div>
+
+  <div class="service-card">
+    <h3>Brand Identity</h3>
+    <p>Build a brand that stands out.</p>
+  </div>
+</div>
+
+
+<script>
+// 3D tilt + moving gradient for all cards
+document.querySelectorAll(".service-card").forEach(card => {
+
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+
+    // mouse position inside card
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // convert to rotation angles
+    const rotateY = ((x / rect.width) - 0.5) * 20;   // tilt left/right
+    const rotateX = ((y / rect.height) - 0.5) * -20; // tilt up/down
+
+    // apply 3D rotation
+    card.style.transform = `
+      perspective(900px)
+      rotateX(${rotateX}deg)
+      rotateY(${rotateY}deg)
+      scale(1.05)
+    `;
+
+    // moving gradient effect
+    const bgPosX = (x / rect.width) * 100;
+    const bgPosY = (y / rect.height) * 100;
+
+    card.style.backgroundPosition = `${bgPosX}% ${bgPosY}%`;
+  });
+
+  // reset on mouse leave
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = `
+      perspective(900px)
+      rotateX(0deg)
+      rotateY(0deg)
+      scale(1)
+    `;
+    card.style.backgroundPosition = "50% 50%";
+  });
+
+});
+
+</script>
+</body>
+</html>

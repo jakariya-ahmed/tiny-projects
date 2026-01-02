@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Advanced Custom Cursor</title>
+<style>
+  :root{
+    --cursor-size: 14px;       /* inner dot size */
+    --cursor-ring: 40px;       /* outer ring size */
+    --ring-border: 2px;
+    --ring-scale-hover: 1.6;
+    --ring-color: rgba(0,0,0,0.75);
+    --dot-color: white;
+    --dot-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    --transition-fast: 150ms;
+  }
+
+  /* Page baseline so demo looks nice */
+  html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;color:#111;background:linear-gradient(180deg,#f7f8fb,#eef2f7);}
+
+  .page{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:2rem;
+    padding:4rem;
+    flex-direction:column;
+  }
+
+  h1{margin:0 0 1rem;font-size:clamp(1.6rem,3vw,2.4rem);}
+
+  /* Make interactive targets to demo hover effects */
+  .btn{
+    display:inline-block;
+    padding:0.8rem 1.2rem;
+    background:#111;color:white;border-radius:10px;text-decoration:none;
+    font-weight:600;cursor:pointer;
+    user-select:none;
+  }
+
+  .card{
+    width:320px;padding:1.6rem;border-radius:12px;background:white;box-shadow:0 6px 20px rgba(20,30,40,0.06);
+    text-align:left;
+  }
+
+  /* --- CURSOR LAYER --- */
+  .cursor {
+    position: fixed;
+    left: 0; top: 0;
+    pointer-events: none;                 /* very important */
+    z-index: 9999;
+    mix-blend-mode: normal;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .cursor__ring, .cursor__dot{
+    position:absolute;
+    left:0; top:0;
+    transform: translate3d(-50%,-50%,0);
+    will-change: transform, opacity;
+    display:block;
+  }
+
+  /* outer ring */
+  .cursor__ring{
+    width: var(--cursor-ring);
+    height: var(--cursor-ring);
+    border-radius: 50%;
+    border: var(--ring-border) solid var(--ring-color);
+    background: transparent;
+    transition: transform var(--transition-fast) ease, opacity var(--transition-fast) ease;
+    box-sizing: border-box;
+    transform-origin:center;
+    opacity: 0.98;
+    backface-visibility: hidden;
+  }
+
+  /* inner dot */
+  .cursor__dot{
+    width: var(--cursor-size);
+    height: var(--cursor-size);
+    border-radius: 50%;
+    background: var(--dot-color);
+    box-shadow: var(--dot-shadow);
+    transition: transform 80ms linear; /* immediate feel */
+  }
+
+  /* hidden state (e.g., on touch devices or when cursor should disappear) */
+  .cursor--hidden { opacity: 0; pointer-events: none; }
+
+  /* hovering an interactive element */
+  .cursor--hover .cursor__ring{
+    transform: translate3d(-50%,-50%,0) scale(var(--ring-scale-hover));
+    border-color: rgba(0,0,0,0.95);
+  }
+
+  /* pressed/clicked effect */
+  .cursor--down .cursor__dot{
+    transform: translate3d(-50%,-50%,0) scale(0.75);
+    transition-duration: 80ms;
+  }
+
+  /* Respect reduced motion preference — disable smoothing animation */
+  @media (prefers-reduced-motion: reduce){
+    .cursor__ring, .cursor__dot { transition: none !important; }
+  }
+
+  /* Demo hint text */
+  .muted{opacity:0.7;font-size:0.95rem}
+</style>
+</head>
+<body>
+  <div class="page">
+    <h1>Advanced Cursor Demo</h1>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <a class="btn" href="#" data-cursor="hover">Primary Action</a>
+      <a class="btn" href="#" data-cursor="hover">Secondary</a>
+    </div>
+
+    <div class="card" style="margin-top:2rem;">
+      <p><strong>Card</strong></p>
+      <p class="muted">Hover elements to see cursor interaction. The cursor is smoothed and can magnetically attract to targets.</p>
+      <div style="margin-top:1rem;">
+        <button class="btn" data-cursor="hover">Button inside card</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cursor markup -->
+  <div class="cursor" id="cursor">
+    <div class="cursor__ring" id="cursorRing" aria-hidden="true"></div>
+    <div class="cursor__dot" id="cursorDot" aria-hidden="true"></div>
+  </div>
+
+<script>
+/*
+ Advanced custom cursor
+ Features:
+ - Smooth follow (lerp)
+ - Ring + dot structure
+ - Hover "magnet" effect for interactive elements (data-cursor or :hoverable)
+ - Click/press animation
+ - Touch-device fallback (hide cursor)
+ - Prefers-reduced-motion respect
+*/
+
+(function () {
+  // Config
+  const config = {
+    easing: 0.14,               // lower = heavier smoothing; 1 = no smoothing
+    ringScaleHover: 1.6,
+    magnetStrength: 0.25,      // how strongly ring moves toward target center
+    hoverSelector: '[data-cursor="hover"], a, button, .btn', // elements to respond to
+    hideOnTouch: true,
+    showCursorAtStart: true,
+  };
+
+  // Elements
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  const dot = document.getElementById('cursorDot');
+
+  // State
+  let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2; // real pointer
+  let ringX = mouseX, ringY = mouseY; // smoothed ring
+  let dotX = mouseX, dotY = mouseY;   // quick dot (optional)
+  let isHovering = false;
+  let hoverTarget = null;
+  let isPointerDown = false;
+  let rafId = null;
+
+  // Accessibility / feature checks
+  const supportsPointer = window.matchMedia ? !window.matchMedia('(pointer:coarse)').matches : true;
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hide cursor on unsupported devices (touch)
+  function updateVisibilityForInput() {
+    if (config.hideOnTouch && !supportsPointer) {
+      cursor.classList.add('cursor--hidden');
+    } else {
+      if (config.showCursorAtStart) cursor.classList.remove('cursor--hidden');
+    }
+  }
+
+  updateVisibilityForInput();
+
+  // LERP helper
+  function lerp(a, b, n) { return (1 - n) * a + n * b; }
+
+  // Event handlers
+  function onPointerMove(e) {
+    // support both pointer and mouse event
+    const clientX = e.clientX ?? (e.touches && e.touches[0] && e.touches[0].clientX);
+    const clientY = e.clientY ?? (e.touches && e.touches[0] && e.touches[0].clientY);
+    mouseX = clientX;
+    mouseY = clientY;
+
+    // Show cursor if hidden on first move
+    cursor.style.display = ''; // ensure present
+    cursor.classList.remove('cursor--hidden');
+  }
+
+  // Hover target detection
+  function onPointerOver(e) {
+    const el = e.target;
+    if (!el) return;
+    if (el.closest && el.closest(config.hoverSelector)) {
+      hoverTarget = el.closest(config.hoverSelector);
+      isHovering = true;
+      cursor.classList.add('cursor--hover');
+    }
+  }
+  function onPointerOut(e) {
+    // when pointer leaves hoverable element
+    const leaving = e.target;
+    if (!leaving) return;
+    // If we moved out of the current hoverTarget (or its children)
+    if (hoverTarget && !hoverTarget.contains(e.relatedTarget)) {
+      hoverTarget = null;
+      isHovering = false;
+      cursor.classList.remove('cursor--hover');
+    }
+  }
+
+  function onPointerDown() {
+    isPointerDown = true;
+    cursor.classList.add('cursor--down');
+  }
+  function onPointerUp() {
+    isPointerDown = false;
+    cursor.classList.remove('cursor--down');
+  }
+
+  // Magnetism: compute a target for the ring when hovering certain targets
+  function getMagnetPosition(target) {
+    if (!target) return { x: mouseX, y: mouseY, strength: 0 };
+    const rect = target.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    // We move ring some fraction toward the center of the element
+    return { x: cx, y: cy, strength: config.magnetStrength };
+  }
+
+  // RAF loop
+  function animate() {
+    // If reduced motion, skip smoothing: directly set positions
+    if (reduceMotion) {
+      ringX = mouseX;
+      ringY = mouseY;
+      dotX = mouseX;
+      dotY = mouseY;
+    } else {
+      // Dot follows closely (fast lerp)
+      dotX = lerp(dotX, mouseX, 0.32);
+      dotY = lerp(dotY, mouseY, 0.32);
+
+      // Ring uses configurable easing
+      ringX = lerp(ringX, mouseX, config.easing);
+      ringY = lerp(ringY, mouseY, config.easing);
+    }
+
+    // Apply magnet if hovering an interactive element
+    if (isHovering && hoverTarget) {
+      const magnet = getMagnetPosition(hoverTarget);
+      // move the ring further toward the target center
+      ringX = lerp(ringX, magnet.x, magnet.strength);
+      ringY = lerp(ringY, magnet.y, magnet.strength);
+    }
+
+    // Update DOM with transforms (use translate3d for GPU accel)
+    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+    dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+
+    rafId = requestAnimationFrame(animate);
+  }
+
+  // Initialize events
+  function addEventListeners() {
+    // pointer events cover mouse + touch + stylus where supported
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointerover', onPointerOver);
+    window.addEventListener('pointerout', onPointerOut);
+
+    // Fallbacks for older browsers
+    window.addEventListener('mousemove', onPointerMove, { passive: true });
+    window.addEventListener('touchstart', function (e) {
+      if (config.hideOnTouch) {
+        cursor.classList.add('cursor--hidden');
+      } else {
+        onPointerMove(e);
+      }
+    }, { passive: true });
+
+    // hide cursor when leaving window
+    window.addEventListener('mouseleave', () => cursor.classList.add('cursor--hidden'));
+    window.addEventListener('mouseenter', () => cursor.classList.remove('cursor--hidden'));
+  }
+
+  // Start
+  function mount() {
+    addEventListeners();
+    // initial placement (off center)
+    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+    dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+    // kickoff loop
+    rafId = requestAnimationFrame(animate);
+  }
+
+  // Cleanup function (if embedding in SPA)
+  function destroy() {
+    window.removeEventListener('pointermove', onPointerMove);
+    window.removeEventListener('pointerdown', onPointerDown);
+    window.removeEventListener('pointerup', onPointerUp);
+    window.removeEventListener('pointerover', onPointerOver);
+    window.removeEventListener('pointerout', onPointerOut);
+    window.removeEventListener('mousemove', onPointerMove);
+    cancelAnimationFrame(rafId);
+    cursor.remove();
+  }
+
+  // Expose to window for debugging and reuse (optional)
+  window.__CustomCursor = { mount, destroy, config };
+
+  // Auto-mount
+  mount();
+})();
+</script>
+</body>
+</html>

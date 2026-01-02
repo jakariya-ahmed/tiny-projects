@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vertical Orbit with Angle</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+  body {
+  margin: 0;
+  background: #0b0c10;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+.hero-orbit {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #ff6b81;
+  will-change: transform;
+  box-shadow: 0 0 10px rgba(255, 107, 129, 0.7);
+}
+
+.dot-1 {
+  width: 30px;
+  height: 30px;
+  background-color: #f7971e;
+  box-shadow: 0 0 10px rgba(247, 151, 30, 0.7);
+  top: 0;
+  left: 10%;
+}
+
+.dot-2 {
+  width: 25px;
+  height: 25px;
+  background-color: #7f00ff;
+  box-shadow: 0 0 10px rgba(127, 0, 255, 0.7);
+  top: 0;
+  left: 30%;
+}
+
+.dot-3 {
+  width: 20px;
+  height: 20px;
+  background-color: #00f260;
+  box-shadow: 0 0 10px rgba(0, 242, 96, 0.7);
+  top: 0;
+  left: 50%;
+}
+
+.dot-4 {
+  width: 18px;
+  height: 18px;
+  background-color: #ff512f;
+  box-shadow: 0 0 10px rgba(255, 81, 47, 0.7);
+  top: 0;
+  left: 70%;
+}
+
+.title {
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  z-index: 10;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+  </style>
+</head>
+<body>
+
+<section class="hero-orbit">
+  <div class="dot dot-1"></div>
+  <div class="dot dot-2"></div>
+  <div class="dot dot-3"></div>
+  <div class="dot dot-4"></div>
+
+  <h1 class="title">Vertical Orbit Motion</h1>
+</section>
+
+<script src="script.js"></script>
+
+<script>
+const dots = document.querySelectorAll(".dot");
+const viewportWidth = window.innerWidth;
+const viewportHeight = window.innerHeight;
+
+const dotsData = [];
+
+dots.forEach(dot => {
+  const width = dot.offsetWidth;
+  const height = dot.offsetHeight;
+
+  // Initial starting position (top somewhere between 0 and 20% viewport height)
+  const startX = dot.offsetLeft; // left position fixed
+  const startY = Math.random() * viewportHeight * 0.2;
+
+  // Movement params
+  // Vertical movement length (down)
+  const travelDistance = viewportHeight * 0.7;
+
+  // Random small angle from vertical in degrees (between -15 and 15)
+  let angleDeg = (Math.random() * 30) - 15;
+  let angleRad = angleDeg * (Math.PI / 180);
+
+  // Speed pixels per frame (can tweak)
+  const baseSpeed = 1 + Math.random(); // 1-2 px/frame
+
+  dotsData.push({
+    element: dot,
+    width,
+    height,
+    startX,
+    startY,
+    angleRad,
+    speed: baseSpeed,
+    posX: startX,
+    posY: startY,
+    travelDistance,
+    direction: 1, // 1 = going down+angled, -1 = going back to start
+    progress: 0, // 0 to 1 along travelDistance
+  });
+});
+
+function lerp(start, end, t) {
+  return start + (end - start) * t;
+}
+
+function animate() {
+  dotsData.forEach(dot => {
+    // Update progress (0 to 1)
+    dot.progress += (dot.speed / dot.travelDistance) * dot.direction;
+
+    // Clamp progress
+    if(dot.progress >= 1) {
+      dot.progress = 1;
+      dot.direction = -1;
+
+      // When reversing, pick a new random angle
+      dot.angleRad = ((Math.random() * 30) - 15) * (Math.PI / 180);
+    } else if(dot.progress <= 0) {
+      dot.progress = 0;
+      dot.direction = 1;
+
+      // When going down again, pick new angle
+      dot.angleRad = ((Math.random() * 30) - 15) * (Math.PI / 180);
+    }
+
+    // Calculate new positions with slight angle offset
+    const y = lerp(dot.startY, dot.startY + dot.travelDistance, dot.progress);
+    const x = lerp(dot.startX, dot.startX + Math.tan(dot.angleRad) * dot.travelDistance, dot.progress);
+
+    // Keep inside viewport horizontally
+    const clampedX = Math.min(Math.max(x, 0), viewportWidth - dot.width);
+
+    dot.posX = clampedX;
+    dot.posY = y;
+
+    dot.element.style.transform = `translate(${dot.posX}px, ${dot.posY}px)`;
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// Update viewport size on resize
+window.addEventListener('resize', () => {
+  viewportWidth = window.innerWidth;
+  viewportHeight = window.innerHeight;
+});
+
+</script>
+</body>
+</html>

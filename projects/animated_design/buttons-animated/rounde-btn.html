@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unified Expanding Red Background from Icon</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #121212;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      cursor: default;
+      user-select: none;
+    }
+
+    /* The single red background circle, behind icon and text ring */
+    .expanding-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 64px;   /* start small, same as icon inner red circle */
+      height: 64px;
+      background-color: red;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+      transition: width 0.5s ease, height 0.5s ease, box-shadow 0.5s ease;
+      z-index: 0;
+    }
+
+    /* Expanded background when hover icon */
+    .center-icon:hover ~ .expanding-bg {
+      width: 300px;  /* expand to full container size */
+      height: 300px;
+      box-shadow: 0 0 50px rgba(255, 0, 0, 0.9);
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Circular text ring with white border, above red bg */
+    .circular-text {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 1px solid white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: spin 15s linear infinite;
+      z-index: 2;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      user-select: none;
+      cursor: default;
+    }
+
+    svg {
+      width: 300px;
+      height: 300px;
+      transform: rotate(-90deg);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    text {
+      fill: white;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-family: 'Poppins', sans-serif;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Outer icon circle with white border */
+    .center-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 1.5px solid white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-sizing: border-box;
+      background: transparent;
+      padding: 12px;
+      transition: border-color 0.3s ease;
+      z-index: 3;
+    }
+
+    .center-icon:hover {
+      border-color: red;
+    }
+
+    /* Inner red circle with arrow */
+    .red-circle {
+      background-color: red;
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+      transition: box-shadow 0.3s ease;
+      z-index: 4;
+    }
+
+    .center-icon:hover .red-circle {
+      box-shadow: 0 0 30px rgba(255, 0, 0, 1);
+    }
+
+    .center-icon svg {
+      width: 36px;
+      height: 36px;
+      fill: white;
+      user-select: none;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      } to {
+        transform: rotate(360deg);
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <button class="center-icon" aria-label="Explore More">
+    <div class="red-circle">
+      <svg viewBox="0 0 24 24" >
+        <path d="M12 4l-8 8h5v8h6v-8h5z" />
+      </svg>
+    </div>
+  </button>
+
+  <div class="expanding-bg"></div>
+
+  <div class="circular-text" aria-hidden="true">
+    <svg viewBox="0 0 300 300" >
+      <defs>
+        <path id="circlePath" d="M150,150 m-130,0 a130,130 0 1,1 260,0 a130,130 0 1,1 -260,0" />
+      </defs>
+      <text>
+        <textPath xlink:href="#circlePath" startOffset="0%">
+          EXPLORE MORE • EXPLORE MORE • EXPLORE MORE • EXPLORE MORE •
+        </textPath>
+      </text>
+    </svg>
+  </div>
+</div>
+
+</body>
+</html>

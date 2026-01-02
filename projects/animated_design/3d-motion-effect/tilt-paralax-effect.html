@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Client Reviews with 3D Tilt Parallax</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0a0a12, #12151f);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px;
+      color: white;
+    }
+
+    .reviews {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      max-width: 1000px;
+      justify-content: center;
+    }
+
+    .review-card {
+      background: rgba(255 255 255 / 0.06);
+      backdrop-filter: saturate(180%) blur(20px);
+      border-radius: 24px;
+      border: 1px solid rgba(255 255 255 / 0.12);
+      width: 320px;
+      padding: 28px 24px;
+      box-shadow:
+        0 8px 24px rgba(0, 255, 255, 0.08);
+      color: white;
+      cursor: pointer;
+      perspective: 1000px;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+      will-change: transform;
+      user-select: none;
+    }
+
+    .review-card:hover {
+      border-color: #00f9ff;
+      box-shadow:
+        0 20px 60px rgba(0, 249, 255, 0.35);
+    }
+
+    .review-content {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 6px rgba(0, 249, 255, 0.8);
+    }
+
+    .client-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .client-photo {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow:
+        0 0 12px rgba(0, 249, 255, 0.8);
+      border: 2px solid #00f9ff;
+    }
+
+    .client-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .client-name {
+      font-weight: 600;
+      font-size: 18px;
+      text-shadow: 0 0 8px #00f9ff;
+    }
+
+    .client-position {
+      font-size: 14px;
+      color: rgba(255 255 255 / 0.7);
+      text-shadow: none;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="reviews">
+  <div class="review-card" tabindex="0">
+    <div class="review-content">
+      “This team transformed our ideas into a sleek, modern product with great usability. Highly recommend!”
+    </div>
+    <div class="client-info">
+      <div class="client-photo">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client 1" />
+      </div>
+      <div>
+        <div class="client-name">Sophia Lee</div>
+        <div class="client-position">CEO, TechCorp</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="review-card" tabindex="0">
+    <div class="review-content">
+      “Outstanding service and attention to detail. The 3D effects really made our product stand out.”
+    </div>
+    <div class="client-info">
+      <div class="client-photo">
+        <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Client 2" />
+      </div>
+      <div>
+        <div class="client-name">Michael Chen</div>
+        <div class="client-position">Founder, InnovateX</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="review-card" tabindex="0">
+    <div class="review-content">
+      “The magnetic 3D tilt interaction was exactly what we needed to engage our users on the homepage.”
+    </div>
+    <div class="client-info">
+      <div class="client-photo">
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Client 3" />
+      </div>
+      <div>
+        <div class="client-name">Emily Davis</div>
+        <div class="client-position">Product Manager, BrightSolutions</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const cards = document.querySelectorAll('.review-card');
+  const maxRotate = 15;  // max tilt degree
+  const ease = 0.1;      // easing factor
+
+  cards.forEach(card => {
+    let currentRotateX = 0;
+    let currentRotateY = 0;
+    let targetRotateX = 0;
+    let targetRotateY = 0;
+    let animationFrameId;
+
+    function animate() {
+      currentRotateX += (targetRotateX - currentRotateX) * ease;
+      currentRotateY += (targetRotateY - currentRotateY) * ease;
+
+      card.style.transform = `rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg)`;
+
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const deltaX = (x - centerX) / centerX;
+      const deltaY = (y - centerY) / centerY;
+
+      targetRotateY = deltaX * maxRotate;  // rotate around Y (left-right tilt)
+      targetRotateX = -deltaY * maxRotate; // rotate around X (up-down tilt)
+
+      if (!animationFrameId) {
+        animate();
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      targetRotateX = 0;
+      targetRotateY = 0;
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Explore More Button</title>
+
+<style>
+body {
+  background: #111;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Button Wrapper */
+.btn-wrap {
+  position: relative;
+  width: 200px;
+  height: 60px;
+  overflow: hidden;
+}
+
+/* Base Button */
+.btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+/* White Base */
+.btn.base {
+  background: white;
+  color: #111;
+  z-index: 1;
+}
+
+/* Hover Button */
+.btn.hover {
+  background: #d3321d;
+  color: white;
+  transform: translateY(95%);
+  z-index: 2;
+}
+
+/* Hover animation */
+.btn-wrap:hover .hover {
+  transform: translateY(0%);
+}
+
+.btn-wrap:hover .base {
+  transform: translateY(-100%);
+}
+</style>
+</head>
+
+<body>
+
+<div class="btn-wrap">
+  <div class="btn base">Explore More</div>
+  <div class="btn hover">Explore More</div>
+</div>
+
+</body>
+</html>

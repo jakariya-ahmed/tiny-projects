@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fully Transparent Glassy Magnetic Cards</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f111a, #12151f);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      max-width: 1200px;
+      justify-content: center;
+    }
+
+    .card {
+      position: relative;
+      width: 280px;
+      padding: 36px 28px;
+      background: rgba(255 255 255 / 0.05);   /* super transparent */
+      backdrop-filter: saturate(180%) blur(25px); /* heavy blur */
+      -webkit-backdrop-filter: saturate(180%) blur(25px); /* Safari support */
+      border-radius: 22px;
+      border: 1.5px solid rgba(255 255 255 / 0.12); /* subtle white border */
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.25);
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition:
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+      perspective: 1200px;
+      overflow: visible;
+      will-change: transform;
+    }
+
+    .card:hover {
+      border-color: #00f9ff;
+      box-shadow:
+        0 16px 48px rgba(0, 249, 255, 0.5);
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      top: var(--y, 50%);
+      left: var(--x, 50%);
+      width: 320px;
+      height: 320px;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 249, 255, 0.3), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      filter: blur(35px);
+      z-index: 0;
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    .icon {
+      font-size: 48px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 2;
+      animation: float 3s ease-in-out infinite;
+      text-shadow:
+        0 0 6px #00f9ff,
+        0 0 12px #00f9ff;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    h3 {
+      margin: 0 0 12px;
+      font-weight: 600;
+      font-size: 22px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 6px #00f9ff;
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.5;
+      color: rgba(255 255 255 / 0.85);
+      margin: 0;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 4px rgba(0, 249, 255, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+<div class="services">
+  <div class="card" tabindex="0">
+    <div class="icon">⚡</div>
+    <h3>AI Automation</h3>
+    <p>Intelligent tools that automate workflows efficiently.</p>
+  </div>
+
+  <div class="card" tabindex="0">
+    <div class="icon">🛠️</div>
+    <h3>Web Development</h3>
+    <p>Robust, scalable websites tailored for your business.</p>
+  </div>
+
+  <div class="card" tabindex="0">
+    <div class="icon">🎨</div>
+    <h3>UI/UX Design</h3>
+    <p>Pixel-perfect, user-friendly interfaces with impact.</p>
+  </div>
+
+  <div class="card" tabindex="0">
+    <div class="icon">🚀</div>
+    <h3>Brand Strategy</h3>
+    <p>Craft compelling brand narratives that resonate.</p>
+  </div>
+</div>
+
+<script>
+  const cards = document.querySelectorAll('.card');
+
+  const maxTranslate = 20;
+  const maxRotate = 15;
+  const ease = 0.1;
+
+  cards.forEach(card => {
+    let currentX = 0, currentY = 0, currentRotateX = 0, currentRotateY = 0;
+    let targetX = 0, targetY = 0, targetRotateX = 0, targetRotateY = 0;
+    let animationFrameId;
+
+    function animate() {
+      currentX += (targetX - currentX) * ease;
+      currentY += (targetY - currentY) * ease;
+      currentRotateX += (targetRotateX - currentRotateX) * ease;
+      currentRotateY += (targetRotateY - currentRotateY) * ease;
+
+      card.style.transform = `translateX(${currentX}px) translateY(${currentY}px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale(1.05)`;
+
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const deltaX = (x - centerX) / centerX;
+      const deltaY = (y - centerY) / centerY;
+
+      targetX = deltaX * maxTranslate;
+      targetY = deltaY * maxTranslate;
+
+      targetRotateX = -deltaY * maxRotate;
+      targetRotateY = deltaX * maxRotate;
+
+      card.style.setProperty('--x', `${x}px`);
+      card.style.setProperty('--y', `${y}px`);
+
+      if (!animationFrameId) {
+        animate();
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      targetX = 0;
+      targetY = 0;
+      targetRotateX = 0;
+      targetRotateY = 0;
+
+      card.style.setProperty('--x', `50%`);
+      card.style.setProperty('--y', `50%`);
+    });
+  });
+</script>
+
+</body>
+</html>

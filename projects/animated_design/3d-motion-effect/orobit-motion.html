@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="orbit-wrapper">
+
+  <div class="orbit-card">
+    <div class="orbit-ring"></div>
+    <div class="orbit-dot"></div>
+    <h3>Web Design</h3>
+    <p>Modern UI systems</p>
+  </div>
+
+  <div class="orbit-card">
+    <div class="orbit-ring"></div>
+    <div class="orbit-dot"></div>
+    <h3>Development</h3>
+    <p>Fast & scalable</p>
+  </div>
+
+  <div class="orbit-card">
+    <div class="orbit-ring"></div>
+    <div class="orbit-dot"></div>
+    <h3>Branding</h3>
+    <p>Identity & visuals</p>
+  </div>
+
+  <div class="orbit-card">
+    <div class="orbit-ring"></div>
+    <div class="orbit-dot"></div>
+    <h3>SEO Growth</h3>
+    <p>Organic traffic</p>
+  </div>
+
+</div>
+
+
+<style>
+body {
+  background: #0e0e11;
+  font-family: sans-serif;
+  color: white;
+}
+
+.orbit-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding: 80px;
+}
+
+.orbit-card {
+  position: relative;
+  height: 260px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #1f1f2e, #111);
+  overflow: hidden;
+  text-align: center;
+  padding-top: 80px;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.orbit-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Orbit Ring */
+.orbit-ring {
+  position: absolute;
+  inset: 25px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255,255,255,0.15);
+  animation: rotate 14s linear infinite;
+}
+
+/* Orbit Dot */
+.orbit-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb347, #ff416c);
+  box-shadow: 0 0 15px #ff416c;
+  transform-origin: -80px center;
+  animation: orbit 6s linear infinite;
+}
+
+/* Text */
+.orbit-card h3 {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.orbit-card p {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* Animations */
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(80px);
+  }
+  to {
+    transform: rotate(360deg) translateX(80px);
+  }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Hover boost */
+.orbit-card:hover .orbit-ring {
+  animation-duration: 6s;
+}
+
+.orbit-card:hover .orbit-dot {
+  animation-duration: 2.5s;
+  box-shadow: 0 0 25px #ff8c00;
+}
+
+.orbit-card::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle, rgba(255,150,0,.2), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.orbit-card:hover::after {
+  opacity: 1;
+}
+
+
+</style>
+
+</body>
+</html>

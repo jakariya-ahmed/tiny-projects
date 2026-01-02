@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Button Hover Slide-Up Over Background</title>
+  <style>
+    body {
+      background: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .order-btn {
+      position: relative;
+      display: inline-block;
+      padding: 16px 40px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #222;
+      background: white;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 6px;
+      user-select: none;
+      transition: color 0.4s ease;
+      z-index: 0;
+    }
+
+    /* The sliding overlay background */
+    .order-btn::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: #d3321d; /* red hover color */
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
+      border-radius: 6px;
+    }
+
+    /* Text on top */
+    .order-btn span {
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      transition: color 0.4s ease;
+      user-select: none;
+    }
+
+    /* Hover effect */
+    .order-btn:hover::before {
+      transform: translateY(0);
+    }
+
+    .order-btn:hover span {
+      color: white;
+    }
+
+  </style>
+</head>
+<body>
+
+<button class="order-btn" type="button"><span>Order Now</span></button>
+
+</body>
+</html>

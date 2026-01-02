@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Expert Scroll-Triggered Navigation (Dark Theme)</title>
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f1117 0%, #1a1c24 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      overflow: auto;
+    }
+
+    /* Container fixed size */
+    .dev-process-section {
+      display: flex;
+      width: 1020px;
+      height: 600px;
+      background: #12131a;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(211, 50, 29, 0.8);
+      border: 1px solid #2e2f38;
+    }
+
+    /* Left side progress with dark background */
+    .progress-sidebar {
+      width: 150px;
+      background: #1f212a;
+      color: #aaa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    /* Title on left */
+    .progress-sidebar h3 {
+      margin: 0 0 40px 0;
+      font-weight: 700;
+      font-size: 20px;
+      color: #d3321d;
+      user-select: none;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    /* Circle list container */
+    .circle-list {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      flex-grow: 1;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Vertical line behind circles */
+    .circle-list::before {
+      content: "";
+      position: absolute;
+      top: 15px;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      background: #d3321d;
+      opacity: 0.15;
+      border-radius: 2px;
+      z-index: 0;
+      filter: drop-shadow(0 0 3px rgba(211, 50, 29, 0.6));
+    }
+
+    /* Each circle item */
+    .circle-item {
+      position: relative;
+      z-index: 1;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #d3321d;
+      background: transparent;
+      margin: 0 auto;
+      transition: background-color 0.5s ease, transform 0.3s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    /* Active circle style */
+    .circle-item.active {
+      background-color: #d3321d;
+      transform: scale(1.25);
+      box-shadow: 0 0 15px #d3321d, 0 0 30px #d3321d;
+    }
+
+    /* Number inside circle */
+    .circle-item::after {
+      content: attr(data-step);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #d3321d;
+      font-weight: 700;
+      font-size: 14px;
+      user-select: none;
+    }
+
+    .circle-item.active::after {
+      color: #12131a;
+    }
+
+    /* Current step / total at bottom */
+    .progress-count {
+      margin-top: 40px;
+      font-weight: 700;
+      font-size: 18px;
+      user-select: none;
+      letter-spacing: 1.1px;
+      color: #d3321d;
+    }
+
+    /* Right side content */
+    .process-content {
+      flex-grow: 1;
+      position: relative;
+      background: #171921;
+      overflow: hidden;
+      border-radius: 0 12px 12px 0;
+      box-shadow: inset 0 0 40px #1f212a;
+    }
+
+    /* Slides container */
+    .slides-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+      will-change: transform;
+    }
+
+    /* Each slide */
+    .process-slide {
+      height: 600px; /* same as container height */
+      padding: 60px 80px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-bottom: 1px solid #2e2f38;
+      font-size: 24px;
+      line-height: 1.5;
+      color: #eee;
+      user-select: none;
+    }
+
+    .process-slide:last-child {
+      border-bottom: none;
+    }
+
+    .process-slide h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 3rem;
+      font-weight: 800;
+      color: #d3321d;
+      letter-spacing: 1.5px;
+      user-select: text;
+    }
+
+    /* Disable page scroll while hovering on right content */
+    body.disable-scroll {
+      overflow: hidden;
+    }
+
+    /* Add subtle glow on hover for circles */
+    .circle-item:hover:not(.active) {
+      box-shadow: 0 0 10px #d3321d55;
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="dev-process-section" aria-label="Development process">
+
+    <aside class="progress-sidebar" aria-hidden="true">
+      <h3>Progress</h3>
+      <div class="circle-list" id="circleList"></div>
+      <div class="progress-count" id="progressCount">1 / 4</div>
+    </aside>
+
+    <main class="process-content" tabindex="0" aria-label="Development steps content" id="processContent">
+      <div class="slides-container" id="slidesContainer">
+        <article class="process-slide">
+          <h2>Step 1: Research & Planning</h2>
+          <p>Understand requirements, market analysis, and planning the roadmap.</p>
+        </article>
+        <article class="process-slide">
+          <h2>Step 2: Design & Prototyping</h2>
+          <p>Create wireframes, mockups, and interactive prototypes to validate concepts.</p>
+        </article>
+        <article class="process-slide">
+          <h2>Step 3: Development</h2>
+          <p>Implement features with best coding practices, testing regularly.</p>
+        </article>
+        <article class="process-slide">
+          <h2>Step 4: Deployment & Maintenance</h2>
+          <p>Launch the product, monitor performance, and provide updates.</p>
+        </article>
+      </div>
+    </main>
+
+  </section>
+
+<script>
+  (() => {
+    const slidesContainer = document.getElementById('slidesContainer');
+    const processContent = document.getElementById('processContent');
+    const circleList = document.getElementById('circleList');
+    const progressCount = document.getElementById('progressCount');
+    const totalSlides = slidesContainer.children.length;
+    let currentIndex = 0;
+    let isAnimating = false;
+
+    // Create circles dynamically
+    for (let i = 1; i <= totalSlides; i++) {
+      const circle = document.createElement('div');
+      circle.className = 'circle-item';
+      circle.dataset.step = i;
+      if (i === 1) circle.classList.add('active');
+      circleList.appendChild(circle);
+
+      // Click circle to jump to step
+      circle.addEventListener('click', () => {
+        if (!isAnimating) {
+          updateUI(i - 1);
+        }
+      });
+    }
+
+    const circles = circleList.querySelectorAll('.circle-item');
+
+    // Update UI on slide change
+    function updateUI(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+
+      currentIndex = index;
+      slidesContainer.style.transform = `translateY(-${currentIndex * 600}px)`; // fixed height 600px
+
+      // Update circles
+      circles.forEach((circle, idx) => {
+        circle.classList.toggle('active', idx === currentIndex);
+      });
+
+      // Update progress count
+      progressCount.textContent = `${currentIndex + 1} / ${totalSlides}`;
+    }
+
+    // Wheel event handler with debounce
+    function onWheel(e) {
+      e.preventDefault();
+
+      if (isAnimating) return;
+
+      const delta = e.deltaY;
+
+      if (delta > 0 && currentIndex < totalSlides - 1) {
+        isAnimating = true;
+        updateUI(currentIndex + 1);
+        setTimeout(() => (isAnimating = false), 700);
+      } else if (delta < 0 && currentIndex > 0) {
+        isAnimating = true;
+        updateUI(currentIndex - 1);
+        setTimeout(() => (isAnimating = false), 700);
+      }
+    }
+
+    // Enable scroll wheel only when mouse is inside right content area
+    processContent.addEventListener('mouseenter', () => {
+      document.body.classList.add('disable-scroll');
+      processContent.addEventListener('wheel', onWheel, { passive: false });
+    });
+    processContent.addEventListener('mouseleave', () => {
+      document.body.classList.remove('disable-scroll');
+      processContent.removeEventListener('wheel', onWheel);
+    });
+
+    // Keyboard accessibility (up/down arrows)
+    processContent.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown') {
+        if (currentIndex < totalSlides - 1) updateUI(currentIndex + 1);
+        e.preventDefault();
+      } else if (e.key === 'ArrowUp') {
+        if (currentIndex > 0) updateUI(currentIndex - 1);
+        e.preventDefault();
+      }
+    });
+
+    // Initialize UI
+    updateUI(0);
+  })();
+</script>
+
+</body>
+</html>

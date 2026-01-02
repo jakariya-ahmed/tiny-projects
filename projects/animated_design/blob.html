@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Blob</title>
+
+<style>
+/* Container to hold blob */
+.service-card {
+  position: relative;
+  overflow: hidden;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(13, 151, 128, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+}
+
+/* The blob */
+.blob {
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle at 30% 30%, #ff7e5f, #feb47b, #ff416c);
+  filter: blur(60px);
+  border-radius: 40%;
+  animation: blob-move 12s ease-in-out infinite, blob-shape 8s ease-in-out infinite;
+  opacity: 0.7;
+  z-index: -1; /* keep behind text */
+}
+
+/* Blob movement (slow shifting) */
+@keyframes blob-move {
+  0%   { transform: translate(0, 0); }
+  50%  { transform: translate(80px, 120px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Blob shape morphing */
+@keyframes blob-shape {
+  0%   { border-radius: 40% 60% 55% 45%; }
+  25%  { border-radius: 60% 40% 45% 55%; }
+  50%  { border-radius: 55% 45% 60% 40%; }
+  75%  { border-radius: 45% 55% 40% 60%; }
+  100% { border-radius: 40% 60% 55% 45%; }
+}
+
+
+</style>
+</head>
+<body>
+<div class="service-card">
+  <div class="blob"></div>
+
+  <h3>UI/UX Design</h3>
+  <p>We design intuitive and modern interfaces.</p>
+</div>
+
+
+
+<script>
+document.querySelectorAll(".service-card").forEach(card => {
+  const blob = card.querySelector(".blob");
+
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    blob.style.transform = `translate(${x * 0.05}px, ${y * 0.05}px)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+
+    
+    blob.style.transform = "translate(0,0)";
+  });
+});
+
+</script>
+</body>
+</html>

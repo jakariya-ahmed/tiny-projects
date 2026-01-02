@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orbit Motion Hero</title>
+  <link rel="stylesheet" href="style.css" />
+
+<style>
+/* Reset and base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0b0c10;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  color: white;
+}
+
+/* HERO CONTAINER */
+.hero-orbit {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ORBIT BASE STYLE */
+.orbit {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0.7;
+  will-change: transform;
+}
+
+/* ORBIT 1 — Left to Right, big */
+.orbit-1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #ff512f, #dd2476);
+  top: 20%;
+  left: -40%;
+  animation: moveX1 18s linear infinite;
+}
+
+/* ORBIT 2 — Top to Bottom, medium */
+.orbit-2 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #24c6dc, #514a9d);
+  top: -30%;
+  left: 60%;
+  animation: moveY1 22s linear infinite;
+}
+
+/* ORBIT 3 — Left to Right, smaller */
+.orbit-3 {
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, #f7971e, #ffd200);
+  top: 70%;
+  left: -30%;
+  animation: moveX2 20s linear infinite;
+}
+
+/* ORBIT 4 — Top to Bottom, smallest */
+.orbit-4 {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, #00f260, #0575e6);
+  top: -40%;
+  left: 80%;
+  animation: moveY2 25s linear infinite;
+}
+
+/* ORBIT ANIMATIONS */
+@keyframes moveX1 {
+  from { transform: translateX(0); }
+  to   { transform: translateX(160vw); }
+}
+
+@keyframes moveX2 {
+  from { transform: translateX(0); }
+  to   { transform: translateX(140vw); }
+}
+
+@keyframes moveY1 {
+  from { transform: translateY(0); }
+  to   { transform: translateY(140vh); }
+}
+
+@keyframes moveY2 {
+  from { transform: translateY(0); }
+  to   { transform: translateY(160vh); }
+}
+
+/* TEXT */
+.title {
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  z-index: 10;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+</style>
+</head>
+<body>
+
+<section class="hero-orbit">
+  <div class="orbit orbit-1"></div>
+  <div class="orbit orbit-2"></div>
+  <div class="orbit orbit-3"></div>
+  <div class="orbit orbit-4"></div>
+
+  <h1 class="title">Next-Gen Motion</h1>
+</section>
+
+<script>
+// Optional: subtle mouse parallax on orbits for extra depth
+const orbits = document.querySelectorAll(".orbit");
+
+document.addEventListener("mousemove", e => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+  orbits.forEach((orb, i) => {
+    // Add subtle parallax based on mouse position
+    orb.style.transform += ` translate(${x * (i + 1) * 0.15}px, ${y * (i + 1) * 0.15}px)`;
+  });
+});
+
+</script>
+</body>
+</html>
