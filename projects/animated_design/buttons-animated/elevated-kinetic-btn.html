@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Elevated Kinetic CTA</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: #0b0b0b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Wrapper */
+.magnetic-wrapper {
+  position: relative;
+}
+
+/* Button */
+.magnetic-btn {
+  position: relative;
+  width: 220px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Base layer */
+.btn-base {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  color: #000;
+  font-weight: 600;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: transform 0.4s ease;
+}
+
+/* Hover layer */
+.btn-hover {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ff2a2a, #ff6b6b);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  box-shadow: 0 0 40px rgba(255, 60, 60, 0.6);
+}
+
+/* Hover reveal */
+.magnetic-btn:hover .btn-base {
+  transform: translateY(-100%);
+}
+
+.magnetic-btn:hover .btn-hover {
+  transform: translateY(0);
+}
+
+</style>
+</head>
+
+<body>
+<div class="magnetic-wrapper">
+  <button class="magnetic-btn">
+    <span class="btn-base">EXPLORE MORE</span>
+    <span class="btn-hover">EXPLORE MORE</span>
+  </button>
+</div>
+<script>
+const btn = document.querySelector(".magnetic-btn");
+
+btn.addEventListener("mousemove", (e) => {
+  const rect = btn.getBoundingClientRect();
+  const x = e.clientX - rect.left - rect.width / 2;
+  const y = e.clientY - rect.top - rect.height / 2;
+
+  btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+});
+
+btn.addEventListener("mouseleave", () => {
+  btn.style.transform = "translate(0, 0)";
+});
+</script>
+
+</body>
+</html>

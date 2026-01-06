@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animated Section Heading</title>
+  <link rel="stylesheet" href="style.css">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0e0e0e;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.section-header {
+  width: 1020px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* LEFT LINE */
+.line-container {
+  position: relative;
+  width: 100px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.moving-dot {
+  position: absolute;
+  top: 50%;
+  width: 5px;
+  height: 40px;
+  background: #ff2b2b;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  animation: moveDot 4.5s linear infinite;
+}
+
+/* Dot animation */
+@keyframes moveDot {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* RIGHT SIDE */
+.title-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Rotating Rectangle */
+.rotating-box {
+  width: 10px;
+  height: 10px;
+  background: #ff2b2b;
+  animation: rotateBox 4.5s linear infinite;
+}
+
+/* Rotation */
+@keyframes rotateBox {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Text */
+.title-box h2 {
+  color: white;
+  font-size: 22px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+</style>
+</head>
+<body>
+
+<section class="section-header">
+  <!-- LEFT LINE -->
+  <div class="line-container">
+    <span class="moving-dot"></span>
+  </div>
+
+  <!-- RIGHT TITLE -->
+  <div class="title-box">
+    <div class="rotating-box"></div>
+    <h2>ABOUT US</h2>
+  </div>
+</section>
+
+</body>
+</html>
