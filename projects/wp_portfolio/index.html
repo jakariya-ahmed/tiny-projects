@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Jakariya Aman – Creative and professional web developer & designer showcasing projects, skills, and contact information." />
+  <meta name="author" content="Jakariya Aman" />
+  <meta name="keywords" content="Jakariya Aman, web developer, portfolio, designer, front-end, JavaScript, HTML, CSS, projects, hire me" />
+
+  <!-- Title -->
+  <title>Jakariya Aman | Web Developer & Designer</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+  <meta property="og:title" content="Jakariya Aman | Web Developer & Designer" />
+  <meta property="og:description" content="Creative and professional web developer & designer showcasing projects, skills, and contact information." />
+  <meta property="og:image" content="assets/images/social-share-image.png" />
+  <meta property="og:image:alt" content="Jakariya Aman portfolio logo and preview" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://yourdomain.com/" />
+  <meta name="twitter:title" content="Jakariya Aman | Web Developer & Designer" />
+  <meta name="twitter:description" content="Creative and professional web developer & designer showcasing projects, skills, and contact information." />
+  <meta name="twitter:image" content="assets/images/social-share-image.png" />
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow" />
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="src/css/variables.css" />
+  <link rel="stylesheet" href="src/css/base.css" />
+  <link rel="stylesheet" href="src/css/layout.css" />
+  <link rel="stylesheet" href="src/css/components.css" />
+  <link rel="stylesheet" href="src/css/utilities.css" />
+  <link rel="stylesheet" href="src/css/style.css" />
+  <link rel="stylesheet" href="src/css/responsive.css" />
+
+    <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  
+</head>
+<body>
+<!-- cursor -->
+  <!-- cursor elements (must exist in DOM) -->
+  <div class="cursor_dot" aria-hidden="true"></div>
+  <div class="cursor_outline" aria-hidden="true"></div>
+<!-- END cursor -->
+
+  <!-- DESKTOP HEADER -->
+  <header class="header desktop-header">
+    <div class="container header-container">
+      <div class="logo"><a href="/">JA</a></div>
+        <!-- header navigation -->
+      <nav class="nav" role="navigation" aria-label="Primary Navigation">
+        <ul class="nav-menu">
+          <li><a href="#home" class="nav-link" data-text="Home">Home</a></li>
+          <li><a href="#projects" class="nav-link" data-text="Projects">Projects</a></li>
+          <li><a href="#about" class="nav-link" data-text="About">About</a></li>
+          <li><a href="#contact" class="nav-link" data-text="Contact">Contact</a></li>
+        </ul>
+      </nav>
+      <!-- hire button -->
+        <div class="btn-wrap">
+            <div class="btn base">Hire me</div>
+            <div class="btn hover">Hire me</div>
+        </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="bottom-nav mobile-bottom-nav" role="navigation" aria-label="Mobile Navigation">
+    <ul class="bottom-nav-menu">
+      <li>
+        <a href="#home" class="bottom-nav-link" aria-label="Home">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M3 12l9-9 9 9h-3v9h-12v-9z"/></svg>
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a href="#projects" class="bottom-nav-link" aria-label="Projects">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M10 4h4l2 4h-8l2-4zm-6 5v11h16v-11h-16z"/></svg>
+          <span>Projects</span>
+        </a>
+      </li>
+      <li>
+        <a href="#about" class="bottom-nav-link" aria-label="About">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="none"/><path d="M11 17h2v-6h-2v6zm1-9a1 1 0 110 2 1 1 0 010-2z" fill="#fff"/></svg>
+          <span>About</span>
+        </a>
+      </li>
+      <li>
+        <a href="#contact" class="bottom-nav-link" aria-label="Contact">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.72 11.72 0 003.69.6 1 1 0 011 1v3.5a1 1 0 01-1 1A17 17 0 013 6a1 1 0 011-1h3.5a1 1 0 011 1 11.72 11.72 0 00.6 3.69 1 1 0 01-.21 1.11l-2.27 2.27z"/></svg>
+          <span>Contact</span>
+        </a>
+      </li>
+      <li>
+        <div class="m-btn-wrap">
+            <div class="btn base">Hire me</div>
+            <div class="btn hover">Hire me</div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+
+  <!-- SERO SECTION  -->
+<section class="hero-orbit">
+  <!-- Large Orbits (glowing radial gradients) -->
+  <div class="orbit orbit-1"></div>
+  <div class="orbit orbit-2"></div>
+
+  <!-- Small solid color dots -->
+  <div class="dot dot-1"></div>
+  <div class="dot dot-2"></div>
+  <div class="dot dot-3"></div>
+  <div class="dot dot-4"></div>
+
+  <div class="container hero-container">
+    <div class="hero hero-left" id="hero">
+      
+      <div class="section-header">
+        <!-- RIGHT TITLE -->
+        <div class="title-box">
+          <div class="rotating-box"></div>
+          <h2>ABOUT US</h2>
+          <div class="rotating-box"></div>
+        </div>
+      </div>
+
+      <h1 class="hero-title">
+        Hi, I'm <span class="name">Jakariya Aman</span><br />
+        <span class="typing gradient-text"></span>
+        <span class="cursor">|</span>
+      </h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-image-wrap">
+        <img src="assets/images/hero-image.png" alt="Jakariya Aman Illustration" class="hero-image" />
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<div>
+    
+</div>
+</section>
+  <!-- END HERO SECTION -->
+
+
+  <!-- FOOTER -->
+  <footer class="container section" style="text-align:center; color: var(--color-neutral-light);">
+    <p>&copy; 2026 Jakariya Aman. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="src/js/cursor.js"></script>
+  <script src="src/js/hero.js"></script>
+  <script src="src/js/typingAnimation.js"></script>
+  <script src="src/js/main.js"></script>
+</body>
+</html>

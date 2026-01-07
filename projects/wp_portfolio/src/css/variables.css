@@ -1,0 +1,30 @@
+/* variables.css */
+/* ===========================
+   Root variables: colors, fonts, sizes
+   =========================== */
+:root {
+  /* Colors */
+  --color-primary-1: #FF512F;
+  --color-primary-2: #F70572;
+
+  --color-secondary: #2B2B2B;
+
+  --color-accent-1: #FF8A65;
+  --color-accent-2: #D9046B;
+
+  --color-neutral-light: #E0E0E0;
+  --color-neutral-dark: #121212;
+
+  --color-white: #FFFFFF;
+
+    /* Secondary colors */
+  --color-secondary-1: #f8d01c;  /* Soft Blue */
+  --color-secondary-2: #D9046B;
+
+  /* Fonts */
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Inter', sans-serif;
+
+  /* Sizes (optional) */
+  --border-radius: 8px;
+}
