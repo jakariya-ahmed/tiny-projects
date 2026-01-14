@@ -1,36 +1,11 @@
-/* ======== CURSRO STYLE ======== */
 
-  .cursor_dot, .cursor_outline {
-    position: fixed;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    will-change: transform;
-  }
-
-
-  .cursor_dot {
-    width: 12px;
-    height: 12px;
-    background: linear-gradient(45deg, var(--color-primary-1), var(--color-primary-2));
-    border-radius: 50%;
-  }
-
-   
-  .cursor_outline {
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--color-primary-1);
-    border-radius: 50%;
-    opacity: 0.6;
-  }
 /* ======== HEADER ======== */
 
 .desktop-header {
   position: sticky;
   top: 0;
   width: 100%;
-  background: transparent;
+  /* background: transparent; */
   z-index: 1000;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: none;
@@ -45,14 +20,14 @@
   justify-content: space-between;
 
   /* Light-dark transparent background */
-  background: rgba(0, 0, 0, 0.35);
+  /* background: rgba(0, 0, 0, 0.35); */
 
   /* Glass effect */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* backdrop-filter: blur(12px); */
+  /* -webkit-backdrop-filter: blur(12px); */
 
   border-radius: 12px;
-  padding: 0.75rem 1.5rem;
+  /* padding: 0.75rem 1.5rem; */
 
   /* Optional subtle border */
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -136,55 +111,7 @@
   transform: translateY(0);
 }
 
-/* Hire me button */
-.btn-wrap {
-  position: relative;
-  width: 200px;
-  height: 60px;
-  overflow: hidden;
-}
 
-/* Base Button */
-.btn {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.4s ease;
-}
-
-/* White Base */
-.btn.base {
-  background: linear-gradient(45deg, var(--color-primary-1), var(--color-primary-2));
-  color: var(--color-white);
-  z-index: 1;
-}
-
-/* Hover Button */
-.btn.hover {
-background: linear-gradient(
-  135deg,
-  var(--color-secondary-1),
-  var(--color-secondary-2)
-);
-  color: white;
-  transform: translateY(95%);
-  z-index: 2;
-}
-
-/* Hover animation */
-.btn-wrap:hover .hover {
-  transform: translateY(0%);
-}
-
-.btn-wrap:hover .base {
-  transform: translateY(-100%);
-}
 
 /* ======== MOBILE BOTTOM NAVIGATION ======== */
 
@@ -338,11 +265,23 @@ background: linear-gradient(
 	padding: 0.75rem 1.5rem;
 }
 
+.hero-left {
+	width: 45%;
+}
+
+.hero-content p {
+  margin: 16px 0px 26px 0px;
+  font-size: 16px;
+  color: var(--color-neutral-light);
+
+}
+
 
 /* HERO CONTAINER */
 .hero-orbit {
   position: relative;
-  height: 100vh;
+  /* height: 100vh; */
+  height: auto;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -443,6 +382,11 @@ background: linear-gradient(
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.header-section {
+  padding: 0px;
+  margin: 0px;
 }
 
 /* LEFT LINE */
@@ -565,5 +509,20 @@ background: linear-gradient(
   51%, 100% { opacity: 0; }
 }
 
+
+
+
+/******* Hero Right Section ******/
+.hero-right {
+	width: 55%;
+	text-align: right;
+  position: relative;
+}
+
+.hero-image {
+	width: 80%;
+	object-fit: cover;
+	border-radius: 24px 0px 150px 100px;
+}
 
 /* ========= END HERO SECTION ======== */

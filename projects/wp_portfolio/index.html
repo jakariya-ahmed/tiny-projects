@@ -54,7 +54,8 @@
   <div class="cursor_outline" aria-hidden="true"></div>
 <!-- END cursor -->
 
-  <!-- DESKTOP HEADER -->
+<section class="header-section">
+    <!-- DESKTOP HEADER -->
   <header class="header desktop-header">
     <div class="container header-container">
       <div class="logo"><a href="/">JA</a></div>
@@ -69,9 +70,9 @@
       </nav>
       <!-- hire button -->
         <div class="btn-wrap">
-            <div class="btn base">Hire me</div>
-            <div class="btn hover">Hire me</div>
-        </div>
+          <div class="btn base"> <a href="project.html">Explore Project </a></div>
+          <div class="btn hover"><a href="project.html">Explore Project </a></div>
+      </div>
 
     </div>
   </header>
@@ -114,7 +115,7 @@
 
 
   <!-- SERO SECTION  -->
-<section class="hero-orbit">
+<div class="hero-orbit">
   <!-- Large Orbits (glowing radial gradients) -->
   <div class="orbit orbit-1"></div>
   <div class="orbit orbit-2"></div>
@@ -127,9 +128,8 @@
 
   <div class="container hero-container">
     <div class="hero hero-left" id="hero">
-      
       <div class="section-header">
-        <!-- RIGHT TITLE -->
+        <!-- Left TITLE -->
         <div class="title-box">
           <div class="rotating-box"></div>
           <h2>ABOUT US</h2>
@@ -137,18 +137,64 @@
         </div>
       </div>
 
-      <h1 class="hero-title">
-        Hi, I'm <span class="name">Jakariya Aman</span><br />
-        <span class="typing gradient-text"></span>
-        <span class="cursor">|</span>
-      </h1>
-    </div>
-    <div class="hero-right">
-      <div class="hero-image-wrap">
-        <img src="assets/images/hero-image.png" alt="Jakariya Aman Illustration" class="hero-image" />
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Hi, I'm <span class="name">Jakariya Aman</span><br />
+          <span class="typing gradient-text"></span>
+          <span class="cursor">|</span>
+        </h1>
+        <p class="hero-description">
+          I'm a passionate web developer and designer dedicated to crafting beautiful and functional digital experiences. With a keen eye for detail and a love for innovation, I bring ideas to life through code and creativity.
+        </p>
+      </div>
+      <div class="group-btn">
+        <div class="btn-wrap">
+          <div class="btn base"> <a href="project.html">Explore Project </a></div>
+          <div class="btn hover"><a href="project.html">Explore Project </a></div>
+      </div>
+
+      <div class="btn-wrap">
+          <div class="btn secondary"> <a href="project.html">Download CV </a></div>
+          <div class="btn secondary-hover"><a href="project.html">Download CV </a></div>
+      </div>
       </div>
     </div>
+<!-- RIGHT BANNER  -->
+    <div class="hero-right">
+        <div class="hero-image-wrap">
+          <img src="assets/images/hero-image.jpg" alt="Jakariya Aman Illustration" class="hero-image" />
+        </div>
+
+        <!-- rounded button  -->
+        <div class="rounded-btn-full">
+          <div class="rounded-btn">
+            <button class="center-icon" aria-label="Explore More">
+              <div class="red-circle">
+                <svg viewBox="0 0 24 24" >
+                  <path d="M12 4l-8 8h5v8h6v-8h5z" />
+                </svg>
+              </div>
+            </button>
+
+            <div class="expanding-bg"></div>
+
+            <div class="circular-text" aria-hidden="true">
+              <svg viewBox="0 0 300 300" >
+                <defs>
+                  <path id="circlePath" d="M150,150 m-130,0 a130,130 0 1,1 260,0 a130,130 0 1,1 -260,0" />
+                </defs>
+                <text>
+                  <textPath xlink:href="#circlePath" startOffset="0%">
+                    EXPLORE MORE • EXPLORE MORE • 
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
+
 
 
 
@@ -157,9 +203,10 @@
 <div>
     
 </div>
-</section>
+</div>
   <!-- END HERO SECTION -->
 
+</section>
 
   <!-- FOOTER -->
   <footer class="container section" style="text-align:center; color: var(--color-neutral-light);">
