@@ -50,8 +50,12 @@ var username = "Jakariya Aman";
 var username = "Jakariya";
 var username = "Aman";
 
-console.log(username); // Aman 
+console.log(username); // Allowed redeclaration, Output: Aman
 
+// =========== Re-assigned ===========
+var email = "aman@gmail.com";
+email = "jakariya@gmail.com";
+console.log(email); // Allowed reassignment, Output: jakariya@gmail.com
 
 
 
