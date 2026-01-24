@@ -37,15 +37,45 @@
 */
 
 
-// =========== Function Scope =========== 
-function testScope() {
-    var msg = "Hellow, come form function scope!";
-    console.log(msg); //✅ Accessible here
-}
 
-testScope(); // Hellow, come form function scope!
+
+// ========================== 
+// let  
+// ========================== 
+
+/* 
+1. Block Scope
+2. Cannot be re-declared
+3. Can be reassigned 
+4. Hoisted but in Temporal Dead Zone (TDZ)
+5. Preffered for block-scoped variables.
+*/
+
+
+// =========== Function Scope in var  =========== 
+function functionScope() {
+    var msg = "Hello, come from Function scope!";
+    if (true) {
+        var inner_msg = "Hello, come from Inner Block! in function scope";
+        console.log(msg);
+    }
+    console.log(inner_msg); // ✅ Accessible
+}
+functionScope();
 
 //console.log(msg); // ❌ ReferenceError: msg is not defined
+
+
+// =========== Block Scope in let ===========
+function blockScope()  {
+    if (true) {
+        let greeting = "Hello, come from Block scope!";
+        console.log(greeting); // ✅ Accessible
+    }
+    //console.log(greeting); // ❌ ReferenceError: greeting is not defined
+}
+
+blockScope();
 
 // =========== Re-declared ===========
 var username = "Jakariya Aman";
@@ -69,8 +99,3 @@ student_id = 101; // Output: undefined
 
 
 
-
-
-// ========================== 
-// Var 
-// ========================== 
