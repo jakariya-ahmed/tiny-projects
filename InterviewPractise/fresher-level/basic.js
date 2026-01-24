@@ -24,7 +24,9 @@
  * 
 
 /* ================= var, let, const ===================== */
-// Var
+// ========================== 
+// Var 
+// ========================== 
 
 /* 
 1. Function Scope
@@ -57,8 +59,18 @@ var email = "aman@gmail.com";
 email = "jakariya@gmail.com";
 console.log(email); // Allowed reassignment, Output: jakariya@gmail.com
 
+// =========== Hoisted in var ===========
+// JavaScript moves variable declaration to the top of its scope 
+// before code execution.
+
+var student_id;
+console.log(student_id); // Hoisted + initialized as undefined
+student_id = 101; // Output: undefined
 
 
 
 
 
+// ========================== 
+// Var 
+// ========================== 
