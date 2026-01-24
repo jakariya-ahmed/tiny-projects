@@ -35,16 +35,22 @@
 */
 
 
-// Function Scope 
+// =========== Function Scope =========== 
 function testScope() {
     var msg = "Hellow, come form function scope!";
-    console.log(msg);
+    console.log(msg); //✅ Accessible here
 }
 
 testScope(); // Hellow, come form function scope!
 
+//console.log(msg); // ❌ ReferenceError: msg is not defined
 
+// =========== Re-declared ===========
+var username = "Jakariya Aman";
+var username = "Jakariya";
+var username = "Aman";
 
+console.log(username); // Aman 
 
 
 
