@@ -142,14 +142,55 @@ const reffer_id = 5001;
 // reffer_id = 6001; // ❌ TypeError: Assignment to constant variable.
 console.log(reffer_id);
 
-/*
-// =========== Hoisted in var ===========
-// JavaScript moves variable declaration to the top of its scope 
-// before code execution.
-
-var student_id;
-console.log(student_id); // Hoisted + initialized as undefined
-student_id = 101; // Output: undefined
-
+/* =========== Hoisted  ===========
+** JavaScript moves variable declaration to the top of its scope 
+** before code execution.
 
 */
+
+// In var
+console.log(student_id); 
+var student_id; // Hoisted and initialized as undefined
+student_id = 3001;
+
+
+// In let 
+/* let is hoisted but not inialized and stay at temporal dead zone */
+// console.log(cart_number);
+let cart_number;
+cart_number = 4001; // Hoisted but in Temporal Dead Zone (TDZ)
+
+// In const
+/* const is hoisted but not inialized and stay at temopral dead zone */
+// console.log(acc_number); 
+const acc_number = 39349;
+
+
+hoistedExample();// Function hoisting works
+
+function hoistedExample() {
+    console.log(student_id);
+}
+
+// checkId(student_id); // Function expression not hoisted
+var checkId = (student_id) => {
+   console.log(student_id);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
