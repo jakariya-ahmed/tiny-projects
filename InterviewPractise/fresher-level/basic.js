@@ -131,7 +131,16 @@ var email = "aman@gmail.com";
 email = "jakariya@gamil.com";
 console.log(email); // Allowed reassignment, Output: jakariya@gamil.com
 
+// In let 
+let mobile = "017XXXXXXXX";
+mobile = "018XXXXXXXX";
+mobile = "01601158093"
+console.log(mobile); // Allowed reassignment, Output: 018XXXXXXXX
 
+// In const 
+const reffer_id = 5001;
+// reffer_id = 6001; // ❌ TypeError: Assignment to constant variable.
+console.log(reffer_id);
 
 /*
 // =========== Hoisted in var ===========
