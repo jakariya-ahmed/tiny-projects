@@ -106,18 +106,34 @@ function constBlockScope()  {
 constBlockScope();
 
 
-// =========== Re-decleration in var ===========
+/* =========== Re-decleration  =========== */
+// In Var
 var username = "Jakariya Aman";
-var username = "Jakariya";
+var username = "Jakariya Ahmed";
 var username = "Aman";
-
 console.log(username); // Allowed redeclaration, Output: Aman
 
-// =========== Re-assigned ===========
-var email = "aman@gmail.com";
-email = "jakariya@gmail.com";
-console.log(email); // Allowed reassignment, Output: jakariya@gmail.com
 
+// In let 
+let city = "Dhaka";
+// let city = "Chittagong"; // ❌ SyntaxError: Identifier 'city' has already been declared
+console.log(city);
+
+// In const
+const country = "Bangladesh";
+// const country = "Pakistan"; // ❌ SyntaxError: Identifier 'country' has already been declared
+console.log(country);
+
+
+/* =========== Re-assigned  =========== */
+// In var
+var email = "aman@gmail.com";
+email = "jakariya@gamil.com";
+console.log(email); // Allowed reassignment, Output: jakariya@gamil.com
+
+
+
+/*
 // =========== Hoisted in var ===========
 // JavaScript moves variable declaration to the top of its scope 
 // before code execution.
@@ -127,4 +143,4 @@ console.log(student_id); // Hoisted + initialized as undefined
 student_id = 101; // Output: undefined
 
 
-
+*/
