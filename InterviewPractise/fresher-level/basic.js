@@ -27,7 +27,6 @@
 // ========================== 
 // Var 
 // ========================== 
-
 /* 
 1. Function Scope
 2. Can be re-declared
@@ -42,7 +41,6 @@
 // ========================== 
 // let  
 // ========================== 
-
 /* 
 1. Block Scope
 2. Cannot be re-declared
@@ -52,11 +50,27 @@
 */
 
 
+
+
+// ========================== 
+// const  
+// ========================== 
+
+/* 
+1. Block Scope
+2. Cannot be re-declared
+3. Cannot be reassigned 
+4. Must be initialized during declaration
+5. Object/Array can be mutated
+6. Preffered for constants and unchanging references.
+*/
+
 // =========== Function Scope in var  =========== 
 function functionScope() {
     var msg = "Hello, come from Function scope!";
     if (true) {
         var inner_msg = "Hello, come from Inner Block! in function scope";
+            inner_msg = "Changed Inner Block Message"; // Re-assigned
         console.log(msg);
     }
     console.log(inner_msg); // ✅ Accessible
@@ -77,7 +91,22 @@ function blockScope()  {
 
 blockScope();
 
-// =========== Re-declared ===========
+
+// =========== Block Scope in const ===========
+function constBlockScope()  { 
+    const age = 26;
+    // age = 30; // ❌ TypeError: Assignment to constant variable.
+    if (true) {
+        const sl_number = 1001;
+        console.log(age); // ✅ Accessible
+    }
+    // console.log(sl_number); // ❌ ReferenceError: sl_number is not defined
+}
+
+constBlockScope();
+
+
+// =========== Re-decleration in var ===========
 var username = "Jakariya Aman";
 var username = "Jakariya";
 var username = "Aman";
