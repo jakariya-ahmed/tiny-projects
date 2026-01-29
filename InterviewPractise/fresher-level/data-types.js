@@ -44,4 +44,16 @@ let result2 = '5' - 2; // 3  subtraction (string converted to number)
 let result3 = '5' - '2' // 2  division (string converted to number)
 let result4 = '5' * 2; // 10 multiplication (string converted to number)
 let result5 = '5' * '2' // 10 multiplication (string converted to number)
-console.log(result5);
+
+let group_result = '5' + 10 + 5; // '5105' left to right evaluation
+let group_result2 = 5 + 10 + '5'; 
+
+let check = true + 2;  // 3  (true converted to 1)
+let check2 = false + 5; // 5
+
+/* ========== == vs ===  ========== */
+'5' == 5; // true (value comparison with type coercion)
+'5' === 5; // false (value and type comparison without type coercion)
+
+
+console.log(group_result2);
