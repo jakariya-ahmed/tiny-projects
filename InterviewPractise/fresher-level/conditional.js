@@ -28,11 +28,38 @@
 
 
 
+// switch statement
+let day = 3;
+switch (day) {
+    case 1:
+        console.log('Monday');
+        break;
+    case 2:
+        console.log('Tuesday');
+        break;
+    case 3:
+        console.log('Wednesday');
+        break;
+    default:
+        console.log("Invalid Day");
+}
 
 
+// For Loop: known number of iterations
+for (let i = 1; i <= 20; i++) {
+    console.log(i); // print 1 to 20 numbers
+}
 
 
+/** Five Basic Problems and Solve by for loop */
+// 1. Find the sum of first n natural numbers
+let n = 100;
+let sum = 0;
+for (let i = 1; i <= n; i++) {
+    sum += i; // sum = sum + i;
+}
 
+console.log (`The sum of First ${n} number is: ${sum}`);
 
 
 
