@@ -56,16 +56,14 @@ for (let i = 1; i <= 20; i++) {
 let n = 100;
 let sum = 0;
 for (let i = 1; i <= n; i++) {
-    sum += i; // sum = sum + i;
+    sum += i // sum = sum + i;
 }
-
-console.log (`The sum of First ${n} number is: ${sum}`);
-
+// console.log(`The sum of first ${n} natural numbers is: ${sum}`);
 
 
-
-
-
-
-
+ // Multiplication Table of a number
+ let num = 5;
+    for (let i = 1; i <= 10; i++) {
+        console.log(`${num} * ${i} = ${num * i}`);
+    }
 
